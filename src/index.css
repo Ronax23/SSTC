@@ -1,0 +1,594 @@
+/* https://foodily.vercel.app/
+https://validthemes.net/site-template/fatory/index-4.html
+
+https://demo.ovathemewp.com/tripgo_html/index.html */
+::-webkit-scrollbar-thumb
+{
+  background-color: #ff4a52;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track
+{
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar
+{
+  width: 4px;
+}
+.mousepoint{
+  top: 35px;
+  left: 30px;
+  width: 11px;
+  height: 11px;
+  border-radius: 100%;
+  z-index: 9999;
+  position: fixed;
+  background-color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+@font-face {
+  font-family: 'Enriqueta';
+  src: url('/fonts/Enriqueta-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+html {
+}
+
+*{
+  font-family: 'Enriqueta', 'Times New Roman', Times, serif;
+}
+body 
+{
+    cursor: url('../cursor/pointer.png'), pointer;
+}
+.lottie-container
+{
+  width: 100%;
+  min-width: 300px;
+  max-width: 800px;
+aspect-ratio: 1/1;
+}
+.lottie-container-gear
+{
+  width: 100%;
+  min-width: 150px;
+  max-width: 300px;
+aspect-ratio: 1/1;
+}
+.iconprop{
+  font-size: 50px;
+  color: #ff4a52;
+  margin-bottom: 20px;
+}
+
+#cardsSec
+{
+  padding: 50px 0;
+  background-color: #f8f9fa;
+  
+}
+#cardsSec .hover-bound
+{
+  position: relative;
+  overflow: hidden;
+    transition-duration: .5s;
+}
+#cardsSec .hover-bound::before,#cardsSec .hover-bound::after
+{
+  content: "";
+  position: absolute;
+  width: 100%;
+  transition-duration: .5s;
+}
+#cardsSec .hover-bound::before
+{
+  top: 0;
+  border: 2px solid #ff4a52;
+  left: -100%;
+}
+#cardsSec .hover-bound::after
+{
+  border: 2px solid #fa16f6;
+  bottom: 0;
+  right: -100%;
+}
+#cardsSec .hover-bound:hover::before
+{
+  left: 0;
+}
+#cardsSec .hover-bound:hover::after
+{
+  right: 0%;
+}
+#cardsSec .hover-bound:hover{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+}
+#sec6 .card {
+  overflow: hidden;
+  position: relative;
+}
+#sec3 .img1 {
+  border-radius: 80px;
+}
+#sec3 .hover-img{
+  top: 0;
+  right: 0;
+  width:100%;
+  height:100%;
+  opacity: 0;
+  transition-duration: .5s;
+  transform:translateX(50%) scaleX(2);
+}
+#sec3 .img1:hover .hover-img{
+  opacity: 1;
+  transform: translateX(0%) scaleX(1);
+}
+.card-img
+{
+  overflow: hidden;
+}
+#sec6 .card::before
+{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  border: 1px solid #ff4a52;
+  transition: left .6s ease-in-out;
+}
+#sec6 .card:hover::before
+{
+  left: 0;
+}
+#sec6 .card img
+{
+  object-fit: cover;
+  object-position: top;
+  transition-duration: .5s;
+  aspect-ratio: 3/2;
+}
+#sec6 .card img:hover
+{
+  transform: scale(1.1);
+}
+#contactus{
+    
+}
+.carousel-mover{
+
+  animation: slideInLeft 1s ease-out forwards;
+  padding-top: 200px;
+}
+
+.hover-effect img{
+  transition-duration: .5s;
+  width: 100%;
+}
+.hover-effect img:hover
+{
+  transform: scale(1.2);
+}
+nav{
+    position: fixed!important;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    
+}
+nav .nav-link {
+  overflow: hidden;
+  position: relative;
+  text-transform: uppercase;
+  color: white !important;
+}
+nav .nav-link::before {
+  border-bottom: 2px solid #ff4a52;
+    bottom: 0;
+    left: 0;
+    content: "";
+    position: absolute;
+     transition: 0.3s ease-in-out;
+    width: 0%;
+}
+nav .nav-link:hover::before {
+  width: 100%;
+}
+.dynamicCaroe,#contactus  {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    overflow: hidden; /* Critical to hide the image as it grows */
+    display: flex;
+    align-items: center; /* Centers text vertically */
+}
+
+/* This handles the background image and the zoom */
+.dynamicCaroe::before, #contactus::before {
+    content: "";
+    position: absolute;
+   offset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.9)), var(--image-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Puts image behind text */
+    animation: zoomer 10s ease-in-out infinite alternate;
+}
+
+/* Now only the background zooms, not the text */
+@keyframes zoomer {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+/* Ensure text stays on top and white */
+.dynamicCaroe .container {
+    position: relative;
+    z-index: 1; 
+}
+img{
+  width: 100%;
+}
+.company-logo img{
+  filter: grayscale(60%);
+  transition: 0.3s ease-in-out;
+  opacity: .1;
+  width: 200px;
+}
+.company-logo img:hover{
+  opacity: .8;
+}
+
+/* 1. The Container Window */
+.slider-window {
+  overflow: hidden;
+  width: 100%;
+  margin: 100px 0;
+}
+
+/* 2. The Moving Track */
+.slider-track {
+  display: flex;
+  transition: none; /* No animation when resetting data */
+}
+
+.slider-track.moving {
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(calc(-1 * var(--logo-width)));
+}
+.logo-card {
+  flex: 0 0 var(--logo-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo-card img {
+  width: 150px;
+  filter: grayscale(100%);
+  transition-duration: .3s;
+
+}
+.logo-card img:hover {
+  filter: grayscale(50%);
+
+}
+#OurTeam
+{
+ padding: 25vh 0;
+  background-color: #f8f9fa;
+}
+/* --- Breakpoints --- */
+
+/* Mobile: Show 2 logos (Width = 100% / 2) */
+
+
+/* Tablets: Show 4 logos (Width = 100% / 4) */
+
+
+/* Desktop: Show 5 logos (Width = 100% / 5) */
+
+
+/* In your index.css or App.css */
+.SelectionActive {
+  background-color: #dc3545 !important; /* Change to your brand color */
+  color: white !important;
+  border-color: #dc3545 !important;
+}
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The Animation Class */
+.animate-content {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Animation for the Text */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation for the Image */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.text-animate {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.img-animate {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.hero-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents video from spilling out */
+}
+
+.back-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* Pushes video behind the content */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures video fills screen without distortion */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Darkens the video by 40% */
+  z-index: 0;
+}
+
+.content {
+  z-index: 1; /* Keeps text above the overlay and video */
+  text-align: center;
+}
+
+/* This forces the modal to be visible when React renders it */
+.modal {
+  display: block !important; 
+  background: rgba(0, 0, 0, 0.8); /* This creates the dark dim effect behind the modal */
+}
+
+.modal-dialog {
+  margin-top: 10%; /* Positions it nicely */
+}
+.breadcrumb-item+.breadcrumb-item::before
+{
+  color: #f5f5f5 !important;
+}
+.term-col
+{
+  color: #015DA9;
+}
+.footer-heads
+{
+position: relative;
+text-transform: capitalize;
+margin-bottom: 20px;
+}
+.footer-heads::before
+{
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: #ff4a52;
+  bottom: -5px;
+  left: 0;
+}
+.col-lg-3:not(:first-child) .footerLink::before
+{
+  content: "\F4F4";
+  font-family: "bootstrap-icons"; 
+  display: inline-block;
+  color: cornflowerblue;
+  margin-right: 8px;
+}
+.footerLink
+{
+  transition:.5s;
+}
+.col-lg-3:not(:first-child) .footerLink:hover
+{
+  transform: translateX(5px);
+}
+#counterSection
+{
+  padding: 100px 0;
+  background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.9)), url("/Backgrounds/counter.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;font-weight: bold;
+}
+#counterSection  .cards
+{
+  backdrop-filter: blur(8px);
+  background-color: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+  border-radius: 50px 20px 50px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+  margin: 20px 0;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+#counterSection .cards:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav-bgs 
+{
+  backdrop-filter: blur(10px);
+  background-color: rgba(81, 79, 223, 0.4) !important;
+}
+.p-50
+{
+  padding: 50px 0 !important;
+}
+#sec6 i{
+  font-size: 40px;
+  color: #ff4a52;
+  margin-bottom: 20px;
+  transition-duration: .3s;
+}
+#sec6 i:hover{
+  color: #fa16f6;
+}
+
+
+/* Hover effect for an industrial feel */
+.card-wrapper {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+footer 
+{
+  background-color: #DAD8C9;
+  padding: 50px 0;
+}
+.contactBanner,#OurTeam
+{
+  padding: 100px 0 !important;
+  background-position: center;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(rgba(40, 46, 37, 0.6),rgba(69, 76, 65, 0.6)), url(/Backgrounds/contactBanner.jpg);
+}
+.contact-section
+{
+  color: white;
+  padding: 80px 0;
+  background-image: linear-gradient(to right,rgba(231, 217, 232, 0.8),rgba(26, 27, 25, 0.8)),url(/Backgrounds/contact.jpg);
+}
+.mapstyle
+{
+  width: 100%;
+  height: 500px;
+}
+@media (max-width: 1920px) {
+  :root { --logo-width: 20%; --pic-width:31% }
+  .modal-dialog{
+    max-width: 80% !important;
+}
+}
+@media (max-width: 1024px) {
+  :root { --logo-width: 25%; --pic-width:48% }
+  .mapstyle
+{
+  height: 400px;
+}
+}
+@media (max-width:450px)
+{
+  :root { --logo-width: 50%; --pic-width:98% }
+  .mapstyle
+{
+  height: 200px;
+}
+  .modal-dialog{
+    max-width: 100% !important;
+}
+}
+.map-section h1
+{
+  z-index: 9;
+  top: -70px;
+  color: white;
+}
+.custom-btn
+{
+ display: inline-flex !important; 
+    width: 50px;
+    height: 50px;
+    background-color: slateblue !important;
+    border-radius: 200px;
+    align-items: center;   
+    overflow: hidden;
+    text-decoration: none !important;
+    transition: .7s ease-in-out !important;
+    white-space: nowrap;
+}
+.custom-btn i 
+{
+  color: white !important;
+  font-weight: bold;
+  margin-left: 15px;
+}
+.custom-btn:hover
+{
+  width: 130px;
+}
+.custom-btn span {
+  opacity: 0;
+  margin-left: 10px;
+  transition: opacity .9s ease-in-out;
+}
+
+.custom-btn:hover span {
+  opacity: 1;     
+}
+.swiper-wrapper
+{
+  padding: 50px 0 !important;
+}
+.mySwiper 
+{
+  width: 95% !important;
+}
+.mySwiper .row 
+{
+    background: rgba(19, 37, 231, 0.223);
+    backdrop-filter: blur(3.5px);
+    border-radius: 20px;
+}
