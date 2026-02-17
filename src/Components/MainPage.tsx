@@ -9,7 +9,7 @@ function MainPage() {
   <Dataprovider>
     <ScrollToTop/>
     <Nav />
-  <section>
+  <section style={{minHeight:"100vh"}}>
     <Outlet />
    </section>
    <Footer/>
