@@ -592,3 +592,59 @@ footer
     backdrop-filter: blur(3.5px);
     border-radius: 20px;
 }
+.mySwiper .row .col-lg-6 img 
+{
+ 
+  object-position: center;
+  filter: grayscale(.5);
+  transition-duration: .5s;
+}
+.mySwiper .row:hover .col-lg-6 img
+{
+   filter: grayscale(0);
+}
+.mySwiper .row .col-lg-6
+{
+  overflow: hidden;
+align-content: center;
+position: relative;
+}
+.mySwiper .row .col-lg-6:nth-child(2):before
+{
+position: absolute;
+font-family: 'bootstrap-icons';
+content: "\F7D5";
+font-size: 40px;
+right: -10px;
+bottom: -20px;
+z-index: 22;
+color: gray;
+transition-duration: .5s;
+
+}
+.mySwiper .row:hover .col-lg-6:nth-child(2):before
+{
+  right: 10px;
+  bottom: 10px;
+  color: rgb(139, 238, 139);
+}
+
+/* nav .container-fluid
+{
+  margin: 0 auto !important;
+  top: 20px;
+  width: 40%;
+  border-radius: 100px;
+}
+@media (max-width:1025px)
+{
+  nav .container-fluid
+  {
+    width: 100%;
+      border-radius: 0;
+      top: -10px;
+  }
+ nav .navbar .navbar-expand-lg{
+    padding: 0 !important;
+  }
+} */

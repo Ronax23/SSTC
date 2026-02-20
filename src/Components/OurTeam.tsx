@@ -30,15 +30,33 @@ function OurTeam() {
     ]
 }
     const team = [
-        { name: "John Doe", role: "Project Manager", photo: "https://randomuser.me/api/portraits/men/1.jpg" },
-        { name: "Jane Smith", role: "Lead Developer", photo: "https://randomuser.me/api/portraits/women/2.jpg" },
-        { name: "Mike Johnson", role: "UI/UX Designer", photo: "https://randomuser.me/api/portraits/men/3.jpg" },
-        { name: "Emily Davis", role: "QA Engineer", photo: "https://randomuser.me/api/portraits/women/4.jpg" },
-        { name: "David Wilson", role: "DevOps Engineer", photo: "https://randomuser.me/api/portraits/men/5.jpg" },
-        { name: "Sarah Brown", role: "Marketing Specialist", photo: "https://randomuser.me/api/portraits/women/6.jpg" },
-        { name: "Chris Lee", role: "Backend Developer", photo: "https://randomuser.me/api/portraits/men/7.jpg" },
-        { name: "Anna Garcia", role: "Frontend Developer", photo: "https://randomuser.me/api/portraits/women/8.jpg" },
-        { name: "James Martinez", role: "Data Scientist", photo: "https://randomuser.me/api/portraits/men/9.jpg" }
+        { name: "Kavita", role: "Owner", photo: '../Team/14.jpg',
+          desc: 'I envision this workshop as a hub of mechanical excellence, where resources and people are aligned to deliver quality and innovation. My role is to secure growth while ensuring sustainability'  
+         },
+        { name: "Bhavya", role: "Manager", photo: '../Team/13.jpg',
+            desc: 'I see the workshop as a well-coordinated system. My role is to organize, supervise, and motivate the team so that every process runs smoothly and targets are achieved'
+         },
+        { name: "Gaurav", role: "Mechnical Engineer",
+            desc: 'I envision engineering as the backbone of progress. My role is to design, refine, and innovate processes that enhance precision, efficiency, and safety in the workshop'
+        },
+        { name: "Ansh", role: "Lathe Operator",
+            desc: 'I see my work as supporting mass production. My role is to deliver consistent quality across repeated operations'
+        },
+        { name: "David", role: "Boring Operator",
+            desc: 'I envision precision as the foundation of heavy engineering. My role is to achieve exact tolerances that strengthen the integrity of every component'
+        },
+        { name: "Sanjeev", role: "VMC Programmer",
+            desc: 'I see machining as a craft of accuracy. My role is to operate Vertical Machining Centers with precision, ensuring every component meets the highest standards'
+        },
+        { name: "Aman", role: "Lathe Operator",
+             desc: 'I see the lathe as a tool of craftsmanship. My role is to shape raw materials into precise forms with skill and care'
+         },
+        { name: "Surya", role: "CNC Operator",
+            desc: 'I envision automation as a path to consistency. My role is to run CNC machines with care, optimizing production while minimizing errors and waste'
+        },
+        { name: "Ojas", role: "M1tr Operator",
+            desc: 'I see milling as a versatile art. My role is to shape and cut materials with accuracy, supporting diverse production needs in the workshop'
+        }
     ]
     
 
@@ -84,12 +102,12 @@ function OurTeam() {
                 <SwiperSlide key={i}>
                     <div className="row g-0">
                         <div className="col-lg-6">
-                            <img src={item.photo} alt={item.name} className='w-100' />
+                            <img src={item.photo? item.photo:'../Team/11.png'} alt={item.name} className='w-100' />
                         </div>
                         <div className="col-lg-6 p-2 ps-5">
                             <h2 className='mt-5'>{item.name}</h2>
-                            <h4>{item.role}</h4>
-                            <p>{item.name}</p>
+                            <h4 className='mt-3'>{item.role}</h4>
+                            <p className='mt-4'>{item.desc}</p>
                         </div>
                     </div>
                 </SwiperSlide>
