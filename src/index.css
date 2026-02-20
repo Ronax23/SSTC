@@ -617,7 +617,7 @@ content: "\F7D5";
 font-size: 40px;
 right: -10px;
 bottom: -20px;
-z-index: 22;
+z-index: -2;
 color: gray;
 transition-duration: .5s;
 
@@ -626,7 +626,7 @@ transition-duration: .5s;
 {
   right: 10px;
   bottom: 10px;
-  color: rgb(139, 238, 139);
+  color: rgba(139, 238, 139,.4);
 }
 
 /* nav .container-fluid
