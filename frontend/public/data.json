@@ -1,0 +1,459 @@
+{
+"Footer_route":[
+
+    {
+        "title":"contact us",
+        "links":[
+            {
+                "Name":"Shiv Shakti Technocrates"
+            },
+            {
+                "Name":"Address: Saroorpur Industrial Area Faridabad"
+            },
+            {
+                "Name":"Email: shivshakti_fbd@yahoo.co.in"
+            },
+            {
+                "Name":"Phone: +91-9810592350"
+            }
+            
+        ]
+    },
+    {
+        "title": "Quick Links",
+        "links": [
+            {
+                "links": "/",
+                "Name": "Home"
+            },
+               {
+        "links": "contact",
+        "Name": "Contact Us"
+    },
+    {
+        "links": "privacy-policy",
+        "Name": "Privacy Policy"
+    },
+    {
+        "links": "terms-of-service",
+        "Name": "Terms of Service"
+    }]
+    }
+
+    
+   ,{
+    "title": "About Us",
+    "links": [
+         {
+                "links": "team",
+                "Name": "Our Team"
+            },
+    {
+        "links": "support",
+        "Name": "Support"
+    },
+        {
+        "links": "services",
+        "Name": "Services"
+    },
+ 
+    {
+                "links": "workshop",
+                "Name": "Workshop"
+            }
+    ]
+   },
+   {
+    "title": "Follow Us",
+    "links": [
+        {
+            "links": "facebook",
+            "Name": "Facebook"
+        },
+        {
+            "links": "twitter",
+            "Name": "Twitter"
+        },
+        {
+            "links": "linkedin",
+            "Name": "LinkedIn"
+        },
+        {
+            "links": "instagram",
+            "Name": "Instagram"
+        }
+    ]
+   }
+],
+ "Nav_Route":[
+    {
+        "links": "/",
+        "Name": "Home"
+    },
+    {
+        "links": "about",
+        "Name": "About Us",
+        "Dropdown":[
+            {
+                "links": "team",
+                "Name": "Our Team"
+            },
+            {
+                "links": "workshop",
+                "Name": "Workshop"
+            }
+        ]
+    },
+    {
+        "links": "services",
+        "Name": "Services"
+    },
+    {
+        "links": "contact",
+        "Name": "Contact Us"
+    }
+],
+
+"comp_logo" : [
+    {
+      "imgsrc": "./Logos/andritz-logo-icon.png",
+      "alt": "Andritz Logo"
+    },
+    {
+      "imgsrc": "./Logos/avl.png",
+      "alt": "AVL Logo"
+    },
+    {
+      "imgsrc": "./Logos/BlissAnand.png",
+      "alt": "Bliss Anand Logo"
+    },
+    {
+      "imgsrc": "./Logos/dantal.svg",
+      "alt": "Dantal Logo"
+    },
+    {
+      "imgsrc": "./Logos/Flovel.jpg",
+      "alt": "Flovel Logo"
+    },
+    {
+      "imgsrc": "./Logos/isgec.png",
+      "alt": "Isgec Logo"
+    },
+    {
+      "imgsrc": "./Logos/HPP.png",
+      "alt": "Hpp Logo"
+    },
+    {
+      "imgsrc": "./Logos/pentaflo.png",
+      "alt": "Pentaflo Logo"
+    },
+    {
+      "imgsrc": "./Logos/maruti.svg",
+      "alt": "Maruti Logo"
+    },
+    {
+      "imgsrc": "./Logos/Samco.png",
+      "alt": "Samco Logo"
+    },
+    {
+      "imgsrc": "./Logos/voith.svg",
+      "alt": "Voith Logo"
+    },
+    {
+      "imgsrc": "./Logos/Sietz.png",
+      "alt": "Sietz Logo"
+    }
+  ],
+  "dynamicSelector":{
+ "Hydro_Engineering":{
+    "img":"/Headers/Carousel2.jpg",
+    "p":"We manufacture high-durability fluid components including turbine runners and pressure valves. Our engineering focuses on extreme corrosion resistance and zero-leakage performance for sustainable water power and management infrastructures."
+    },
+  "Component_Jobwork":{
+    "img":"/Components/cast2.jpg",
+    "p":"We provide high-tolerance jobwork utilizing advanced CNC, VMC, and Lathe technologies. This division specializes in subtractive manufacturing and multi-axis milling to deliver custom-engineered components with superior surface finishes. Our processes ensure exact dimensional accuracy for both rapid prototyping and high-volume industrial production."
+  },
+  "Precision_Die_Moulding":{
+    "img":"/Components/diecast.jpg",
+    "p":"We design and fabricate high-complexity moulds with micron-level tolerances for mass production. Our CNC-machined tooling ensures perfect repeatability and structural integrity for millions of identical plastic and metal components."
+  },
+  "Industrial_Press_Components":{
+    "img":"/Components/press.jpg",
+    "p":"Focused on heavy-duty force, we engineer robust frames and hydraulic cylinders for industrial press machinery. Our components are built to withstand high-tonnage impacts while maintaining surgical precision in shearing and forming operations"
+  }
+},
+  "slides": [
+        {
+            "imgsrc": "/Service/1.jpg",
+            "title": "Flywheel Of Press Machine",
+            "caption":"Flywheels smooth out power delivery in mechanical presses by maintaining consistent rotational speed. They supply peak energy bursts to the crankshaft and ram, compensating for momentary load spikes that would otherwise slow the motor."
+        },
+        {
+            "imgsrc": "/Service/2.jpg",
+            "title": "SAMCO Machine Base Plate",
+            "caption":"We provide high-precision jobwork for internal machine components, including gears, shafts, and specialized fasteners. Using client-provided blueprints, we utilize CNC and VMC machining to achieve microscopic tolerances and superior surface finishes, ensuring every custom-made part integrates perfectly into your specific machinery"
+        },
+        {
+            "imgsrc": "/Service/3.jpg",
+            "title": "AVL Frame Fabrication & Finishing",
+            "caption":"We provide end-to-end manufacturing for frames, managing the entire process from heavy-duty structural fabrication to final surface treatment. This comprehensive jobwork ensures a durable, shop-ready frame that meets strict structural and aesthetic standards."
+        },
+        {
+            "imgsrc": "/Service/4.jpg",
+            "title": "ISGEC Bolster & Adapter Machining",
+            "caption":"We deliver high-precision jobwork for ISGEC press machine bolsters and adapters using our heavy-duty KAFO 3-axis VMC. Our process ensures perfect flatness, precise T-slot milling, and exact bore alignment, guaranteeing stable die-clamping and seamless integration for heavy-tonnage press systems."
+             },
+        {
+            "imgsrc": "/Service/5.jpg",
+            "title": "SAMCO Robust Machine Housing",
+            "caption":"We execute precision cutting, bending, and welding of sheet metal to create vibration-resistant, anti-corrosive frames. We specialize in manufacturing these protective shells according to exact structural specifications for industrial equipment."
+        },
+        {
+            "imgsrc": "/Service/6.jpg",
+            "title": "SAMCO Industrial Machine Frames",
+            "caption":"Heavy-Duty Structural Fabrication We specialize in the contract manufacturing of robust machine frames for SAMCO, engineered to support heavy industrial loads. Utilizing high-grade steel and precision welding techniques, we fabricate these skeletons to ensure perfect alignment and zero-deflection under operational stress."
+        },
+        {
+            "imgsrc": "/Service/7.jpg",
+            "title": "Voith Press Machine Components",
+            "caption":"We specialize in the high-precision machining of critical components for press machines. Utilizing our advanced VMC and lathe capabilities, we ensure every part meets the stringent dimensional tolerances and surface integrity required for high-speed paper and industrial press applications."
+        },
+        {
+            "imgsrc": "/Service/8.jpg",
+            "title": "Grandprix Housing Holder Machining",
+            "caption":"Precision VMC Jobwork We specialize in the precision machining of Grandprix housing holders using advanced VMC technology. Our process ensures tight positional tolerances and high-quality surface finishes required for secure component seating."
+             },
+             {
+            "imgsrc": "/Service/9.jpg",
+            "title": "JBM Die Mould Base Machining",
+            "caption":"We provide high-precision jobwork for die mould bases, utilizing our 3-axis VMC to achieve perfect surface flatness and exact pocket dimensions. Our machining process ensures high-tolerance alignment and a superior finish, meeting the rigorous standards required for heavy-duty automotive tooling and high-volume production"
+             },
+             {
+            "imgsrc": "/Service/12.jpg",
+            "title": "Voith Press Machine Rotor Shaft",
+            "caption":"We provide specialized machining for Voith press machine rotor shafts, focusing on high-load durability and precision alignment. Utilizing heavy-duty lathes and grinding equipment, we achieve the exact stepped diameters and micron-level surface finishes required for high-speed industrial rotation. Our jobwork ensures perfect concentricity and dynamic balance, critical for preventing vibration and extending the bearing life of Voith's high-performance machinery"
+             },
+             {
+            "imgsrc": "/Service/17.jpg",
+            "title": "Fabricated Stuffing Box",
+            "caption":"We provide end-to-end jobwork for stuffing box components, from structural fabrication to final precision machining. Using 3-axis VMC and lathe work, we ensure exact bore tolerances and seating flatness, guaranteeing leak-proof seals and perfect alignment for high-pressure industrial applications."
+             },
+             {
+            "imgsrc": "/Service/18.jpg",
+            "title": "Motor Mounting Bracket Machining",
+            "caption":"We provide precision jobwork for heavy-duty motor mounting brackets, specializing in high-strength fabrication and 3-axis VMC machining. Our process ensures perfect mounting hole alignment and flat seating surfaces to eliminate motor vibration and structural stress. Finished with industrial-grade sandblasting and painting, these brackets offer maximum durability and exact fitment for industrial drive systems."
+        },
+        {
+            "imgsrc": "/Service/19.jpg",
+            "title": "Drilling Jig for Bearing House",
+            "caption":"We specialize in the precision manufacturing of drilling jigs for bearing housings using 3-axis VMC machining. Our jobwork ensures exact hole coordinates and bushing alignment, critical for maintaining the concentricity of the bearing bore. Designed for durability and repeat accuracy, these jigs facilitate error-free production and perfect interchangeability of bearing components."
+        },
+        {
+            "imgsrc": "/Service/20.jpg",
+            "title": "Francis Runner",
+            "caption":"We provide precision jobwork for Uflex top plates, utilizing our 3-axis VMC to achieve high-accuracy surface facing and mounting hole patterns. Our machining ensures perfect parallelism and flatness, which are critical for the stable mounting of industrial equipment and vibration-free operation in Uflex machinery systems."
+             },
+             {
+            "imgsrc": "/Service/23.jpg",
+            "title": "Top Plate for Uflex",
+            "caption":"We specialize in high-precision jobwork for Kaplan Runners, using advanced lathe turning for hub concentricity and 3-axis VMC machining for complex blade geometries. Our process ensures exact pitch and twist profiles, delivering maximum hydraulic efficiency and balanced rotation for low-head hydro turbines."
+             },
+             {
+            "imgsrc": "/Service/25.jpg",  
+            "title": "Turbine Shaft Machining",
+            "caption":"We provide specialized lathe jobwork for heavy-duty turbine shafts, ensuring perfect concentricity and dimensional accuracy. Our process focuses on achieving micron-level tolerances on stepped diameters and bearing seats to eliminate run-out. By utilizing heavy-duty turning and precision finishing, we deliver shafts that guarantee dynamic balance and vibration-free performance in high-speed turbine environments."
+             },
+             
+             {
+            "imgsrc": "/Headers/Carousel2.jpg",
+            "title": "Pelton Runner Machining",
+            "caption":"We provide precision jobwork for Pelton Runners using heavy-duty lathe turning for disc concentricity and 3-axis VMC machining for intricate bucket profiling. Our process ensures exact splitter geometry and balanced bucket alignment, delivering maximum kinetic energy transfer and vibration-free performance for high-head hydro turbines."
+             },
+             {
+            "imgsrc": "/Headers/Carousel1.jpg",
+            "title": "Suzuki Mould Machining",
+            "caption":"We specialize in high-precision Maruti mould facing utilizing our advanced 3-axis VMC technology. This process ensures exceptional surface flatness and dimensional accuracy required for automotive grade injection and casting moulds. By leveraging high-speed vertical milling, we achieve a superior finish that reduces the need for secondary polishing"
+           }
+    ],
+     "CardsMap":{
+      "head":"The Gold Standard in Precision",
+      "cards":[
+        {
+            "icon":"bi bi-bullseye",
+            "title":"Precision-First Approach",
+            "desc":"Ensuring exact tolerances in every mould and die we craft"
+        },
+        {
+            "icon":"bi-gear-wide-connected",
+            "title":"Technical Mastery",
+            "desc":"Deep expertise in the specialized manufacturing of hydro-turbine components"
+        },
+        {
+            "icon":"bi-patch-check",
+            "title":"Uncompromising Quality",
+            "desc":"Rigorous testing protocols to guarantee durability in high-stress environments"
+        },
+        {
+            "icon":"bi-clock-history",
+            "title":"On-Time Execution",
+            "desc":"Streamlined workshop management to meet your critical project deadlines"
+        }
+    ]},
+
+      "counterMap":[
+        {
+            "count":15,
+            "title":"Years of Excellence"
+        },
+        {
+            "count":500,
+            "title":"Projects Delivered"
+        },
+        {
+            "count":200,
+            "title":"Precision Moulds"
+        },
+        {
+            "count":120,
+            "title":"Satisfied Clients"
+        }
+    ],
+
+         "dynamics":[
+    {
+        "content":"Expert Precision in Every Component",
+        "p":"Specialized job-work for high-quality moulds, dies, and custom industrial parts tailored to your specifications",
+        "imgsrc":"/Headers/Carousel1.jpg"     
+    },
+    {
+        "content":"Hydro-Turbine Part Specialists",
+        "p":"Delivering durable, high-performance components engineered to withstand the rigors of the power generation industry",
+        "imgsrc":"/Headers/Carousel2.jpg"     
+    },
+    {
+        "content":"Advanced Tooling, Proven Reliability",
+        "p":"Combining years of workshop expertise with modern machining to ensure your projects are delivered on time and on spec",
+        "imgsrc":"/Headers/Carousel3.jpg"     
+    }
+],
+
+ "machines":[
+    {
+      "name":"Kafo VMC",
+      "Model":"Kafo VMC B3122",
+      "Description":"Kafo VMC B3122 is a vertical machining center that is used for machining various parts."
+      ,"Image":"/Machines/vmc.jpg"
+    },
+    {
+      "name":"NeWay CNC",
+      "Model":"NeWay CNC Lathe",
+      "Description":"NeWay CNC Lathe is a lathe that is used for machining various parts.",
+      "Image":"/Machines/cnc.jpg"
+    },
+    {
+      "name":"TOS Boring Machine",
+      "Model":"TOS WH-100",
+      "Description":"TOS Boring Machine is a boring machine that is used for boring various parts.",
+      "Image":"/Machines/b100.jpg"
+    },
+    {
+      "name":"TOS Boring Machine",
+      "Model":"TOS WH-80",
+      "Description":"TOS Milling Machine is a milling machine that is used for milling various parts.",
+      "Image":"/Machines/b80.jpg"
+    },
+    {
+      "name":"Lathe Machine",
+      "Model":"Lathe 18 Foot",
+      "Make":"Batala Punjab 2006",
+      "Description":"Lathe Machine is a lathe machine that is used for lathe various parts.",
+      "Image":"/Machines/l18.jpg"
+    },
+    {
+      "name":"Lathe Machine",
+      "Model":"Lathe 12 Foot",
+      "Make":"Batala Punjab 2006",
+      "Description":"Lathe Machine is a lathe machine that is used for lathe various parts.",
+      "Image":"/Machines/l12.jpg"
+    },
+    {
+      "name":"Lathe Machine",
+      "Model":"Lathe 9 Foot",
+      "Make":"Rajkot Gujarat 2016",
+      "Description":"Lathe Machine is a lathe machine that is used for lathe various parts.",
+      "Image":"/Machines/l9.jpg"
+    },
+    {
+      "name":"Lathe Machine",
+      "Model":"Lathe 10 Foot",
+      "Make":"Rajkot Gujarat 2017",
+      "Description":"Lathe Machine is a lathe machine that is used for lathe various parts.",
+      "Image":"/Machines/l10.jpg"
+    },
+    {
+      "name":"Lathe Machine",
+      "Model":"Lathe 6 Foot",
+      "Make":"Keloskar 1998",
+      "Description":"Lathe Machine is a lathe machine that is used for lathe various parts.",
+      "Image":"/Machines/l6.jpg"
+    },
+    {
+      "name":"M1TR",
+      "Model":"M1TR",
+      "Make":"M1TR",
+      "Description":"M1TR is a M1TR machine that is used for M1TR various parts.",
+      "Image":"/Machines/m1tr.jpg"
+
+    },
+    {
+      "name":"Surface Grinder",
+      "Model":"Guru Surface Grinder",
+      "Make":"Faridabad 2015",
+      "Description":"M1TR is a M1TR machine that is used for M1TR various parts.",
+      "Image":"/Machines/l6.jpg"
+
+    }
+  ],
+
+  "termsAndConditions": [
+  {
+    "id": 1,
+    "title": "Quality Assurance & Standards",
+    "description": "Our workshop operates under strict quality control protocols to ensure every component meets the industrial requirements of the power generation and tooling sectors.",
+   "bullets": [
+      "All raw materials are inspected for metallurgical integrity before machining.",
+      "Final products undergo a 3-step tolerance verification process.",
+      "Material test certificates (MTC) can be provided upon prior request."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Project Timelines & Delivery",
+    "description": "We strive to meet every deadline; however, precision engineering requires specific environmental and mechanical conditions that may affect scheduling.",
+   "bullets": [
+      "Delivery dates are estimates starting from the date of advance payment.",
+      "The company is not liable for delays caused by power grid failures or transit issues.",
+      "Expedited 'Urgent' orders will incur a 20% surcharge on the total labor cost."
+    ]
+  },{
+    "id": 3,
+    "title": "Payment Terms & Delay Interest",
+    "description": "To maintain our supply chain and operational efficiency, we require strict adherence to payment schedules outlined in the Proforma Invoice.",
+   "bullets": [
+      "Payments must be cleared within 7 business days of invoice generation.",
+      "A delayed payment interest of 2% per month (calculated daily) will be applied to all overdue balances.",
+      "Work on subsequent project phases will be paused until outstanding dues are settled."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Storage & Component Rental",
+    "description": "Completed components must be collected or scheduled for delivery immediately upon notification of completion. Our workshop space is optimized for active production.",
+   "bullets": [
+      "A grace period of 5 business days is provided after the 'Ready for Collection' notice.",
+      "Post-grace period, a storage rental fee of ₹500 per component per day (or 0.5% of order value, whichever is higher) will apply.",
+      "The company is not liable for minor surface oxidation (rust) on components left in storage for over 15 days without specialized coating."
+    ]
+  }
+]
+}
