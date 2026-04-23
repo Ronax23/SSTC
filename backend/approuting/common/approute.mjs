@@ -1,5 +1,4 @@
 import express from 'express'
-import data from "../../data.json" with { type: 'json' };
 import dbConnect from '../../config/dbConnect.mjs';
 import userAdd from '../../controller/userAdd.mjs';
 import delUser from '../../controller/delUser.mjs';
@@ -8,13 +7,15 @@ import loginAuth from '../../controller/loginControl.mjs';
 import passReset from '../../controller/passReset.mjs';
 import userList from '../../controller/userList.mjs';
 import dashboard from '../../controller/dashboard.mjs';
+import con from '../../config/dbConnect.mjs';
 
 console.log(dbConnect);
 const app=express();
 app.use(express.static('../'));
 
 app.get("/",(req,res)=>{
-    res.status(200).json(data);
+    console.log("hello world");
+    res.send("hello world");
 });
 
 app.get("/userlist",userList)
