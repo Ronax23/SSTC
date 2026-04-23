@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React from 'react'
+import {useState,useEffect} from 'react'
 import LoaderError from '../../assets/Reusable/LoaderError';
 
 function dashboardHome() {
-    const [data,setData]=React.useState<any>([]);
-    const [loading,setLoading]=React.useState(true);
+    const [data,setData]=useState<any>([]);
+    const [loading,setLoading]=useState(true);
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         axios.get("http://localhost:8000/dashboard").then((res)=>{
             setData(res.data);
             console.log(res.data);

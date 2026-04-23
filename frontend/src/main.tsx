@@ -16,6 +16,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import LoaderError from './assets/Reusable/LoaderError.tsx';
 import DashboardHome from './Components/Dashboard/dashboardHome.tsx';
 import Dashboard from './Components/Dashboard.tsx';
+const Blogs =lazy(()=>import ('./Components/Dashboard/Blogs.tsx'))
 const Register=lazy(()=> import('./Components/Register.tsx'));
 const Login=lazy(()=> import('./Components/Login.tsx'));
 const Services= lazy(()=>import ('./Components/Services.tsx'));
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path='dashboardhome' element={<DashboardHome />} />
           <Route path='userList'  element={<UserList/>}/>
+          <Route path='createBlog' element={<Blogs />} />
         </Route>
         <Route path="/" element={<MainPage />}>
           <Route path="/" element={<LandingPage />} />

@@ -1,10 +1,11 @@
-import React from 'react'
+import {useState} from 'react'
 import { Link, Outlet } from 'react-router-dom';
 
 function Dashboard() {
-  const [collapse, setCollapse] = React.useState(true)
+  const [collapse, setCollapse] = useState(true)
   const sidebar=
   [    {name:"Dashboardhome",icon:"🏠"} ,
+    {name:"UserList",icon:"👥"} ,
     {name:"Invoice",icon:"📊"} ,
     {name:"Settings",icon:"⚙️"}
   ]
@@ -19,7 +20,7 @@ function Dashboard() {
                
           <ul className="list-unstyled d-flex flex-column align-items-start my-3">
             {sidebar.map((item, index) => (
-              <li className='my-2' key={index}>
+              <li className='my-2 text-decoration-none text-light' key={index}>
                 <Link to={item.name.toLowerCase()}>
                   {item.icon} {!collapse && item.name}
                 </Link>
@@ -28,7 +29,7 @@ function Dashboard() {
           </ul>
         </div>
 
-        <div className="flex-grow-1 bg-danger p-4">
+        <div className="flex-grow-1 bg-light p-4">
           <Outlet/>
         </div>
 

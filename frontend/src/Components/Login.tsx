@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiLoc } from '../assets/Constants/apis_loc';
 
 
+
 function Login() {
     const navigateDashboard=useNavigate();
     const [passwordView, setPasswordview] = useState<string>("password");
@@ -13,7 +14,8 @@ function Login() {
         mode: "onBlur"
       });
      const loginhandle = (data:string) => {
-          axios.post(`${apiLoc}login`,data).then((res)=>{
+        console.log(import.meta.env.VITE_API)
+          axios.post(`${import.meta.env.VITE_API}login`,data).then((res)=>{
             if(res.data.login){
                 toast.success(res.data.message);
                 setTimeout(()=>{

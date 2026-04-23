@@ -2,7 +2,6 @@ import {useState, useEffect } from 'react'
 import LoaderError from '../../assets/Reusable/LoaderError';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import { set } from 'react-hook-form';
 
 function userList() {
 
