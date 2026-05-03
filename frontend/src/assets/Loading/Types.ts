@@ -73,6 +73,16 @@ interface dynamics
   p:string,
   imgsrc:string
 }
+interface Blog{
+    id:string,
+    title:string,
+    content:string,
+    image:string
+}
+interface Paginate{
+    page:number,
+    total:number
+}
 export type {
     HeaderReusableDynamic,
     comp_logo,
@@ -86,5 +96,5 @@ export type {
     TermsProps,
     Machine,
     counterMap,
-    dynamics
+    dynamics,Blog,Paginate
 }

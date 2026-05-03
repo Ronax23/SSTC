@@ -1,6 +1,7 @@
 import loginModel from "../models/login.mjs";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import cookieParser from "cookie-parser";
 
 const loginAuth=    async(req,res)=>{
     try
@@ -15,6 +16,7 @@ const loginAuth=    async(req,res)=>{
     const passwordMatch=await bcrypt.compare(password,user.password[0]);
     if (user.email===email && passwordMatch){
         const token=jwt.sign({email,password},process.env.JWT_SECRET,{expiresIn:'1h'});
+        res.cookie("token", token, { httpOnly: true, secure: true,maxAge: 60 * 60 * 1000,path: '/' });
         res.status(200).json({message:"Login successful",login:true, stats:200, token:token});
 
         console.log("Login successful");

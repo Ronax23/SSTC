@@ -4,7 +4,6 @@ function Blogs() {
 
         const [preview, setPreview] = useState<string>("");
     const uploadImg=(e)=>{
-        console.log(URL.createObjectURL(e.target.files[0]))
         setPreview(URL.createObjectURL(e.target.files[0]))
     }
 

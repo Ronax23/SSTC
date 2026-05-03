@@ -7,7 +7,11 @@ function dashboardHome() {
     const [loading,setLoading]=useState(true);
 
     useEffect(()=>{
-        axios.get("http://localhost:8000/dashboard").then((res)=>{
+        axios.get("http://localhost:8000/dashboard",
+            {
+                withCredentials:true
+            }
+        ).then((res)=>{
             setData(res.data);
             console.log(res.data);
             setLoading(false);

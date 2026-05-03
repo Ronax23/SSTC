@@ -8,6 +8,8 @@ import passReset from '../../controller/passReset.mjs';
 import userList from '../../controller/userList.mjs';
 import dashboard from '../../controller/dashboard.mjs';
 import con from '../../config/dbConnect.mjs';
+import viewBlog from '../../controller/viewBlog.mjs';
+import createBlog from '../../controller/createBlog.mjs';
 
 console.log(dbConnect);
 const app=express();
@@ -18,7 +20,11 @@ app.get("/",(req,res)=>{
     res.send("hello world");
 });
 
-app.get("/userlist",userList)
+app.get("/blogs",viewBlog);
+
+app.post("/createBlog",createBlog);
+
+app.get("/userlist",userList);
 
 app.get("/dashboard",dashboard)
 

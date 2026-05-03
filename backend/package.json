@@ -1,23 +1,28 @@
 {
-  "name": "learner",
+  "name": "sstc-billing-system",
   "version": "1.0.0",
-  "description": "learn",
+  "description": "Professional inventory and billing management system for Shiv Shakti Technocrates",
   "license": "ISC",
   "author": "Ronax",
   "type": "module",
   "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cloudinary": "^2.9.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.1",
+    "multer": "^2.1.1"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.14"
   }
 }
