@@ -10,6 +10,9 @@ import dashboard from '../../controller/dashboard.mjs';
 import con from '../../config/dbConnect.mjs';
 import viewBlog from '../../controller/viewBlog.mjs';
 import createBlog from '../../controller/createBlog.mjs';
+import addInventory from '../../controller/inventory/addInventory.mjs';
+import deleteInventory from '../../controller/inventory/deleteInventory.mjs';
+import auth from '../../middleware/auth.mjs';
 
 console.log(dbConnect);
 const app=express();
@@ -22,20 +25,24 @@ app.get("/",(req,res)=>{
 
 app.get("/blogs",viewBlog);
 
-app.post("/createBlog",createBlog);
+app.post("/createBlog",auth,createBlog);
 
 app.get("/userlist",userList);
 
-app.get("/dashboard",dashboard)
+app.get("/dashboard",auth,dashboard)
 
 app.post("/adduser",userAdd);
 
-app.delete("/userlist/:id",delUser);
+app.delete("/userlist/:id",auth,delUser);
 
 app.post("/login",loginAuth);
 
-app.post("/forgerpass ",passReset);
+app.patch("/forgetpass ",passReset);
 
-app.post("/newbill", invoicesCreate);
+app.post("/newbill",auth, invoicesCreate);
+
+app.post("/addinventory", auth, addInventory);
+app.delete("/deleteinventory/:id", auth, deleteInventory);
+app.put("/editinventory/:id", auth, editInventory);
 
 export default app;

@@ -1,14 +1,17 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 import HeaderReusable from '../assets/Reusable/HeaderReusable';
-import type{Blog,Paginate } from '../assets/Loading/Types';
+import type{Blog } from '../assets/Loading/Types';
 
 function Blogs() {
     const [blogs,setBlogs]=useState<Blog[]>([]);
-    const [page,setPage]=<Paginate>useState(1);
+    const [page,setPage]=useState<number>(1);
+    let total:number=0;
     const getBlogs=()=>{
         axios.get(`${import.meta.env.VITE_API}/blogs?page=${page}`).then((res)=>{
-            setBlogs(res.data);
+            setBlogs(res.data.blog);
+            setPage(res.data.page);
+            total = res.data.total;
         }).catch((e)=>{
             console.log(e);
         })

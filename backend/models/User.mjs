@@ -10,6 +10,6 @@ const userInsert=Schema({
     gender:{type:String,enum:["male","female","other"]}
 })
 
-const userModel= mongoose.model("use",userInsert);
+const userModel= mongoose.model("user",userInsert);
 
 export default userModel;

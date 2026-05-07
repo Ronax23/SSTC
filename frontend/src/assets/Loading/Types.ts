@@ -79,10 +79,6 @@ interface Blog{
     content:string,
     image:string
 }
-interface Paginate{
-    page:number,
-    total:number
-}
 export type {
     HeaderReusableDynamic,
     comp_logo,
@@ -96,5 +92,5 @@ export type {
     TermsProps,
     Machine,
     counterMap,
-    dynamics,Blog,Paginate
+    dynamics,Blog
 }
