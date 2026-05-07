@@ -2,7 +2,7 @@ import express from 'express'
 import dbConnect from '../../config/dbConnect.mjs';
 import userAdd from '../../controller/userAdd.mjs';
 import delUser from '../../controller/delUser.mjs';
-import invoicesCreate from '../../controller/invoicesCreate.mjs';
+import invoicesCreate from '../../controller/Invoice/invoicesCreate.mjs';
 import loginAuth from '../../controller/loginControl.mjs';
 import passReset from '../../controller/passReset.mjs';
 import userList from '../../controller/userList.mjs';
@@ -13,6 +13,7 @@ import createBlog from '../../controller/createBlog.mjs';
 import addInventory from '../../controller/inventory/addInventory.mjs';
 import deleteInventory from '../../controller/inventory/deleteInventory.mjs';
 import auth from '../../middleware/auth.mjs';
+import listInvoice from '../../controller/Invoice/editInvoice.mjs';
 
 console.log(dbConnect);
 const app=express();
@@ -24,6 +25,8 @@ app.get("/",(req,res)=>{
 });
 
 app.get("/blogs",viewBlog);
+
+app.get("/blog/:id",viewBlog);
 
 app.post("/createBlog",auth,createBlog);
 
@@ -37,12 +40,16 @@ app.delete("/userlist/:id",auth,delUser);
 
 app.post("/login",loginAuth);
 
+app.get("/listinvoice",auth,listInvoice);
+
 app.patch("/forgetpass ",passReset);
 
 app.post("/newbill",auth, invoicesCreate);
 
 app.post("/addinventory", auth, addInventory);
+
 app.delete("/deleteinventory/:id", auth, deleteInventory);
+
 app.put("/editinventory/:id", auth, editInventory);
 
 export default app;

@@ -1,4 +1,5 @@
 import invoiceModel from "../models/invoice.mjs";
+import Inventory from "../models/inventory.mjs";
 
 const invoiceCreate=    async(req,res)=>{
     const  {item}=req.body;
@@ -22,7 +23,16 @@ const invoiceCreate=    async(req,res)=>{
     const billno=bill?bill.invoiceNumber+1:1;
     console.log(dat);
     const newBill=new invoiceModel({items:dat,customerName:req.body.customerName,invoiceNumber:billno,grandAmount:GrandTotal});
-   await newBill.save();
+    const inventoryUpdates = dat.map(i => {
+            return Inventory.updateOne(
+                { name: { $regex: new RegExp(`^${i.item}$`, 'i') } }, 
+                { $inc: { quantity: -i.quantity } }
+            );
+        });
+        await Promise.all([
+            ...inventoryUpdates,
+            newBill.save()
+        ]);
     res.status(200).json(dat);
 }
 
