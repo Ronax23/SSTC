@@ -1,4 +1,4 @@
-import Inventory from '../../models/Inventory.mjs';
+import Inventory from '../../models/inventory.mjs';
 const addStock = async (req, res) => {
     const{name, quantity,purchasePrice,MRP,Metric, description} = req.body;
     try {

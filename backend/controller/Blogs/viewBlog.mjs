@@ -1,4 +1,4 @@
-import blogs from "../models/blogs.mjs";
+import blogs from "../../models/blogs.mjs";
 
 const viewBlog = async(req,res)=>{
     const {id, title} = req.query;

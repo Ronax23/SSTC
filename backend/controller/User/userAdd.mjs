@@ -1,5 +1,5 @@
-import userModel from '../models/User.mjs';
-import loginModel from '../models/login.mjs';
+import userModel from '../../models/User.mjs';
+import loginModel from '../../models/login.mjs';
 import bcrypt from 'bcrypt';
 
 const userAdd =    async(req,res)=>{

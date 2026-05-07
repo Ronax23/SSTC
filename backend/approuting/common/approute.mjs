@@ -8,12 +8,13 @@ import passReset from '../../controller/User/passReset.mjs';
 import userList from '../../controller/User/userList.mjs';
 import dashboard from '../../controller/dashboard.mjs';
 import con from '../../config/dbConnect.mjs';
-import viewBlog from '../../controller/viewBlog.mjs';
-import createBlog from '../../controller/createBlog.mjs';
-import addInventory from '../../controller/inventory/addInventory.mjs';
-import deleteInventory from '../../controller/inventory/deleteInventory.mjs';
-import auth from '../../middleware/auth.mjs';
+import viewBlog from '../../controller/Blogs/viewBlog.mjs';
+import createBlog from '../../controller/Blogs/createBlog.mjs';
+import addInventory from '../../controller/Inventory/addInventory.mjs';
+import deleteInventory from '../../controller/Inventory/deleteInventory.mjs';
+import auth from '../../middlewares/auth.mjs';
 import listInvoice from '../../controller/Invoice/editInvoice.mjs';
+import editInventory from '../../controller/Inventory/editInventory.mjs';
 
 console.log(dbConnect);
 const app=express();

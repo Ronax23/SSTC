@@ -1,5 +1,5 @@
-import userModel from "../models/User.mjs";
-import loginModel from "../models/login.mjs";
+import userModel from "../../models/User.mjs";
+import loginModel from "../../models/login.mjs";
 
 const delUser=    async(req,res)=>{
     const {id}=req.params;

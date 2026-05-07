@@ -1,4 +1,4 @@
-import blogs from "../models/blogs.mjs";
+import blogs from "../../models/blogs.mjs";
 const createBlog = async(req,res) => {
     const {title,content,img}=req.body;
     try{

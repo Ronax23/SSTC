@@ -1,4 +1,4 @@
-import loginModel from "../models/login.mjs";
+import loginModel from "../../models/login.mjs";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from "cookie-parser";

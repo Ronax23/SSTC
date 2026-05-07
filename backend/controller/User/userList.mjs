@@ -1,6 +1,6 @@
-import con from "../config/dbConnect.mjs";
-import userModel from "../models/User.mjs";
-import calculateAge from "../utilities/ageCal.mjs";
+import con from "../../config/dbConnect.mjs";
+import userModel from "../../models/User.mjs";
+import calculateAge from "../../utilities/ageCal.mjs";
 
 const userList = async (req, res) => {
 

@@ -26,6 +26,7 @@ const inventorySchema = new mongoose.Schema({
         min: 0
     },
     Metric: {
+        type: String,
         enum: ['kg', 'g', 'l', 'ml', 'pcs'],
         required: true,
         trim: true

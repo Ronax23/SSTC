@@ -1,4 +1,4 @@
- import loginModel from "../models/login.mjs";
+ import loginModel from "../../models/login.mjs";
 
  const passReset=    async(req,res)=>{
     const {names}=req.body;  

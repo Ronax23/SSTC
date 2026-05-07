@@ -1,5 +1,5 @@
-import invoiceModel from "../models/invoice.mjs";
-import Inventory from "../models/inventory.mjs";
+import invoiceModel from "../../models/invoice.mjs";
+import Inventory from "../../models/inventory.mjs";
 
 const invoiceCreate=    async(req,res)=>{
     const  {item}=req.body;
