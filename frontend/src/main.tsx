@@ -15,7 +15,7 @@ const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
 const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
-const Dashboard =lazy(()=> import ('./Components/Dashboard.tsx'));
+const Dashboard =lazy(()=> import ('./Components/Dashboard/Dashboard.tsx'));
 const AddUser=lazy(()=>import  ('./Components/Dashboard/AddUser.tsx'));
 const Invoice= lazy(()=>import ('./Components/Dashboard/Invoice.tsx'));
 const CreateBlogs =lazy(()=>import ('./Components/Dashboard/CreateBlogs.tsx'))
@@ -39,7 +39,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='userList'  element={<UserList/>}/>
           <Route path='createBlog' element={<CreateBlogs />} />
           <Route path="AddUser" element={<AddUser />} />
-          <Route path='Invoice' element={<Invoice />} />
+          <Route path='AddInvoice' element={<Invoice />} />
         </Route>
         <Route path="/" element={<MainPage />}>
           <Route path="/" element={<LandingPage />} />

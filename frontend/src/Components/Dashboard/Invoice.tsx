@@ -1,6 +1,15 @@
+import axios from 'axios';
 import React from 'react'
 
 function Invoice() {
+    const invocePost = async (e:any)=>{
+        axios.post('http://localhost:3000/invoice',FormData,{withCredentials:true}).then((res)=>{
+            console.log(res);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+    const [taxType,setTaxType] = React.useState("local");
     const [field,addField] = React.useState([{ id: crypto.randomUUID() }]);
     const addInv=()=>{
         addField([...field,{ id: crypto.randomUUID() }]);
@@ -24,7 +33,8 @@ function Invoice() {
                             <input type="date" placeholder='Invoice Date' />
 
                         </div>
-                        {field.map((item:any)=>(
+                       <div className=" p-2" style={{ height: '65vh', overflowY: 'scroll'   }}>
+                         {field.map((item:any)=>(
                             <div className="row mt-3" key={item.id}>
                         <div className="col-lg-2 col-md-2">
                             <input type="text" className='w-100' placeholder='Product Name' />
@@ -50,6 +60,29 @@ function Invoice() {
                             )}
                         </div>
                         </div>))}
+                       </div>
+                       <div className="part col-lg-4 col-md-4 col-12 justify-content-end gap-2">
+                        <p>Total = ₹{}</p>
+                        {taxType == "local" ? (
+                            <>
+                            <p>CGST {}% = ₹{}</p>
+                            <p>SGST {}% = ₹{}</p>
+                            </>
+                        ) : (
+                           <p>IGST {}% = ₹{}</p>
+                        )}
+                        <p>Grand Total = ₹{}</p>
+                        <label htmlFor="">Payment Mode</label>
+                        <div className="pay d-flex gap-2">
+                            
+                            <button>UPI</button>
+                            <button>Cash</button>
+                            <button>Card</button>
+                            <button>Online</button>
+                            <button>Cheque</button>
+                            <button>Credit</button>
+                        </div>
+                       </div>
                      </div>
                         </form>
                 </div>

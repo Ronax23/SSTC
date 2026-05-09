@@ -6,13 +6,16 @@ import cookieParser from "cookie-parser";
 const loginAuth=    async(req,res)=>{
     try
     {
-        const {email,password}=req.body;    
+        const {email,password}=req.body;   
     
     if (!email|| !password){
         res.status(200).json({message:"Email and password are required",login:false});
         return;
     }
     const user=await loginModel.findOne({email:email});
+    if (!user){
+       return res.status(200).json({message:"No User found",login:false, status:300});
+    }
     const passwordMatch=await bcrypt.compare(password,user.password[0]);
     if (user.email===email && passwordMatch){
         const token=jwt.sign({email,password},process.env.JWT_SECRET,{expiresIn:'1h'});

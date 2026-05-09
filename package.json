@@ -1,0 +1,22 @@
+{
+  "name": "sstc_erp",
+  "version": "1.0.0",
+  "description": "This project is a company website showcasing their product and tracking sale, purchase, inventory,purchase orders of job work, attandance,salary calculations, manage customer,employes data, genrate invoices keep track records of payments, blogs and products posts and also keep investments records and tell profits",
+  "keywords": [
+    "sstc",
+    "erp",
+    "inventory-management",
+    "invoice-generator",
+    "mern-stack"
+  ],
+  "license": "ISC",
+  "author": "ronax",
+  "type": "module",
+  "main": "./backend/index.mjs",
+  "scripts": {
+  "dev": "npm run backend & npm run frontend",
+  "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

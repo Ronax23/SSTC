@@ -2,9 +2,8 @@ import {useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type {login} from '../assets/Loading/Types';
-import { text } from 'framer-motion/client';
 
 
 
@@ -16,7 +15,7 @@ function Login() {
       });
      const loginhandle = (data:login) => {
         console.log(import.meta.env.VITE_API)
-          axios.post(`${import.meta.env.VITE_API}login`,data,{withCredentials:true}).then((res)=>{
+          axios.post(`${import.meta.env.VITE_API}login`,data).then((res)=>{
             if(res.data.login){
                 toast.success(res.data.message);
                 setTimeout(()=>{
@@ -51,11 +50,12 @@ function Login() {
                     </section>
                     <section className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type={passwordView} id="password" className='my-3 form-control'
+                   <div className="position-relative">
+                         <input type={passwordView} id="password" className='my-3 form-control'
                         {...register("password", { required: true})}
                         placeholder='Enter your password' />
                          <i 
-                                            className={`btn btn-outline-secondary ${passwordView === "password" ? "bi bi-eye" : "bi bi-eye-slash"}`}
+                                            className={`btn btn-outline-secondary position-absolute top-0 end-0 border-0   ${passwordView === "password" ? "bi bi-eye" : "bi bi-eye-slash"}`}
                                             onMouseDown={() => setPasswordview("text")}
                                             onMouseUp={() => setPasswordview("password")}
                                             onTouchStart={() => setPasswordview("text")} // Mobile support
@@ -63,9 +63,13 @@ function Login() {
                                             style={{ userSelect: 'none' }}
                                         >
                                         </i>
+                   </div>
                         {errors.password?.type === "required" && <span className='text-danger'>This field is required</span>}
                     </section>
-                    <button type='submit' className='btn btn-primary'>Login</button>
+                    <section className="d-flex justify-content-between align-items-center">
+                        <button type="submit" className='btn btn-primary'>Login</button>
+                        <span>Don't have an account? <Link className="ms-2 btn btn-info text-light" to="/register">Register</Link></span>
+                    </section>
                 </form>
             </section>
             <section className="mt-3 col-lg-6 col-md-6 col-12">
