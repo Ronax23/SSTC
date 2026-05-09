@@ -49,8 +49,8 @@ export const Footer_route:FooterRoute[]=[
                 Name: "Our Team"
             },
     {
-        links: "*",
-        Name: "Error 404"
+        links: "blogs",
+        Name: "Blogs"
     },
         {
         links: "services",

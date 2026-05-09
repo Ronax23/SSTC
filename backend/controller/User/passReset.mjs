@@ -1,4 +1,6 @@
  import loginModel from "../../models/login.mjs";
+import sendEmail from "../../services/nodemailer.mjs";
+import otpModel from "../../models/otp.mjs";
 
  const passReset=    async(req,res)=>{
     const {names}=req.body;  
@@ -9,9 +11,13 @@
     {
 
 
-    const user=await loginModel.find({username:names});
+    const user=await loginModel.findOne({$or:[{username:names},{email:names},{phone:names}]});
     if(user){
-        res.status(200).json({message:"Password reset link sent to your email"});
+        const otp=Math.floor(100000 + Math.random() * 900000);
+        await sendEmail(user.email,otp,user.username);
+        const newOtp=new otpModel({email:user.email,otp});
+        await newOtp.save();
+        res.status(200).json({message:"OTP sent to email"});
     }else{
         res.status(200).json({message:"User not found"});
     }

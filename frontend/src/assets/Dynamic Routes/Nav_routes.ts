@@ -19,6 +19,10 @@ export const Nav_Route:NavType[]=[
         ]
     },
     {
+        links: "blogs",
+        Name: "Blogs"
+    },
+    {
         links: "services",
         Name: "Services"
     },

@@ -5,7 +5,7 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
-const AnimatedCursor=lazy(()=> import('./Components/AnimatedCursor.tsx'));
+const AnimatedCursor=lazy(()=> import('./assets/Reusable/AnimatedCursor.tsx'));
 const LandingPage=lazy(()=> import ('./Components/LandingPage.tsx'));
 const ContactUs= lazy(()=> import ('./Components/ContactUs.tsx'));
 const MainPage= lazy(()=>import ('./Components/MainPage.tsx'));
@@ -13,16 +13,18 @@ const OurTeam= lazy(()=>import ('./Components/OurTeam.tsx'));
 const Terms= lazy(()=>import ('./Components/Terms.tsx'));
 const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import LoaderError from './assets/Reusable/LoaderError.tsx';
-import DashboardHome from './Components/Dashboard/dashboardHome.tsx';
-import Dashboard from './Components/Dashboard.tsx';
-import AddUser from './Components/Dashboard/AddUser.tsx';
-import Invoice from './Components/Dashboard/Invoice.tsx';
-const Blogs =lazy(()=>import ('./Components/Dashboard/Blogs.tsx'))
+const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
+const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
+const Dashboard =lazy(()=> import ('./Components/Dashboard.tsx'));
+const AddUser=lazy(()=>import  ('./Components/Dashboard/AddUser.tsx'));
+const Invoice= lazy(()=>import ('./Components/Dashboard/Invoice.tsx'));
+const CreateBlogs =lazy(()=>import ('./Components/Dashboard/CreateBlogs.tsx'))
 const Register=lazy(()=> import('./Components/Register.tsx'));
 const Login=lazy(()=> import('./Components/Login.tsx'));
 const Services= lazy(()=>import ('./Components/Services.tsx'));
 const UserList=lazy(()=> import('./Components/Dashboard/userList.tsx'));
+const ViewBlog=lazy(()=> import('./Components/Blogs.tsx'));
+const DynamicBlog=lazy(()=> import('./Components/DynamicBlog.tsx'));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -35,7 +37,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path='dashboardhome' element={<DashboardHome />} />
           <Route path='userList'  element={<UserList/>}/>
-          <Route path='createBlog' element={<Blogs />} />
+          <Route path='createBlog' element={<CreateBlogs />} />
           <Route path="AddUser" element={<AddUser />} />
           <Route path='Invoice' element={<Invoice />} />
         </Route>
@@ -47,6 +49,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="privacy-policy" element={<Terms term={false} />} />
           <Route path="workshop" element={<Workshop />} />
           <Route path="services" element={<Services />} />
+          <Route path="blogs" element={<ViewBlog />} />
+          <Route path="viewblog/:id" element={<DynamicBlog />} />
           
         </Route>
         <Route path="*" element={<LoaderError hasError={true} />} />

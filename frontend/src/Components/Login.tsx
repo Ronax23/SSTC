@@ -3,17 +3,18 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { apiLoc } from '../assets/Constants/apis_loc';
+import type {login} from '../assets/Loading/Types';
+import { text } from 'framer-motion/client';
 
 
 
 function Login() {
     const navigateDashboard=useNavigate();
-    const [passwordView, setPasswordview] = useState<string>("password");
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const [passwordView, setPasswordview] = useState<"password"|"text">("password");
+    const { register, handleSubmit, formState: { errors } } = useForm<login>({
         mode: "onBlur"
       });
-     const loginhandle = (data:string) => {
+     const loginhandle = (data:login) => {
         console.log(import.meta.env.VITE_API)
           axios.post(`${import.meta.env.VITE_API}login`,data,{withCredentials:true}).then((res)=>{
             if(res.data.login){

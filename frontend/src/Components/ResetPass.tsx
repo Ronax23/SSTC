@@ -3,9 +3,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { form } from 'framer-motion/client';
 
 
 function ResetPass() {
+    const [step, setStep] = useState<number>(1);
     const navigateDashboard=useNavigate();
     const [passwordView, setPasswordview] = useState<string>("password");
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -35,16 +37,26 @@ function ResetPass() {
     <section className="container">
         <section className="row">
             <section className="mt-3 col-lg-6 col-md-6 col-12">
+                <h2>Reset Password</h2>
                 <form onSubmit={handleSubmit(loginhandle)}>
-                    <h2>Reset Password</h2>
+                    
                     <section className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" className='my-3 form-control' placeholder='Enter your email'
-                        {...register("email", { required: true, pattern: /@/ })}
+                        <input type="text" id="email" className='my-3 form-control' placeholder='Enter your E-Mail or Mobile Number'
+                        {...register("email", { required: true })}
                         />
-                        {errors.email?.type === "required" && <span className='text-danger'>This field is required</span>}
-                        {errors.email?.type === "pattern" && <span className='text-danger'>Please enter a valid email</span>}
+                        {errors.email && <span className='text-danger'>This field is required</span>}
                     </section>
+                    
+                    <button type='submit' className='btn btn-primary'>Check</button>
+                </form>
+
+                {step===2 && 
+                
+                }
+
+                {step===3 &&
+                 <form onSubmit={handleSubmit(loginhandle)}>
                     <section className="form-group">
                         <label htmlFor="password">Password</label>
                         <input type={passwordView} id="password" className='my-3 form-control'
@@ -61,8 +73,8 @@ function ResetPass() {
                                         </i>
                         {errors.password?.type === "required" && <span className='text-danger'>This field is required</span>}
                     </section>
-                    <button type='submit' className='btn btn-primary'>Login</button>
-                </form>
+                    <button type='submit' className='btn btn-primary'>Reset Password</button>
+                    </form>}
             </section>
             <section className="mt-3 col-lg-6 col-md-6 col-12">
                 <img src="../Backgrounds/login.jpg" alt="loginPage" />

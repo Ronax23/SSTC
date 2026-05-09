@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import HeaderReusable from '../assets/Reusable/HeaderReusable';
 import type{Blog } from '../assets/Loading/Types';
+import { Link } from 'react-router-dom';
+import DynamicBlog from './DynamicBlog';
 
 function Blogs() {
     const [blogs,setBlogs]=useState<Blog[]>([]);
@@ -12,7 +14,7 @@ function Blogs() {
             setBlogs(res.data.blog);
             setPage(res.data.page);
             total = res.data.total;
-        }).catch((e)=>{
+        }).catch((e: Error)=>{
             console.log(e);
         })
     }
@@ -22,7 +24,7 @@ function Blogs() {
     },[])
   return (
     <>
-    <HeaderReusable title="Blogs" image="" />
+    <HeaderReusable title="Blogs" image="/Headers/blog.jpg" />
     <section className="container">
         <section className="row">
             {blogs.map((blog)=>(
@@ -33,7 +35,7 @@ function Blogs() {
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">{blog.title}</h5>
-                                <p className="card-text">{blog.content}</p>
+                                <Link to={`/viewblog/${blog.id}`} className="card-text">{blog.content.substring(0, 50)}Read More...</Link>
                             </div>
                         </div>
                     </section>

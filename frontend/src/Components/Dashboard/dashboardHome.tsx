@@ -19,9 +19,9 @@ function dashboardHome() {
             console.log(err);
         })
     },[])
-    if(loading){
-        return <div><LoaderError loading={true}/></div>
-    }
+    
+    if(loading){return <LoaderError loading={true}/>}
+
   return (
     <>
     <div className="container-fluid">

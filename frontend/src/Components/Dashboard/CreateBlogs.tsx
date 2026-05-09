@@ -1,10 +1,12 @@
 import {useState} from 'react'
 
-function Blogs() {
+function CreateBlogs() {
 
         const [preview, setPreview] = useState<string>("");
-    const uploadImg=(e)=>{
-        setPreview(URL.createObjectURL(e.target.files[0]))
+    const uploadImg=(e: React.ChangeEvent<HTMLInputElement>)=>{
+        if (e.target.files && e.target.files[0]) {
+            setPreview(URL.createObjectURL(e.target.files[0]));
+        }
     }
 
  return (
@@ -41,4 +43,4 @@ function Blogs() {
   )
 }
 
-export default Blogs
+export default CreateBlogs

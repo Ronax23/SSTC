@@ -4,10 +4,20 @@ import { Link, Outlet } from 'react-router-dom';
 function Dashboard() {
   const [collapse, setCollapse] = useState(true)
   const sidebar=
-  [    {name:"Dashboardhome",icon:"🏠"} ,
-    {name:"UserList",icon:"👥"} ,
-    {name:"Invoice",icon:"📊"} ,
-    {name:"Settings",icon:"⚙️"}
+  [ {name:"Dashboardhome",icon:"🏠",role:["admin","manager"]} ,
+    {name:"UserList",icon:"👥",role:["admin","manager"]} ,
+    {name:"View Invoice",icon:"📊",role:["all"]} ,
+    {name:"Add Invoice",icon:"➕",role:["admin","manager","cashier"]} ,
+    {name:"Profile",icon:"👤",role:["all"]} ,
+    {name:"Logout",icon:"🚪",role:["all"]} ,
+    {name:"Stocks",icon:"📦",role:["admin","manager"]} ,
+    {name:"Salary",icon:"💰",role:["admin","manager"]} ,
+    {name:"Attendance",icon:"📅",role:["admin","manager"]} ,
+    {name:"Add Employee",icon:"➕",role:["admin"]} ,
+    {name:"Employee List",icon:"👥",role:["admin","manager"]} ,
+    {name:"Tax",icon:"💸",role:["admin","manager"]} ,
+    {name:"Investments",icon:"📈",role:["admin"]} ,
+    {name:"Settings",icon:"⚙️",role:["admin"]}
   ]
   const sidebarWidth = collapse ? "60px" : "260px";
 

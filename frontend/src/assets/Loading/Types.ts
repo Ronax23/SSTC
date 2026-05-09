@@ -79,6 +79,10 @@ interface Blog{
     content:string,
     image:string
 }
+interface login{
+  email:string,
+  password:string
+}
 export type {
     HeaderReusableDynamic,
     comp_logo,
@@ -92,5 +96,5 @@ export type {
     TermsProps,
     Machine,
     counterMap,
-    dynamics,Blog
+    dynamics,Blog,login
 }
