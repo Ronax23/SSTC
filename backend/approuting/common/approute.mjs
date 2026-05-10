@@ -23,14 +23,7 @@ const app=express();
 app.use(express.static('../'));
 
 app.get("/",async (req,res)=>{
-     if (!isRedisReady) {
-        return res.status(503).json({ error: 'Redis not ready yet' });
-    }
-   const test= await redisClient.set("greeting","Hello, Ronny");
-   
-    result= await test.get("greeting");
-    console.log(result);
-    res.send(result);
+    res.send(Hi);
 });
 
 app.get("/blogs",viewBlog);
@@ -54,7 +47,6 @@ app.get("/listinvoice",auth,listInvoice);
 app.patch("/forgetpass ",passReset);
 
 app.post("/newbill",auth, invoicesCreate);
-
 app.post("/addinventory", auth, addInventory);
 
 app.delete("/deleteinventory/:id", auth, deleteInventory);

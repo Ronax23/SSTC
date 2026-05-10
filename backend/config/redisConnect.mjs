@@ -1,7 +1,7 @@
 import { createClient } from 'redis';
-let isRedisReady = false;
 
 const redisClient = createClient({
+    
     username: 'default',
     password: process.env.REDIS_PASSWORD,
     socket: {
@@ -9,8 +9,7 @@ const redisClient = createClient({
         port: parseInt(process.env.REDIS_PORT) || 6379
     }
 }).on('connect', () => console.log('🚀 Redis Connecting...')).on("ready", () =>
-{   isRedisReady = true;
-    console.log('✅ Redis Connected Successfully!')}).on('error', (err) => console.log('❌ Redis Connection Error', err));
+{   console.log('✅ Redis Connected Successfully!')}).on('error', (err) => console.log('❌ Redis Connection Error', err));
     
 await redisClient.connect();
 

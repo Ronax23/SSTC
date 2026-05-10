@@ -83,6 +83,16 @@ interface login{
   email:string,
   password:string
 }
+interface DatasetItem {
+    label: string;
+    data: number[];
+    backgroundColor?: string | string[];
+    borderColor?: string | string[];
+}
+interface BarGraphProps {
+    labels: string[];
+    datasets: DatasetItem[]; // Note the 's'
+}
 export type {
     HeaderReusableDynamic,
     comp_logo,
@@ -96,5 +106,5 @@ export type {
     TermsProps,
     Machine,
     counterMap,
-    dynamics,Blog,login
+    dynamics,Blog,login,DatasetItem,BarGraphProps
 }

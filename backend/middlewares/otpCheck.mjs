@@ -1,4 +1,3 @@
-import otpModel from "../../models/otp.mjs";
 import redisClient from "../../config/redisConnect.mjs";    
 
 const otpCheck=async(req,res,next)=>{
