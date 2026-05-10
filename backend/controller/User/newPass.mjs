@@ -1,5 +1,5 @@
 import LoginModel from "../../models/login.mjs";
-import otpModel from "../../models/otp.mjs";
+import redisClient from "../../config/redisConnect.mjs";  
 import bcrypt from "bcrypt";
 
 const newPass=async(req,res)=>{
@@ -21,7 +21,7 @@ const newPass=async(req,res)=>{
             }
         });
         await LoginModel.findOneAndUpdate({email},{password:hashedPassword});
-        await otpModel.deleteMany({email});
+        await redisClient.del(email);
         res.status(200).json({message:"Password reset successful"});
     }catch(err){
         res.status(500).json({message:"Server error",error:err.message});

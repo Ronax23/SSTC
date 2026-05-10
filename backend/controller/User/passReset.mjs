@@ -1,9 +1,10 @@
  import loginModel from "../../models/login.mjs";
 import sendEmail from "../../services/nodemailer.mjs";
-import otpModel from "../../models/otp.mjs";
+import redisClient from "../../config/redisConnect.mjs";  
 
  const passReset=    async(req,res)=>{
     const {names}=req.body;  
+    const OTPTime=10*60;
     if(!names){
         res.status(200).json({message:"Username is required"});
     }  
@@ -15,8 +16,7 @@ import otpModel from "../../models/otp.mjs";
     if(user){
         const otp=Math.floor(100000 + Math.random() * 900000);
         await sendEmail(user.email,otp,user.username);
-        const newOtp=new otpModel({email:user.email,otp});
-        await newOtp.save();
+        await redisClient.setEx(user.email, OTPTime, otp);
         res.status(200).json({message:"OTP sent to email"});
     }else{
         res.status(200).json({message:"User not found"});
