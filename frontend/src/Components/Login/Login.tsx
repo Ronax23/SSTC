@@ -3,7 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import type {login} from '../assets/Loading/Types';
+import type {login} from '../../assets/Loading/Types';
 
 
 
@@ -25,8 +25,8 @@ function Login() {
              else{
                 toast.error(res.data.message);
              }
-            }).catch(()=>{
-                toast.error("An error occurred during login.");
+            }).catch((errors)=>{
+                toast.error(errors.data.message);
             })
      }
      
@@ -68,7 +68,9 @@ function Login() {
                     </section>
                     <section className="d-flex justify-content-between align-items-center">
                         <button type="submit" className='btn btn-primary'>Login</button>
-                        <span>Don't have an account? <Link className="ms-2 btn btn-info text-light" to="/register">Register</Link></span>
+                        <span>Don't have an account? <Link className="ms-2 btn btn-info text-light" to="/register">Register</Link>
+                        <Link className="ms-2 btn btn-info text-light" to='/reset-password' >Forget Password</Link>
+                        </span>
                     </section>
                 </form>
             </section>

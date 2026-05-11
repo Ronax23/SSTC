@@ -1,5 +1,6 @@
 import HeaderReusable from '../assets/Reusable/HeaderReusable'
 import CardsSec from '../assets/Reusable/CardsSec'
+import data from '../../public/data.json' with { type: 'json' };
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
 // @ts-ignore
@@ -7,28 +8,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 function OurTeam() {
-    const cardDat=
-    {
-        head:"Our Team Principles",
-        cards:[
-        {
-            icon:"bi bi-people-fill",
-            title:"Collaborative Synergy",
-            desc:"Unified teams bridging the gap between blueprints and finished components."        },
-        {
-            icon:"bi bi-mortarboard-fill",
-            title:"Technical Mastery",
-            desc:"Expert engineers specializing in CNC/VMC operations in the Faridabad hub."        },
-        {
-            icon:"bi bi-search",
-            title:"Precision Mindset",
-            desc:"Trained in \"Zero-Defect\" manufacturing for micron-level job work accuracy."        },
-        {
-            icon:"bi bi-award-fill",
-            title:"Certified Expertise",
-            desc:"Specialized technicians maintaining our elite ISO and MSME standards."        }
-    ]
-}
+    const {teamCard}=data;
     const team = [
         { name: "Kavita", role: "Owner", photo: '../Team/14.jpg',
           desc: 'I envision this workshop as a hub of mechanical excellence, where resources and people are aligned to deliver quality and innovation. My role is to secure growth while ensuring sustainability'  
@@ -66,7 +46,7 @@ function OurTeam() {
     return (
         <section>
             <HeaderReusable title="Our Team" image="/Headers/overview.jpg" />
-            <CardsSec dynamicdat={cardDat}/>
+            <CardsSec dynamicdat={teamCard}/>
 
 
             <section  id="OurTeam">

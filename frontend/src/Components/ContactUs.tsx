@@ -4,19 +4,26 @@ import toast, { Toaster } from 'react-hot-toast';
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import type { LatLngExpression } from 'leaflet';
+import axios from 'axios';
 function ContactUs() {
   const calling="/Headers/Contact.jpg";
     const callig="/Backgrounds/call.jpg";
   const { register, handleSubmit,reset, formState: { errors } } = useForm({
     mode: "onBlur"
   });
-  const FormSucess = () => toast.success('Message sent successfully!');
+
   const onSubmit = (data: any) => {
-    console.log(data);
-    FormSucess();
-    reset();
+    axios.post(`${import.meta.env.VITE_API}contact`, data).then((res) => {
+      if (res.data.success) {
+        reset();
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    }).catch((err) => {
+      toast.error(err.message || "An error occurred while submitting the form.");
+    });
     
-    // Here you can handle the form submission, e.g., send the data to a server
   };
 
   const location: LatLngExpression = [28.35537457581717, 77.27498147598868];

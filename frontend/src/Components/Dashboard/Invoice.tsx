@@ -75,12 +75,12 @@ function Invoice() {
                         <label htmlFor="">Payment Mode</label>
                         <div className="pay d-flex gap-2">
                             
-                            <button>UPI</button>
-                            <button>Cash</button>
-                            <button>Card</button>
-                            <button>Online</button>
-                            <button>Cheque</button>
-                            <button>Credit</button>
+                            <button className='btn'>UPI</button>
+                            <button className='btn'>Cash</button>
+                            <button className='btn'>Card</button>
+                            <button className='btn'>Online</button>
+                            <button className='btn'>Cheque</button>
+                            <button className='btn'>Credit</button>
                         </div>
                        </div>
                      </div>

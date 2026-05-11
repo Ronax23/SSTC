@@ -455,5 +455,125 @@
       "The company is not liable for minor surface oxidation (rust) on components left in storage for over 15 days without specialized coating."
     ]
   }
-]
+],
+"privacyPolicy":[
+{
+      "id": 1,
+      "title": "Information We Collect",
+  "description": "We collect information to provide better services to our clients and engineering partners. This includes:", 
+   "bullets": [
+    "Contact Information: Name, email address, and phone number provided through our lead generation forms.",
+    "Contact Information: Name, email address, and phone number provided through our lead generation forms.",
+    "Technical Data: IP addresses and browser types collected via our Node.js backend to ensure server security and performance."
+  ]
+},
+{
+    "id": 2,
+      "title": "How We Use Information",
+  "description": "Your data is used strictly for industrial and business purposes:",
+
+   "bullets": [
+    "To provide quotes and technical consultations",
+
+"To maintain the performance of our Dynamic Industrial Catalog",
+
+"To communicate updates regarding your engineering projects",
+
+"We do not sell your personal data to third parties"
+   ]},
+   {
+    "id": 3,
+    "title":"Data Storage & Security",
+    "description":"We implement robust security measures to protect your data.",
+    "bullets":[
+      "Server Security: Our backend infrastructure utilizes secure protocols to prevent unauthorized access",
+
+"Cookies: We use functional cookies to enhance your experience (e.g., remembering your preferences in the workshop catalog)"
+    ]
+   },
+   {
+    "id":4,
+    "title":"Your Rights",
+    "description":"You have control over your personal data:",
+    "bullets":[
+      "Access & Correction: You can request access to your data and correct any inaccuracies by contacting us.",
+
+"Data Deletion: You may request the deletion of your personal data, subject to legal and operational constraints."
+    ]
+   }
+   ,{
+    "id":5,
+    "title":"Changes to This Policy",
+    "description":"We may update this privacy policy periodically to reflect changes in our practices or legal requirements.",
+    "bullets":[
+      "Notification: Significant changes will be communicated via email or prominent notices on our website.",
+
+"Review: We encourage you to review this policy regularly to stay informed about how we protect your data."
+    ]
+   },
+   {
+    "id":6,
+    "title":"Third-Party Services",
+    "description":"We may employ third-party companies to facilitate our services, such as hosting and data analysis.",
+    "bullets":[
+      "These third parties are obligated to protect your data and are prohibited from using it for any other purpose.",
+      
+      "We do not share your personal information with advertisers or marketers."
+    ]
+   },
+   {
+    "id":7,
+    "title":"Contact Us",
+    "description":"If you have any questions or concerns about this privacy policy or our data practices"    
+    
+   }
+
+],
+"serviceCard":{
+    "head":"Our Service Excellence",
+    "cards":[
+        {
+            "icon":"bi bi-tools",
+            "title":"Precision Machining",
+            "desc":"High-accuracy CNC and VMC job work for complex gears, shafts, and custom fasteners"
+        },
+        {
+            "icon":"bi bi-stack",
+            "title":"Heavy Fabrication",
+            "desc":"End-to-end structural fabrication for machine frames, base plates, and industrial skids"
+        },
+        {
+            "icon":"bi bi-vector-pen",
+            "title":"Custom Tooling",
+            "desc":"Specialized design and manufacturing of jigs, fixtures, and precision tooling components"
+        },
+        {
+            "icon":"bi bi-layers-half",    
+            "title":"Surface Finishing",
+            "desc":"Professional finishing including grinding, coating, and anti-rust treatments for durability"
+        }
+    ]
+},
+"teamCard":
+    {
+        "head":"Our Team Principles",
+        "cards":[
+        {
+            "icon":"bi bi-people-fill",
+            "title":"Collaborative Synergy",
+            "desc":"Unified teams bridging the gap between blueprints and finished components."        },
+        {
+            "icon":"bi bi-mortarboard-fill",
+            "title":"Technical Mastery",
+            "desc":"Expert engineers specializing in CNC/VMC operations in the Faridabad hub."        },
+        {
+            "icon":"bi bi-search",
+            "title":"Precision Mindset",
+            "desc":"Trained in \"Zero-Defect\" manufacturing for micron-level job work accuracy."        },
+        {
+            "icon":"bi bi-award-fill",
+            "title":"Certified Expertise",
+            "desc":"Specialized technicians maintaining our elite ISO and MSME standards."        }
+    ]
+}
 }

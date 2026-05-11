@@ -1,49 +1,32 @@
+import React from 'react'
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import toast, {Toaster } from 'react-hot-toast';
-interface AddUserProps {
-    editUser?: boolean;
-    id?: string;
-}
-function AddUser({editUser=false,id}:AddUserProps) {
-    const { register, handleSubmit, formState: { errors }, watch, setValue,reset } = useForm({
-        mode: "onBlur"
-    })
-    const isSameAddress = watch("isSameAddress");
-    const gst = watch('userType') === 'gst';
-    const [edit,setEdit]=useState<boolean>(false);
+import toast, { Toaster } from 'react-hot-toast';
+
+function AddEmployee() {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const submitData = (data: any) => {
-        axios.post(`${import.meta.env.REACT_APP_API_URL}/addUser`, data)
-            .then(res => {
-                toast.success(res.data.message || "User added successfully");
-            })
-            .catch(err => {
-                toast.error(err.data.message || "Failed to add user");
-            })
-    }
-    useEffect(() => {
-        setEdit(true);
-    }, [editUser===true])
-    useEffect(() => {
-        axios.get(`${import.meta.env.REACT_APP_API_URL}/getUser/${id}`).then(res => {reset(res.data)}).catch(err => console.log(err))
-    }, [edit])
-    useEffect(() => {
-        if (isSameAddress) {
-            setValue('firmAddress', watch("address"));
-            setValue('firmState', watch("state"));
-        }
-    }, [isSameAddress, watch("address"), watch("state"), setValue]);
+        axios.post(`${import.meta.env.VITE_API}addemployee`, data,{withCredentials:true}).then((res) => {
+            if (res.data.success) {
+                toast.success(res.data.message);
+            } else {
+                toast.error(res.data.message);
+            }
+        }).catch((err) => {
+            toast.error(err.message || "An error occurred while adding the employee.");
+        })}
 
-    return (
-        <>
+
+  return (
+    <>
         <Toaster position="top-right" />
             <section className="modal " tabIndex={-1}>
                 <section className="modal-dialog ">
                     <section className="modal-content">
                         <section className="modal-header">
-                            <h5 className="modal-title">Add User</h5>
+                            <h5 className="modal-title">Add Employee</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </section>
                         <section className="modal-body">
@@ -116,56 +99,39 @@ function AddUser({editUser=false,id}:AddUserProps) {
                                         </section>
                                     </section>
                                 </section>
+                                <div className="col-lg-6 col-12 form-group">
+                                <div className="">
+                                    <label htmlFor="">Employee Type</label>
+                                    <select className="form-select" {...register('empType', { required: true })}>
+                                        <option value="manager">Manager</option>
+                                        <option value="cashier">Cashier</option>
+                                        <option value="sales-men">Sales Man</option>
+                                        <option value="helper">Helper</option>
+                                        <option value="accounts">Accountant</option>
+                                        <option value="engineer">Engineer</option>
+                                        <option value="worker">Worker</option>
+                                        <option value="operator">Operator</option>
+                                    </select>
+                                    {errors.empType && <p className="text-danger">Employee Type is required</p>}
+                                </div>
+                                <div className="">
+                                    <label htmlFor="">Salary</label>
+                                    <input type="number" className="form-control" id="salary" placeholder='Enter Salary' {...register('salary', { required: true })} />
+                                    {errors.salary && <p className="text-danger">Salary is required</p>}
+                                </div>
+                                </div>
 
-
-
-                                <section className="mb-3">
-                                    <label htmlFor="type" className="form-label">User Type</label>
-                                    <input type="radio" className="form-check-input mx-2" id="type" value="gst"{...register('userType')} />
-                                    <label htmlFor="type" className="form-check-label">GST</label>
-                                    <input type="radio" className="form-check-input mx-2" id="type" value="user"{...register('userType')} />
-                                    <label htmlFor="type" className="form-check-label">Normal</label>
-                                    {errors.userType && <p className="text-danger">User Type is required</p>}
-                                </section>
-
-                                <section className="row">
-                                    <section className="col-lg-6 col-md-6 col-12">
-                                        <section className="mb-3">
-                                            <label htmlFor="gst" className="form-label">Enter GSTIN</label>
-                                            <input type="text" disabled={!gst} className="form-control" id="gst" placeholder='Enter GSTIN' {...register("gstin", {
-                                                minLength: 12,
-                                                maxLength: 13, required: gst
-                                            })} />
-                                            {gst && errors.gstin?.type === "required" && <p className="text-danger">GSTIN is required</p>}
-                                            {gst && errors.gstin?.type === "minLength" || errors.gstin?.type === "maxLength" && <p className="text-danger">GSTIN must be 12-13 characters</p>}
-                                        </section>
-                                    </section>
-                                    <section className="col-lg-6 col-md-6 col-12">
-                                        <label htmlFor="state" className="form-label">State</label>
-                                        <input type="text" className="form-control" id="state" placeholder='Enter State' {...register('firmState', { required: !isSameAddress })} disabled={isSameAddress || !gst} />
-                                    </section>
-                                </section>
-
-
-                                <section className="mb-3">
-                                    <label htmlFor="address" className="form-label">Firm Address</label>
-                                    <textarea className="form-control" id="address" placeholder='Enter Firm Address' rows={3} {...register('firmAddress', { required: !isSameAddress })}
-                                        disabled={isSameAddress || !gst}></textarea>
-
-                                    <input type="checkbox" className="form-check-input mt-2" id="firmAddressSame" {...register('isSameAddress')} disabled={!gst} />
-                                    <label htmlFor="firmAddressSame" className='ms-2 mt-2' >Same As Above</label>
-                                </section>
                             </form>
                         </section>
                         <section className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" className="btn btn-primary">Add User</button>
+                            <button type="submit" className="btn btn-primary">Add Employee</button>
                         </section>
                     </section>
                 </section>
             </section>
         </>
-    )
+  )
 }
 
-export default AddUser
+export default AddEmployee

@@ -13,7 +13,7 @@ export default function Register() {
 
   
 
-  const registerform = (formdata)=>{
+  const registerform = (formdata:any)=>{
     console.log(formdata);
     axios.post("http://localhost:8000/adduser",formdata)
     .then((response)=>{
@@ -28,7 +28,7 @@ export default function Register() {
       }
     })
     .catch((error)=>{
-      toast.error("An error occurred during registration.");
+      toast.error(error.message || "An error occurred while registering.");
     })
    
     
@@ -147,10 +147,12 @@ export default function Register() {
                 <div className="col-12">
                    <label className="form-label select-label">Choose option</label>
                   <select className="select form-control-lg" {...register("role", { required:true})}>
-                    <option value="Admin" disabled>Admin</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Cashier">Cashier</option>
-                    <option value="Accounts">Accounts</option>
+                    <option value="na" disabled>NA</option>
+                    <option value="student">Student</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="Employed">Employed</option>
+                    <option value='selfemployed'>Self Employed</option>
+                    <option value="other">Other</option>
                   </select>
                  {errors.role?.type==="required" && <p className='text-danger'>Please select a role</p>}
 
@@ -158,7 +160,8 @@ export default function Register() {
               </div>
 
               <div className="mt-4 pt-2">
-                <input data-mdb-ripple-init className="btn btn-primary btn-lg" type="submit" value="Submit" />
+                <button data-mdb-ripple-init className="btn btn-primary btn-lg" type="submit">
+                  Submit</button>
               </div>
 
             </form></div>

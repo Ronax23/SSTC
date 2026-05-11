@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios';
-import type{Blog } from '../assets/Loading/Types';
+import type{Blog } from '../Loading/Types';
 import { useParams } from 'react-router-dom';
 
 function DynamicBlog() {
@@ -21,9 +21,10 @@ function DynamicBlog() {
     <>
     <div className="container">
         <div className="row">
-            <div className="col-8">
+            <div className="col-lg-8 col-md-10 col-12 mx-auto">
                 <h1>{blog?.title}</h1>
                 <img src={blog?.image} alt="" />
+                <p>{blog?.time}</p>
                 <p>{blog?.content}</p>
 
             </div>

@@ -3,7 +3,6 @@ import axios from 'axios';
 import HeaderReusable from '../assets/Reusable/HeaderReusable';
 import type{Blog } from '../assets/Loading/Types';
 import { Link } from 'react-router-dom';
-import DynamicBlog from './DynamicBlog';
 
 function Blogs() {
     const [blogs,setBlogs]=useState<Blog[]>([]);

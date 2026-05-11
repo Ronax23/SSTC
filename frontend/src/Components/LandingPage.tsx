@@ -3,77 +3,13 @@ import BrandSection from '../assets/Reusable/BrandSection.tsx'
 import ServiceTabs from '../assets/Reusable/ServiceTabs.tsx'
 import { Link } from 'react-router-dom'
 import CardsSec from '../assets/Reusable/CardsSec.js'
-import { useData } from '../context/Context.tsx'
-import LoaderError from '../assets/Reusable/LoaderError.js'
 import type { counterMap, dynamics } from '../assets/Loading/Types.ts'
-
+import data from "../../public/data.json"
 export default function LandingPage() {
     const [location, setLocation] = useState<{latitude: number; longitude: number}>({
     latitude: -23.1857,longitude: -45.8892});   
-    // const counterMap=data.counterMap;
-    // const CardsMap=data.CardsMap;
-    // const dynamics=data.dynamics;
-    const { data, loading } = useData() as { data: any; loading: boolean };
-    // console.log(data);
-    const { counterMap, CardsMap, dynamics } = data||{};
-//     const dynamics=[
-//     {
-//         content:"Expert Precision in Every Component",
-//         p:"Specialized job-work for high-quality moulds, dies, and custom industrial parts tailored to your specifications",
-//         imgsrc:"/Headers/Carousel1.jpg"     
-//     },
-//     {
-//         content:"Hydro-Turbine Part Specialists",
-//         p:"Delivering durable, high-performance components engineered to withstand the rigors of the power generation industry",
-//         imgsrc:"/Headers/Carousel2.jpg"     
-//     },
-//     {
-//         content:"Advanced Tooling, Proven Reliability",
-//         p:"Combining years of workshop expertise with modern machining to ensure your projects are delivered on time and on spec",
-//         imgsrc:"/Headers/Carousel3.jpg"     
-//     }
-// ]
-//     const counterMap=[
-//         {
-//             count:15,
-//             title:"Years of Excellence"
-//         },
-//         {
-//             count:500,
-//             title:"Projects Delivered"
-//         },
-//         {
-//             count:200,
-//             title:"Precision Moulds"
-//         },
-//         {
-//             count:120,
-//             title:"Satisfied Clients"
-//         }
-//     ]
-//     const CardsMap=[
-//         {
-//             icon:"bi bi-bullseye",
-//             title:"Precision-First Approach",
-//             desc:"Ensuring exact tolerances in every mould and die we craft"
-//         },
-//         {
-//             icon:"bi-gear-wide-connected",
-//             title:"Technical Mastery",
-//             desc:"Deep expertise in the specialized manufacturing of hydro-turbine components"
-//         },
-//         {
-//             icon:"bi-patch-check",
-//             title:"Uncompromising Quality",
-//             desc:"Rigorous testing protocols to guarantee durability in high-stress environments"
-//         },
-//         {
-//             icon:"bi-clock-history",
-//             title:"On-Time Execution",
-//             desc:"Streamlined workshop management to meet your critical project deadlines"
-//         }
-//     ];
-  
+    const { counterMap, CardsMap, dynamics } = data;
+
 useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
         setLocation({latitude: position.coords.latitude, longitude: position.coords.longitude});
@@ -110,9 +46,7 @@ useEffect(() => {
     };
 }, [data]); // Runs once when page opens
 
-if (loading || !data) {
-    return <LoaderError loading={true}/>
-  }
+
   return (
     <>
     <header id='main'>

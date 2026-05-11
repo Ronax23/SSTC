@@ -15,13 +15,13 @@ function userList() {
     const delUser=async(id:string)=>{
         axios.delete(`http://localhost:8000/userlist/${id}`).then((res)=>{
             userData();
-            toast.success("User Deleted Successfully");
+            toast.success(res.data.message);
             setShowModal(false);
             setUser({});
         }).catch((err)=>{
             setShowModal(false);
             setUser({});
-            toast.error("Error Deleting User"); 
+            toast.error(err.message || "An error occurred while deleting the user."); 
         })
     }
 
@@ -34,7 +34,6 @@ function userList() {
         }).then((data)=>{
             setTotal(data.total);
             setData(data.data);
-            setTotal(data.total);
             setLoading(false);
         }).catch((err)=>{
             console.log(err);

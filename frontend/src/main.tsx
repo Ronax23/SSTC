@@ -19,12 +19,12 @@ const Dashboard =lazy(()=> import ('./Components/Dashboard/Dashboard.tsx'));
 const AddUser=lazy(()=>import  ('./Components/Dashboard/AddUser.tsx'));
 const Invoice= lazy(()=>import ('./Components/Dashboard/Invoice.tsx'));
 const CreateBlogs =lazy(()=>import ('./Components/Dashboard/CreateBlogs.tsx'))
-const Register=lazy(()=> import('./Components/Register.tsx'));
-const Login=lazy(()=> import('./Components/Login.tsx'));
+const Register=lazy(()=> import('./Components/Login/Register.tsx'));
+const Login=lazy(()=> import('./Components/Login/Login.tsx'));
 const Services= lazy(()=>import ('./Components/Services.tsx'));
 const UserList=lazy(()=> import('./Components/Dashboard/userList.tsx'));
 const ViewBlog=lazy(()=> import('./Components/Blogs.tsx'));
-const DynamicBlog=lazy(()=> import('./Components/DynamicBlog.tsx'));
+const DynamicBlog=lazy(()=> import('./assets/Reusable/DynamicBlog.tsx'));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
