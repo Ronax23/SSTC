@@ -16,7 +16,7 @@ import deleteInventory from '../../controller/Inventory/deleteInventory.mjs';
 import auth from '../../middlewares/auth.mjs';
 import listInvoice from '../../controller/Invoice/editInvoice.mjs';
 import editInventory from '../../controller/Inventory/editInventory.mjs';
-
+import logoutControl from '../../controller/User/logoutControl.mjs'
 
 console.log(dbConnect);
 const app=express();
@@ -25,6 +25,7 @@ app.use(express.static('../'));
 app.get("/",async (req,res)=>{
     res.send(Hi);
 });
+app.delete("/logout",auth,logoutControl)
 
 app.get("/blogs",viewBlog);
 
@@ -47,6 +48,7 @@ app.get("/listinvoice",auth,listInvoice);
 app.patch("/forgetpass ",passReset);
 
 app.post("/newbill",auth, invoicesCreate);
+
 app.post("/addinventory", auth, addInventory);
 
 app.delete("/deleteinventory/:id", auth, deleteInventory);
