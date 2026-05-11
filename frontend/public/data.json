@@ -575,5 +575,31 @@
             "title":"Certified Expertise",
             "desc":"Specialized technicians maintaining our elite ISO and MSME standards."        }
     ]
-}
+},
+"WorkshopCards":  
+  {
+    "head":"Our Workshop Principles",
+    "cards":[
+    {
+        "icon":"bi bi-arrow-repeat",
+        "title":"Reliability",
+        "desc":"Consistent performance and structural integrity in every component"
+    },
+    {
+        "icon":"bi bi-bullseye",
+        "title":"Repeatability",
+        "desc":"VMC precision ensuring identical tolerances from the 1st to 1000th part"
+    },
+    {
+        "icon":"bi bi-recycle",
+        "title":"Resourcefulness",
+        "desc":"Optimizing material usage for cost-effective, high-quality engineering"
+    },
+    {
+        "icon":"bi bi-input-cursor-text", 
+        "title":"Planned Precision",
+        "desc":"Following the 5P rule: Proper Planning Prevents Poor Performance"
+    }
+  ]
+  }
 }

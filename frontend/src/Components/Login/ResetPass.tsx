@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Password from './Password';
 
 
 
@@ -11,7 +12,6 @@ import { motion } from 'framer-motion';
 function ResetPass() {
     const [step, setStep] = useState<number>(1);
     const navigateDashboard=useNavigate();
-    const [passwordView, setPasswordview] = useState<string>("password");
     const { register, formState: { errors },trigger,getValues } = useForm({
         mode: "onBlur"
       });
@@ -79,7 +79,7 @@ function ResetPass() {
     <Toaster />
 
     <section className="container">
-        <section className="row">
+        <section className="row vh-100 pt-5">
             <section className="mt-3 col-lg-6 col-md-6 col-12">
                 <h2>Reset Password</h2>
                 {step===1 && <motion.div
@@ -99,7 +99,7 @@ function ResetPass() {
                         {errors.email && <span className='text-danger'>This field is required</span>}
                     </section>
                     
-                    <button type='submit' onClick={getUser} className='btn btn-primary'>Get User</button>
+                    <button onClick={getUser} className='btn btn-primary'>Get User</button>
                 </motion.div>}
 
                 {step===2 && 
@@ -112,9 +112,10 @@ function ResetPass() {
             transition={{ duration: 0.3 }}
                     className="form-group">
                         <label htmlFor="">Enter OTP</label>
-                        <input type="text" {...register("otp",{required:true})} />
-                        {errors.otp && <span className='text-danger'>This field is required</span>}
-                         <button className='btn btn-primary' onClick={verifyOtp} >Verify OTP</button>
+                        <input type="text" className="form-control my-3" {...register("otp",{required:true})} />
+                        <button className='btn btn-primary' onClick={verifyOtp} >Verify OTP</button>
+
+                        {errors.otp && <span className='ms-3 text-light'>This field is required</span>}
                    </motion.section>
 
                 }
@@ -129,22 +130,7 @@ function ResetPass() {
             exit="exit"
             transition={{ duration: 0.3 }}
                  >
-                    <section className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input type={passwordView} id="password" className='my-3 form-control'
-                        {...register("password", { required: true})}
-                        placeholder='Enter your password' />
-                         <i 
-                                            className={`btn btn-outline-secondary ${passwordView === "password" ? "bi bi-eye" : "bi bi-eye-slash"}`}
-                                            onMouseDown={() => setPasswordview("text")}
-                                            onMouseUp={() => setPasswordview("password")}
-                                            onTouchStart={() => setPasswordview("text")} // Mobile support
-                                            onTouchEnd={() => setPasswordview("password")}   // Mobile support
-                                            style={{ userSelect: 'none' }}
-                                        >
-                                        </i>
-                        {errors.password?.type === "required" && <span className='text-danger'>This field is required</span>}
-                    </section>
+                    <Password register={register} errors={errors} />
                     <button onClick={resetPassword} className='btn btn-primary'>Reset Password</button>
                     </motion.div>
                     }

@@ -13,6 +13,7 @@ const OurTeam= lazy(()=>import ('./Components/OurTeam.tsx'));
 const Terms= lazy(()=>import ('./Components/Terms.tsx'));
 const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
 import 'bootstrap-icons/font/bootstrap-icons.css';
+const ResetPass=lazy(()=> import('./Components/Login/ResetPass.tsx'));
 const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
 const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
 const Dashboard =lazy(()=> import ('./Components/Dashboard/Dashboard.tsx'));
@@ -51,6 +52,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path="services" element={<Services />} />
           <Route path="blogs" element={<ViewBlog />} />
           <Route path="viewblog/:id" element={<DynamicBlog />} />
+          <Route path="login/register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="reset-password" element={<ResetPass />} />
           
         </Route>
         <Route path="*" element={<LoaderError hasError={true} />} />

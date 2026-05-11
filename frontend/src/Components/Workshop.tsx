@@ -3,39 +3,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import CardsSec from '../assets/Reusable/CardsSec.js';
 import type {Machine} from '../assets/Loading/Types.js'
 import dat from "../../public/data.json"
+import { data } from 'react-router-dom';
 function Workshop() {
-
-
-  const CardDats=  
-  {
-    head:"Our Workshop Principles",
-    cards:[
-    {
-        icon:"bi bi-arrow-repeat",
-        title:"Reliability",
-        desc:"Consistent performance and structural integrity in every component"
-    },
-    {
-        icon:"bi bi-bullseye",
-        title:"Repeatability",
-        desc:"VMC precision ensuring identical tolerances from the 1st to 1000th part"
-    },
-    {
-        icon:"bi bi-recycle",
-        title:"Resourcefulness",
-        desc:"Optimizing material usage for cost-effective, high-quality engineering"
-    },
-    {
-        icon:"bi bi-input-cursor-text", 
-        title:"Planned Precision",
-        desc:"Following the 5P rule: Proper Planning Prevents Poor Performance"
-    }
-  ]
-  }
   const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null)
   const [modal, setModal] = useState<boolean>(false)
   const [mover,setMover]=useState<number>(3)
- const { machines} = dat;
+ const { machines,WorkshopCards} = dat;
   
   const selectedMachineHandler = (index:Machine) => {
     setSelectedMachine(index)
@@ -79,7 +52,7 @@ function Workshop() {
       </div>
     </header>
 
-    <CardsSec dynamicdat={CardDats}/>
+    <CardsSec dynamicdat={WorkshopCards}/>
     
       <section id="sec6">
         <div className="container">

@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form"
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import type {login} from '../../assets/Loading/Types';
+import Password from './Password';
 
 
 
 function Login() {
     const navigateDashboard=useNavigate();
-    const [passwordView, setPasswordview] = useState<"password"|"text">("password");
     const { register, handleSubmit, formState: { errors } } = useForm<login>({
         mode: "onBlur"
       });
@@ -48,28 +48,11 @@ function Login() {
                         {errors.email?.type === "required" && <span className='text-danger'>This field is required</span>}
                         {errors.email?.type === "pattern" && <span className='text-danger'>Please enter a valid email</span>}
                     </section>
-                    <section className="form-group">
-                        <label htmlFor="password">Password</label>
-                   <div className="position-relative">
-                         <input type={passwordView} id="password" className='my-3 form-control'
-                        {...register("password", { required: true})}
-                        placeholder='Enter your password' />
-                         <i 
-                                            className={`btn btn-outline-secondary position-absolute top-0 end-0 border-0   ${passwordView === "password" ? "bi bi-eye" : "bi bi-eye-slash"}`}
-                                            onMouseDown={() => setPasswordview("text")}
-                                            onMouseUp={() => setPasswordview("password")}
-                                            onTouchStart={() => setPasswordview("text")} // Mobile support
-                                            onTouchEnd={() => setPasswordview("password")}   // Mobile support
-                                            style={{ userSelect: 'none' }}
-                                        >
-                                        </i>
-                   </div>
-                        {errors.password?.type === "required" && <span className='text-danger'>This field is required</span>}
-                    </section>
+                    <Password  register={register} errors={errors} />
                     <section className="d-flex justify-content-between align-items-center">
                         <button type="submit" className='btn btn-primary'>Login</button>
                         <span>Don't have an account? <Link className="ms-2 btn btn-info text-light" to="/register">Register</Link>
-                        <Link className="ms-2 btn btn-info text-light" to='/reset-password' >Forget Password</Link>
+                        <Link className="ms-2 btn btn-info text-light" to="/reset-password" >Forget Password</Link>
                         </span>
                     </section>
                 </form>
