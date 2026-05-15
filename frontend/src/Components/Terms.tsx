@@ -1,10 +1,9 @@
 import HeaderReusable from '../assets/Reusable/HeaderReusable'
 import type { TermsProps } from '../assets/Loading/Types';
-import data from '../../public/data.json'
+import {privacyPolicy,termsAndConditions}from '../../public/data.json'
 
 
 function Terms({ term }:TermsProps) {
-const {privacyPolicy,termsAndConditions}=data;
 const terms=term?termsAndConditions:privacyPolicy;
 const term_img=`/Headers/${term?"t&c.jpg":"privacy.jpg"}`;
   return (

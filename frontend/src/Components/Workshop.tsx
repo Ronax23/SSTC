@@ -2,13 +2,13 @@ import {useState}from 'react'
 import { motion, AnimatePresence } from 'motion/react';
 import CardsSec from '../assets/Reusable/CardsSec.js';
 import type {Machine} from '../assets/Loading/Types.js'
-import dat from "../../public/data.json"
-import { data } from 'react-router-dom';
+import { machines,WorkshopCards} from "../../public/data.json"
+
 function Workshop() {
   const [selectedMachine, setSelectedMachine] = useState<Machine | null>(null)
   const [modal, setModal] = useState<boolean>(false)
   const [mover,setMover]=useState<number>(3)
- const { machines,WorkshopCards} = dat;
+
   
   const selectedMachineHandler = (index:Machine) => {
     setSelectedMachine(index)

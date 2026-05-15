@@ -1,6 +1,5 @@
 import {useState} from 'react'
-import type{ServiceType,
-    ServiceDetail} from '../Loading/Types';
+import type{ServiceType,ServiceDetail} from '../Loading/Types';
 const dynamicSelector:Record<ServiceType,ServiceDetail>={
   Hydro_Engineering:{
     img:"/Headers/Carousel2.jpg",

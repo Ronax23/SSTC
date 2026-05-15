@@ -1,6 +1,6 @@
 import HeaderReusable from '../assets/Reusable/HeaderReusable'
 import CardsSec from '../assets/Reusable/CardsSec'
-import data from '../../public/data.json' with { type: 'json' };
+import {teamCard,team} from '../../public/data.json' with { type: 'json' };
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.css';
 // @ts-ignore
@@ -8,41 +8,6 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 function OurTeam() {
-    const {teamCard}=data;
-    const team = [
-        { name: "Kavita", role: "Owner", photo: '../Team/14.jpg',
-          desc: 'I envision this workshop as a hub of mechanical excellence, where resources and people are aligned to deliver quality and innovation. My role is to secure growth while ensuring sustainability'  
-         },
-        { name: "Bhavya", role: "Manager", photo: '../Team/13.jpg',
-            desc: 'I see the workshop as a well-coordinated system. My role is to organize, supervise, and motivate the team so that every process runs smoothly and targets are achieved'
-         },
-        { name: "Gaurav", role: "Mechnical Engineer",
-            desc: 'I envision engineering as the backbone of progress. My role is to design, refine, and innovate processes that enhance precision, efficiency, and safety in the workshop'
-        },
-        { name: "Ansh", role: "Lathe Operator",
-            desc: 'I see my work as supporting mass production. My role is to deliver consistent quality across repeated operations'
-        },
-        { name: "David", role: "Boring Operator",
-            desc: 'I envision precision as the foundation of heavy engineering. My role is to achieve exact tolerances that strengthen the integrity of every component'
-        },
-        { name: "Sanjeev", role: "VMC Programmer",
-            desc: 'I see machining as a craft of accuracy. My role is to operate Vertical Machining Centers with precision, ensuring every component meets the highest standards'
-        },
-        { name: "Aman", role: "Lathe Operator",
-             desc: 'I see the lathe as a tool of craftsmanship. My role is to shape raw materials into precise forms with skill and care'
-         },
-        { name: "Surya", role: "CNC Operator",
-            desc: 'I envision automation as a path to consistency. My role is to run CNC machines with care, optimizing production while minimizing errors and waste'
-        },
-        { name: "Ojas", role: "M1tr Operator",
-            desc: 'I see milling as a versatile art. My role is to shape and cut materials with accuracy, supporting sectionerse production needs in the workshop'
-        }
-    ]
-    
-
-
-
-
     return (
         <section>
             <HeaderReusable title="Our Team" image="/Headers/overview.jpg" />

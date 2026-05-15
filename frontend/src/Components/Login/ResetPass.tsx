@@ -1,4 +1,4 @@
-import {useState } from 'react'
+import {useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from "react-hook-form"
 import axios from 'axios';
@@ -10,22 +10,42 @@ import Password from './Password';
 
 
 function ResetPass() {
+
+    
+    const [isRotating, setRotation] = useState(0);
+    const [regen,setRegen]= useState("")
     const [step, setStep] = useState<number>(1);
     const navigateDashboard=useNavigate();
     const { register, formState: { errors },trigger,getValues } = useForm({
-        mode: "onBlur"
+        mode: "onChange"
       });
       const variants = {
   enter: { x: 100, opacity: 0 },
   center: { x: 0, opacity: 1 },
   exit: { x: -100, opacity: 0 }
 };
+const randomgen=()=>{
+        const randomchar ="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+let capcha="";
+for(let i=0;i<6;i++)
+{
+    capcha+=randomchar.charAt(Math.floor(Math.random()*randomchar.length));
+}
+setRotation(prev => prev + 360);
+setRegen(capcha)
+    }
+useEffect(() => {
+    randomgen();
+}, [])
 
-      const getUser = () => {
-        const isValid = trigger("email");
+      const getUser = async () => {
+        const isValid =await trigger("email");
+        const verifyCap = getValues("capcha");
         if (!isValid) return;
         const data={email:getValues("email")};
-        axios.post(`${import.meta.env.VITE_API}check-user`,data).then((res)=>{
+       if(verifyCap===regen)
+       {
+         axios.post(`${import.meta.env.VITE_API}check-user`,data).then((res)=>{
             if(res.data.userExists){
                 toast.success(res.data.message);
                 setStep(2);
@@ -36,6 +56,10 @@ function ResetPass() {
             }).catch(()=>{
                 toast.error("An error occurred while checking the user.");
             })
+       }
+       else{
+        toast.error("Wrong Capcha")
+       }
      }
      const verifyOtp = () => {
         const isValid = trigger("otp");
@@ -98,6 +122,18 @@ function ResetPass() {
                         />
                         {errors.email && <span className='text-danger'>This field is required</span>}
                     </section>
+                    <div className="capcha my-2 position-relative">
+                    <span className="me-4 ">{regen}</span>
+                    <motion.i
+                    animate={{ rotate: isRotating}}
+    transition={{ duration: 0.5, ease: "easeInOut" }}
+    style={{cursor:"pointer"}}
+                    className="bi bi-arrow-clockwise position-absolute right-0" onClick={randomgen}></motion.i>
+                    <input className='my-3 form-control' type="text" {...register("capcha",{required:true,validate:{match: (value) => value === regen}})} />
+                    {errors.capcha?.type==="required" &&  <p className='text-light'>Enter Capcha To Proceed</p>}
+                    {errors.capcha?.type==="match" &&  <p className='text-light'>Wrong Captcha</p>}
+
+                    </div>
                     
                     <button onClick={getUser} className='btn btn-primary'>Get User</button>
                 </motion.div>}

@@ -17,6 +17,7 @@ import auth from '../../middlewares/auth.mjs';
 import listInvoice from '../../controller/Invoice/editInvoice.mjs';
 import editInventory from '../../controller/Inventory/editInventory.mjs';
 import logoutControl from '../../controller/User/logoutControl.mjs'
+import ratelimiter from '../../middlewares/ratelimiter.mjs'
 
 console.log(dbConnect);
 const app=express();
@@ -41,7 +42,7 @@ app.post("/adduser",userAdd);
 
 app.delete("/userlist/:id",auth,delUser);
 
-app.post("/login",loginAuth);
+app.post("/login",ratelimiter,loginAuth);
 
 app.get("/listinvoice",auth,listInvoice);
 

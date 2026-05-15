@@ -28,14 +28,36 @@ https://demo.ovathemewp.com/tripgo_html/index.html */
   mix-blend-mode: difference;
   pointer-events: none;
 }
+html {
+  font-size: 15px;
+}
 @font-face {
   font-family: 'Enriqueta';
   src: url('/fonts/Enriqueta-SemiBold.ttf') format('truetype');
   font-style: normal;
   font-display: swap;
 }
-html {
+@font-face {
+  font-family: 'Rubik Microbe';
+  src: url('/fonts/RubikMicrobe-Regular.ttf') format('truetype');
 }
+.capcha span {
+  font-family: 'Rubik Microbe';
+  background-color: #fff;
+  color: black;
+  font-size: 3rem;
+  border-radius: 10px;
+  filter: blur(0.3px); 
+    letter-spacing: 3px;
+    user-select: none;
+    cursor: crosshair;
+}
+.capcha i{
+  font-size: 2rem;
+  top: 10px;
+  user-select: none;
+}
+
 
 *{
   font-family: 'Enriqueta', 'Times New Roman', Times, serif;
@@ -675,3 +697,4 @@ transition-duration: .2s;
 overflow: hidden;
 white-space: nowrap;
 }
+
