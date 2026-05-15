@@ -1,4 +1,4 @@
-import redisClient from "../../config/redisConnect.mjs";    
+import redisClient from "../config/redisConnect.mjs"
 
 const otpCheck=async(req,res,next)=>{
     const {email,otp}=req.body;

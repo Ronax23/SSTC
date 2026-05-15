@@ -1,4 +1,4 @@
-import { redisClient as redis } from "../../config/redisConnect.mjs";
+import redisClient from "../config/redisConnect.mjs";
 
 const rateLimiter = async (req, res, next) => {
     const ip = req.ip;
@@ -13,31 +13,31 @@ const rateLimiter = async (req, res, next) => {
     try {
 
         const [ipCount, emailCount] = await Promise.all([
-            redis.get(ipKey),
-            redis.get(emailKey)
+            redisClient.get(ipKey),
+            redisClient.get(emailKey)
         ]);
 
         if (ipCount && parseInt(ipCount) >= IP_LIMIT) {
-            const timer = await redis.ttl(ipKey);
+            const timer = await redisClient.ttl(ipKey);
             return res.status(200).json({ message: `Too Many Attempts. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
         }
 
         if (email && emailCount && parseInt(emailCount) >= EMAIL_LIMIT) {
-            const timer = await redis.ttl(emailKey);
+            const timer = await redisClient.ttl(emailKey);
             return res.status(200).json({ message: `Account Locked. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
         }
 
         const [newIpCount, newEmailCount] = await Promise.all([
-            redis.incr(ipKey),
-            email ? redis.incr(emailKey) : Promise.resolve(0)
+            redisClient.incr(ipKey),
+            email ? redisClient.incr(emailKey) : Promise.resolve(0)
         ]);
 
         if (newIpCount === IP_LIMIT + 1) {
-            await redis.expire(ipKey, Lock_Time);
+            await redisClient.expire(ipKey, Lock_Time);
         }
 
         if (newEmailCount === EMAIL_LIMIT + 1) {
-            await redis.expire(emailKey, Lock_Time);
+            await redisClient.expire(emailKey, Lock_Time);
         }
 
         next();
@@ -51,8 +51,8 @@ export const clearRateLimit = async (ip, email) => {
     const ipKey = `limiter:ip:${ip}`;
     const emailKey = `limiter:email:${email}`;
     await Promise.all([
-        redis.del(ipKey),
-        email ? redis.del(emailKey) : Promise.resolve()
+        redisClient.del(ipKey),
+        email ? redisClient.del(emailKey) : Promise.resolve()
     ]);
 };
 
