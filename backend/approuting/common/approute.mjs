@@ -1,6 +1,5 @@
 import express from 'express'
-import dbConnect from '../../config/dbConnect.mjs';
-import redisClient from '../../config/redisConnect.mjs';
+import '../../config/dbConnect.mjs';
 import userAdd from '../../controller/User/userAdd.mjs';
 import delUser from '../../controller/User/delUser.mjs';
 import invoicesCreate from '../../controller/Invoice/invoicesCreate.mjs';
@@ -8,7 +7,6 @@ import loginAuth from '../../controller/User/loginControl.mjs';
 import passReset from '../../controller/User/passReset.mjs';
 import userList from '../../controller/User/userList.mjs';
 import dashboard from '../../controller/dashboard.mjs';
-import con from '../../config/dbConnect.mjs';
 import viewBlog from '../../controller/Blogs/viewBlog.mjs';
 import createBlog from '../../controller/Blogs/createBlog.mjs';
 import addInventory from '../../controller/Inventory/addInventory.mjs';
@@ -19,12 +17,11 @@ import editInventory from '../../controller/Inventory/editInventory.mjs';
 import logoutControl from '../../controller/User/logoutControl.mjs'
 import ratelimiter from '../../middlewares/ratelimiter.mjs'
 
-console.log(dbConnect);
 const app=express();
 app.use(express.static('../'));
 
-app.get("/",async (req,res)=>{
-    res.send(Hi);
+app.get("/", (_req, res) => {
+    res.status(200).send("SSTC API");
 });
 app.delete("/logout",auth,logoutControl)
 
@@ -46,7 +43,7 @@ app.post("/login",ratelimiter,loginAuth);
 
 app.get("/listinvoice",auth,listInvoice);
 
-app.patch("/forgetpass ",passReset);
+app.patch("/forgetpass", passReset);
 
 app.post("/newbill",auth, invoicesCreate);
 
