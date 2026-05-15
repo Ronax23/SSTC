@@ -12,3 +12,4 @@
         res.status(200).json({message:"An Error Has Occured",status:500})
     }
  }
+ export default logout;
