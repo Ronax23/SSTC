@@ -2,7 +2,7 @@ import express from 'express'
 import {configDotenv} from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import appRoute from './approuting/common/approute.mjs'
+import appRoute from './approuting/approute.mjs'
 configDotenv();
 const app=express();
 const PORT = process.env.PORT || 8000;

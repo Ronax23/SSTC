@@ -1,4 +1,4 @@
-import invoiceModel from "../../../models/Invoice.mjs";
+import invoiceModel from "../../models/invoice.mjs";
 
 const listInvoice=async(req,res)=>{
     const {id}=req.params;

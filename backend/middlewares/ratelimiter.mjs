@@ -2,7 +2,7 @@ import redisClient from "../config/redisConnect.mjs";
 
 const rateLimiter = async (req, res, next) => {
     const ip = req.ip;
-    const email = req.body.email;
+    const email = req.body?.email;
     const ipKey = `limiter:ip:${ip}`;
     const emailKey = `limiter:email:${email}`;
 
@@ -17,17 +17,8 @@ const rateLimiter = async (req, res, next) => {
             redisClient.get(emailKey)
         ]);
 
-        if (ipCount && parseInt(ipCount) >= IP_LIMIT) {
-            const timer = await redisClient.ttl(ipKey);
-            return res.status(200).json({ message: `Too Many Attempts. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
-        }
 
-        if (email && emailCount && parseInt(emailCount) >= EMAIL_LIMIT) {
-            const timer = await redisClient.ttl(emailKey);
-            return res.status(200).json({ message: `Account Locked. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
-        }
-
-        const [newIpCount, newEmailCount] = await Promise.all([
+         const [newIpCount, newEmailCount] = await Promise.all([
             redisClient.incr(ipKey),
             email ? redisClient.incr(emailKey) : Promise.resolve(0)
         ]);
@@ -39,6 +30,18 @@ const rateLimiter = async (req, res, next) => {
         if (newEmailCount === EMAIL_LIMIT + 1) {
             await redisClient.expire(emailKey, Lock_Time);
         }
+
+        if (ipCount && parseInt(ipCount) >= IP_LIMIT) {
+            const timer = await redisClient.ttl(ipKey);
+            return res.status(200).json({ message: `Too Many Attempts. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
+        }
+
+        if (email && emailCount && parseInt(emailCount) >= EMAIL_LIMIT) {
+            const timer = await redisClient.ttl(emailKey);
+            return res.status(200).json({ message: `Account Locked. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
+        }
+
+       
 
         next();
     } catch (error) {
