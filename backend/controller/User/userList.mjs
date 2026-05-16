@@ -14,7 +14,7 @@ const userList = async (req, res) => {
     });
 
     const total = Math.ceil(await userModel.countDocuments()/limit);
-    if (dat.length<1)
+    if (dat.length<0)
     {
         res.status(200).json({message:"No data found"});
     }

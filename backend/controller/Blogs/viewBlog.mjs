@@ -15,7 +15,7 @@ const viewBlog = async(req,res)=>{
                 blog = await blogs.find().sort({createdAt:-1}).limit(limit).skip((page - 1) * limit);
             }
 
-        res.status(200).json(blog?{message:"Blog found",status:200,blog}:{message:"Blog not found",status:404});
+        res.status(200).json(blog.length>0?{message:"Blog found",status:200,blog}:{message:"Blog not found",status:404});
     }
     catch(err){
         res.status(200).json({message:"Error fetching blog", error: err.message,status:500});
