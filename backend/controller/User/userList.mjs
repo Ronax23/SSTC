@@ -1,4 +1,3 @@
-import con from "../../config/dbConnect.mjs";
 import userModel from "../../models/User.mjs";
 import calculateAge from "../../utilities/ageCal.mjs";
 
@@ -15,7 +14,7 @@ const userList = async (req, res) => {
     });
 
     const total = Math.ceil(await userModel.countDocuments()/limit);
-    if (!dat)
+    if (dat.length<1)
     {
         res.status(200).json({message:"No data found"});
     }
