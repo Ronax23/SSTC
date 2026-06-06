@@ -1,21 +1,23 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import toast, {Toaster } from 'react-hot-toast';
-interface AddUserProps {
-    editUser?: boolean;
-    id?: string;
-}
-function AddUser({editUser=false,id}:AddUserProps) {
+import { useParams } from 'react-router-dom';
+
+function AddUser() {
     const { register, handleSubmit, formState: { errors }, watch, setValue,reset } = useForm({
         mode: "onBlur"
     })
+    const {id}=useParams()
+    const edit=Boolean(id)
     const isSameAddress = watch("isSameAddress");
     const gst = watch('userType') === 'gst';
-    const [edit,setEdit]=useState<boolean>(false);
-
+    const fetchdat=()=>{
+        axios.get(`${import.meta.env.REACT_APP_API_URL}/getUser/${id}`).then(res => {reset(res.data)}).catch(err => console.log(err))
+    }
     const submitData = (data: any) => {
-        axios.post(`${import.meta.env.REACT_APP_API_URL}/addUser`, data)
+        const method=edit? "put":"post";
+        axios[method](edit?`${import.meta.env.REACT_APP_API_URL}/addUser/${id}`:`${import.meta.env.REACT_APP_API_URL}/addUser`, data)
             .then(res => {
                 toast.success(res.data.message || "User added successfully");
             })
@@ -24,11 +26,9 @@ function AddUser({editUser=false,id}:AddUserProps) {
             })
     }
     useEffect(() => {
-        setEdit(true);
-    }, [editUser===true])
-    useEffect(() => {
-        axios.get(`${import.meta.env.REACT_APP_API_URL}/getUser/${id}`).then(res => {reset(res.data)}).catch(err => console.log(err))
-    }, [edit])
+        fetchdat()
+    }, [id,edit])
+
     useEffect(() => {
         if (isSameAddress) {
             setValue('firmAddress', watch("address"));

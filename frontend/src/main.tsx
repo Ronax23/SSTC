@@ -13,6 +13,8 @@ const OurTeam= lazy(()=>import ('./Components/OurTeam.tsx'));
 const Terms= lazy(()=>import ('./Components/Terms.tsx'));
 const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import InvestDash from './Components/Dashboard/InvestDash.tsx';
+import BlogList from './Components/Dashboard/BlogList.tsx';
 const ResetPass=lazy(()=> import('./Components/Login/ResetPass.tsx'));
 const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
 const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
@@ -36,11 +38,15 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path='dashboardhome' element={<DashboardHome />} />
+          <Route index element={<DashboardHome />} />
           <Route path='userList'  element={<UserList/>}/>
           <Route path='createBlog' element={<CreateBlogs />} />
           <Route path="AddUser" element={<AddUser />} />
           <Route path='AddInvoice' element={<Invoice />} />
+          <Route path="Investments" element={<InvestDash/>}></Route>
+          <Route path="viewBlogs" element={<BlogList />}>
+            <Route path=":id" element={<DynamicBlog />} />
+          </Route>
         </Route>
         <Route path="/" element={<MainPage />}>
           <Route path="/" element={<LandingPage />} />

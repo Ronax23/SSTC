@@ -6,6 +6,7 @@
     try
     {
         res.clearCookie("token", token, { httpOnly: true, secure: true,path: '/' });
+        res.clearCookie("role", user.role, { httpOnly: false, secure: true,path: '/',sameSite: 'lax' });
         res.status(200).json({message:"Logout Successfully",status:200})
     }
     catch{

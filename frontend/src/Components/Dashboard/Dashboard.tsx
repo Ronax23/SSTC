@@ -1,9 +1,11 @@
 import {useState} from 'react'
 import { sidebar } from '../../assets/Dynamic Routes/Dashboard_routes';
 import { Link, Outlet } from 'react-router-dom';
+import cookie from 'js-cookie';
 
 function Dashboard() {
-  const [collapse, setCollapse] = useState(true)
+  const [collapse, setCollapse] = useState(true);
+  const role = cookie.get("role") || "all";
 
   const sidebarWidth = collapse ? "60px" : "260px";
 
@@ -16,11 +18,13 @@ function Dashboard() {
                
           <ul className="list-unstyled d-flex flex-column align-items-start my-3">
             {sidebar.map((item, index) => (
-              <li className='my-2 text-decoration-none text-light' key={index}>
-                <Link to={item.to} className="text-decoration-none">
-                  {item.icon}  {!collapse && <span className="text-white">{item.name}</span>}
-                </Link>
-              </li>
+              (item.role.includes(role)) && (
+                <li className='my-2 text-decoration-none text-light' key={index}>
+                  <Link to={item.to} className="text-decoration-none">
+                    {item.icon}  {!collapse && <span className="text-white">{item.name}</span>}
+                  </Link>
+                </li>
+              )
             ))}
           </ul>
         </div>

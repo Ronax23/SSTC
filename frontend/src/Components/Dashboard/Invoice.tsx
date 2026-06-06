@@ -1,7 +1,18 @@
 import axios from 'axios';
 import React from 'react'
+import { useParams } from 'react-router-dom';
+
+
+interface Invoice {
+id?:String,
+Date:Date,
+
+}
 
 function Invoice() {
+    const {id}=useParams()
+    const edit=Boolean(id)
+
     const invocePost = async (e:any)=>{
         axios.post('http://localhost:3000/invoice',FormData,{withCredentials:true}).then((res)=>{
             console.log(res);
@@ -33,7 +44,7 @@ function Invoice() {
                             <input type="date" placeholder='Invoice Date' />
 
                         </div>
-                       <div className=" p-2" style={{ height: '65vh', overflowY: 'scroll'   }}>
+                       <div className=" p-2" style={{ height: '65vh', overflowY: 'scroll', overflowX: 'hidden' }}>
                          {field.map((item:any)=>(
                             <div className="row mt-3" key={item.id}>
                         <div className="col-lg-2 col-md-2">

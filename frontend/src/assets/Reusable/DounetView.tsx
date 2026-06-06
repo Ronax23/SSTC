@@ -1,10 +1,11 @@
 import { Doughnut } from 'react-chartjs-2';
 import type { BarGraphProps } from '../Loading/Types';
-
-function DounetView({labels,datasets}: BarGraphProps) {
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+ChartJS.register(ArcElement, Tooltip, Legend);
+function DounetView(props: BarGraphProps) {
     const data={
-        labels:labels,
-        datasets:datasets.map((item:any)=>({
+        labels:props.labels,
+        datasets:props.datasets.map((item:any)=>({
             label:item.label,
             data:item.data,
             backgroundColor:item.backgroundColor||['rgba(9, 8, 6, 0.2)','rgba(196, 80, 51, 0.2)'],

@@ -18,7 +18,7 @@ app.use("/blogs",blogroutes)
 
 app.use("/inventory",auth,inv_routes)
 
-app.use("/users",ratelimiter,userRoute)
+app.use("/users",auth,userRoute)
 
 app.use("/invoice",auth,invoiceRoute)
 

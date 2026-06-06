@@ -1,5 +1,5 @@
   export const sidebar: {name: string, icon: string, role: string[],to:string}[] =
-  [ {name:"Home",icon:"🏠",role:["admin","manager"],to:"dashboardhome"} ,
+  [ {name:"Home",icon:"🏠",role:["admin","manager"],to:"/dashboard"} ,
     {name:"User List",icon:"👥",role:["admin","manager"],to:"userList"} ,
     {name:"Add Blogs",icon:"📝",role:["admin","manager"],to:"createBlog"} ,
     {name:"View Blogs",icon:"📖",role:["admin","manager"],to:"viewBlogs"} ,

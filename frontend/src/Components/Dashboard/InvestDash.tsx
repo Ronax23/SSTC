@@ -28,6 +28,31 @@ function InvestDash() {
     useEffect(()=>{
         investdat();
     },[])
+    const data={
+        labels: ["January", "February", "March", "April", "May", "June"],
+        datasets: [
+            {
+                label: "Inventory Sales (₹)",
+                data: [43200, 71500, 28900, 84100, 56300, 61000],
+                backgroundColor: [
+                    "rgba(45, 120, 180, 0.4)",
+                    "rgba(190, 65, 30, 0.4)",
+                    "rgba(80, 155, 70, 0.4)",
+                    "rgba(210, 140, 10, 0.4)",
+                    "rgba(110, 40, 195, 0.4)",
+                    "rgba(30, 185, 160, 0.4)"
+                ],
+                borderColor: [
+                    "rgba(45, 120, 180, 1)",
+                    "rgba(190, 65, 30, 1)",
+                    "rgba(80, 155, 70, 1)",
+                    "rgba(210, 140, 10, 1)",
+                    "rgba(110, 40, 195, 1)",
+                    "rgba(30, 185, 160, 1)"
+                ]
+            }
+        ]
+    }
   return (
    <>
    <Toaster />
@@ -47,10 +72,10 @@ function InvestDash() {
             <BarGraph labels={['January', 'February', 'March', 'April', 'May']} datasets={[{label:'Investment Growth',data:[10,20,30,40,50]}]} />
         </div>
         <div className="col-lg-3">
-            <DounetView data={investment} />
+            <DounetView labels={data.labels} datasets={data.datasets} />
         </div>
         <div className="col-lg-3">
-            <DounetView data={investment} />
+            <DounetView labels={data.labels} datasets={data.datasets} />
         </div>
     </div>
    </div>

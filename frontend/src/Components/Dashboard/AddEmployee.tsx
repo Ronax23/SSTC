@@ -1,14 +1,47 @@
-import React from 'react'
+import {useEffect} from 'react'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { useParams } from 'react-router-dom';
+interface Employees{
+            fName:String,
+               lName:String,
+               dob:Date,
+               gender:{type:String,enum:["male","female","other"]},
+               address:String,
+               state:String,
+               mobile:Number,
+               email:String,
+               empType:String,
+               salary:Number
+}
 function AddEmployee() {
+    const {id}=useParams()
+    const edit=Boolean(id)
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
+    const fetchDat=()=>{
+        axios.get(`import.meta.env.VITE_API}view/${id}`).then((res)=>{
+            reset({
+               fName:res.data.fName,
+               lName:res.data.lName,
+               dob:res.data.dob,
+               gender:res.data.gender,
+               address:res.data.address,
+               state:res.data.state,
+               mobile:res.data.mobile,
+               email:res.data.email,
+               empType:res.data.empType,
+               salary:res.data.salary 
+            })
+        }).catch(err=>toast(err.message))
+    }
+    useEffect(()=>{
+        if(id && edit)fetchDat
+    },[id,edit])
     const submitData = (data: any) => {
-        axios.post(`${import.meta.env.VITE_API}addemployee`, data,{withCredentials:true}).then((res) => {
+        const method = edit ? 'put' : 'post';
+        axios[method](edit?`${import.meta.env.VITE_API}addemployee/${id}`:`${import.meta.env.VITE_API}addemployee`, data,{withCredentials:true}).then((res) => {
             if (res.data.success) {
                 toast.success(res.data.message);
             } else {
