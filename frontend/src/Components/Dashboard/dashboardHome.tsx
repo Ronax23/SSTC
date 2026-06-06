@@ -35,11 +35,14 @@ function dashboardHome() {
                     </div>
                 </div>
             ))} */}
-<div className="row">
-  <div className="col-lg-4 col-md-6 col-12 justify-content-center">
+<div className="row justify-content-between">
+  <div className="col-lg-3 col-md-6 col-12 justify-content-center">
     <DounetView labels={['Label 1', 'Label 2','kab3','tab4']} datasets={[{ label: 'Dataset 1', data: [40, 28,80,50] }]} />
   </div>
     <div className="col-lg-4 col-md-6 col-12">
+    <BarGraph labels={['Label 1', 'Label 2','lab 3']} datasets={[{ label: 'Dataset 1', data: [10, 20,50] }]} />
+  </div>
+  <div className="col-lg-4 col-md-6 col-12">
     <BarGraph labels={['Label 1', 'Label 2','lab 3']} datasets={[{ label: 'Dataset 1', data: [10, 20,50] }]} />
   </div>
 </div>

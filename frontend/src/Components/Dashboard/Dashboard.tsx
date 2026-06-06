@@ -12,14 +12,14 @@ function Dashboard() {
   return (
     <div className="container-fluid g-0">
       <div className="d-flex vh-100">
-        <div className="bg-success p-3 text-white sidebar" 
+        <div className="p-3 text-white sidebar" 
           style={{ "--sidebar": sidebarWidth} as React.CSSProperties}>
-          <i  onClick={() => setCollapse(!collapse)} style={{backdropFilter:'blur(10px)'}} className={`bi ${collapse ? 'bi-list' : 'bi-x-lg'} bg-danger rounded my-5 p-2`}></i>
+          <i  onClick={() => setCollapse(!collapse)} style={{backdropFilter:'blur(10px)'}} className={`bi ${collapse ? 'bi-list' : 'bi-x-lg'} sidebar-button rounded my-5 p-2`}></i>
                
           <ul className="list-unstyled d-flex flex-column align-items-start my-3">
             {sidebar.map((item, index) => (
               (item.role.includes(role)) && (
-                <li className='my-2 text-decoration-none text-light' key={index}>
+                <li className='my-3 text-decoration-none text-light' key={index}>
                   <Link to={item.to} className="text-decoration-none">
                     {item.icon}  {!collapse && <span className="text-white">{item.name}</span>}
                   </Link>
