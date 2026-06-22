@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion"; // Highly recommended for animations
+import { motion, useSpring } from "framer-motion";
 
 export default function AnimatedCursor() {
 
@@ -11,6 +11,7 @@ export default function AnimatedCursor() {
  useEffect(() => {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
+    const onTouch = () => setIsVisible(false);
 
     const handleMove = (e:MouseEvent) => {
       if (!isVisible) setIsVisible(true);
@@ -19,14 +20,16 @@ export default function AnimatedCursor() {
       dotY.set(e.clientY - 6);
     };
 
-    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mousemove", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("mousemove", handleMove);
+    window.addEventListener("touchstart", onTouch);
 
     return () => {
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("touchstart", onTouch);
     };
   }, [dotX, dotY, isVisible]);
 

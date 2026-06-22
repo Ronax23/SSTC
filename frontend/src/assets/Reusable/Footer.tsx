@@ -21,8 +21,13 @@ export default function Footer() {
                     </ul>
                 </section>
             ))} 
-            <section className='col-12 text-center py-3'>
+            <section className='col-12 text-center py-3 justify-content-center d-flex flex-column align-items-center'>
             © {new Date().getFullYear()} Ronax. All rights reserved.
+            <div className="mt-5">
+               <a href="https://pawns.app/?r=2931994" target="_blank">
+<img src="https://cdn.pawns.app/images/b/728.jpg" alt="Pawns.app" />
+</a>
+            </div>
             </section>
         </section>
         </section>

@@ -45,7 +45,7 @@ useEffect(() => {
         const data={email:getValues("email")};
        if(verifyCap===regen)
        {
-         axios.post(`${import.meta.env.VITE_API}check-user`,data).then((res)=>{
+         axios.post(`${import.meta.env.VITE_API}forgetpass`,data).then((res)=>{
             if(res.data.userExists){
                 toast.success(res.data.message);
                 setStep(2);

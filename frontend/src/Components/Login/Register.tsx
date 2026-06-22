@@ -11,6 +11,19 @@ export default function Register() {
   const nav=useNavigate();
   // var jst=localStorage.setItem("name","hello");
 
+  const checkUsername = (username: string) => {
+    axios.post("http://localhost:8000/checkusername", { username })
+      .then((response) => {
+        if (response.data.status === 200) {
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message || "An error occurred while checking the username.");
+      });
+  };
   
 
   const registerform = (formdata:any)=>{
@@ -62,6 +75,9 @@ export default function Register() {
                 <div data-mdb-input-init className="form-outline">
                     <label className="form-label">Username</label>
                     <input type="text" id="username" className="form-control form-control-lg" {...register("uname",{required: true})} />
+                    <span className="btn btn-success" onClick={() => checkUsername(watch("uname"))}>
+                      Check
+                    </span>
                     {errors.uname && <span className='text-danger'>This field is required</span>}
                   </div>
                 </div>
@@ -79,12 +95,11 @@ export default function Register() {
                 <div className="col-md-6 mb-4">
 
                   <h6 className="mb-2 pb-1">Gender: </h6>
-                  <label className="form-check-label">Female</label>
-                  <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" id="femaleGender"
-                      value="female" 
+                   <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio"  id="femaleGender"
+                      value="female"
                       {...register("gender", { required: "Please select a gender" })} />
-                    
+                    <label className="form-check-label">Female</label>
                   </div>
 
                   <div className="form-check form-check-inline">

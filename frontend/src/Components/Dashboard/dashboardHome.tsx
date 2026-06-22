@@ -7,25 +7,25 @@ function dashboardHome() {
     const [data,setData]=useState<any>([]);
     const [loading,setLoading]=useState(true);
 
-    // useEffect(()=>{
-    //     axios.get("http://localhost:8000/dashboard",
+    useEffect(()=>{
+        axios.get("http://localhost:8000/dashboard",
            
-    //     ).then((res)=>{
-    //         setData(res.data);
-    //         console.log(res.data);
-    //         setLoading(false);
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //     })
-    // },[])
+        ).then((res)=>{
+            setData(res.data);
+            console.log(res.data);
+            setLoading(false);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    },[])
     
-    // if(loading){return <LoaderError loading={true}/>}
+    if(loading){return <LoaderError loading={true}/>}
 
   return (
     <>
     <div className="container-fluid">
         <div className="row">
-            {/* {data.map((item:any,index:number)=>(
+             {data.map((item:any,index:number)=>(
                 <div className="col-lg-3" key={index}>
                     <div className="card my-3">
                         <div className="card-body">
@@ -34,7 +34,7 @@ function dashboardHome() {
                         </div>
                     </div>
                 </div>
-            ))} */}
+            ))} 
 <div className="row justify-content-between">
   <div className="col-lg-3 col-md-6 col-12 justify-content-center">
     <DounetView labels={['Label 1', 'Label 2','kab3','tab4']} datasets={[{ label: 'Dataset 1', data: [40, 28,80,50] }]} />
