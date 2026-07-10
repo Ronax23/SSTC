@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React from 'react'
+import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
-
+import {useForm} from 'react-hook-form'
 
 interface Invoice {
 id?:String,
@@ -13,16 +13,32 @@ function Invoice() {
     const {id}=useParams()
     const edit=Boolean(id)
 
+    const { register, handleSubmit, reset, error } = useForm();
+
+    const invoiceGet=async()=>{
+        axios.get('${import.meta.env.VITE_API}/invoice/${id}',{withCredentials:true}).then((res)=>{
+            reset(res.data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+    useEffect(()=>{
+        if(edit){
+            invoiceGet();
+        }
+    },[id,edit])
+
     const invocePost = async (e:any)=>{
-        axios.post('http://localhost:3000/invoice',FormData,{withCredentials:true}).then((res)=>{
+        axios[edit?'put':'post']('${import.meta.env.VITE_API}/invoice/${edit? edit/${id}:"add"}',FormData,{withCredentials:true}).then((res)=>{
             console.log(res);
         }).catch((err)=>{
             console.log(err);
         })
     }
-    const [taxType,setTaxType] = React.useState("local");
-    const [field,addField] = React.useState([{ id: crypto.randomUUID() }]);
+    const [taxType,setTaxType] = useState("local");
+    const [field,addField] = useState([{ id: crypto.randomUUID() }]);
     const addInv=()=>{
+
         addField([...field,{ id: crypto.randomUUID() }]);
     }
     const deleteInv=(ind:any)=>{
@@ -34,7 +50,7 @@ function Invoice() {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12">
-                    <form action="">
+                    <form onSubmit={handleSubmit(invocePost)}>
                      <div className="row">
                            <div className="col-12">
                             <label htmlFor="">Invoice Type</label>

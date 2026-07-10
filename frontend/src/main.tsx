@@ -41,7 +41,15 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<DashboardHome />} />
           <Route path='userList'  element={<UserList/>}/>
           <Route path='createBlog' element={<CreateBlogs />} />
-          <Route path="AddUser" element={<AddUser />} />
+          <Route path="addUser" element={<AddUser userType={"customer"} />} />
+          <Route path="editUser/:id" element={<AddUser userType={"customer"} />} />
+          <Route path="addEmployee" element={<AddUser userType={"employee"} />} />
+          <Route path="addEmployee/:id" element={<AddUser userType={"employee"} />} />
+          <Route path="addAdmin" element={<AddUser userType={"admin"} />} />
+          <Route path="addAdmin/:id" element={<AddUser userType={"admin"} />} />
+          <Route path="addSupplier" element={<AddUser userType={"supplier"} />} />
+          <Route path="addSupplier/:id" element={<AddUser userType={"supplier"} />} />
+
           <Route path='AddInvoice' element={<Invoice />} />
           <Route path="Investments" element={<InvestDash/>}></Route>
           <Route path="viewBlogs" element={<BlogList />}>

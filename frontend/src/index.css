@@ -706,7 +706,6 @@ transition-duration: .5s;
 {
   width: var(--sidebar);
 transition-duration: .2s;
-overflow: hidden;
+overflow-x: hidden;
 white-space: nowrap;
 }
-

@@ -22,8 +22,8 @@ app.use("/users",auth,userRoute)
 
 app.use("/invoice",auth,invoiceRoute)
 
-app.get("/", (_req, res) => {
-    res.status(200).send("SSTC API");
+app.get("/", (_, res) => {
+    res.status(200).send("<h1 style='color:blue; font-size:100px; margin-top: 40vh; text-align:center;'>SSTC API</h1>");
 });
 
 app.get("/dashboard",auth,dashboard)

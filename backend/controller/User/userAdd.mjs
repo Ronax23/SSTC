@@ -3,9 +3,25 @@ import loginModel from '../../models/login.mjs';
 import bcrypt from 'bcrypt';
 
 const userAdd =    async(req,res)=>{
-    const  {firstName,lastName,email,mob,uname,dob,password,gender,role}=req.body;
+    const {id}=req.params;
+    const edit=Boolean(id);
+    const {
+        firstName, lastName, email, mob, uname, dob, password, gender, role,
+        address, state, ...datas
+      } = req.body; 
+    
    try
    {
+    if(edit){
+        const user=await userModel.findById(id);
+        if(!user){
+            return res.status(200).json({message:"User not found",status:400});
+        }
+        else{
+            await user.updateOne(datas);
+            return res.status(200).json({message:"User updated successfully",status:200});
+        }}
+    else{
     if(!firstName || !lastName || !email || !mob || !uname || !dob || !password||!gender||!role){
         console.log(firstName,lastName,email,mob,uname,dob,password,gender,role);
         return res.status(200).json({message:"All fields are required",status:400});
@@ -25,6 +41,7 @@ const userAdd =    async(req,res)=>{
    newLogin.save();
     res.status(200).json({message:"User added successfully",status:200});
     }
+}
    }
    catch(err)
    {

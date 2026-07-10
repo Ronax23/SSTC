@@ -5,20 +5,27 @@ import { useParams } from 'react-router-dom';
 interface Blog{
     title:string;
     blog_content:string;
-    blogimg:string;
+    blogimg:FileList | string;
 }
 function CreateBlogs() {
     const {id}=useParams();
     const edit=Boolean(id)
-      const { register, handleSubmit, formState: { errors },reset } = useForm({
+      const { register, handleSubmit, formState: { errors },reset } = useForm<Blog>({
         mode: "onBlur"
     })
 
 const postdata=(data:Blog)=>{
-    const url = edit? `${import.meta.env.VITE_API_URL}/blogs/edit/${id}`: `${import.meta.env.VITE_API_URL}/blogs/add`;
-    const method = edit ? 'put' : 'post';
-axios[method](url,data,{withCredentials:true}).then((res)=>{
-    if(res.data.status=200)
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("blog_content", data.blog_content);
+    if (data.blogimg instanceof FileList && data.blogimg.length > 0) {
+      formData.append("blogimg", data.blogimg[0]);
+    } else if (typeof data.blogimg === 'string') {
+      formData.append("blogimg", data.blogimg);
+    }
+axios[edit?'put':'post'](`{import.meta.env.VITE_API_URL}/blogs/${edit?`edit/${id}` : 'add'}`,formData,
+    {withCredentials:true, headers: { "Content-Type": "multipart/form-data" }},).then((res)=>{
+    if(res.data.status===200)
     {
 
     }
@@ -28,12 +35,12 @@ axios[method](url,data,{withCredentials:true}).then((res)=>{
 }).catch(err=>console.log(err))
 }
     const fetchdat=()=>{
-        axios.get(`${import.meta.env.REACT_APP_API_URL}/blogs/:${id}`).then((res)=>{
+        axios.get(`${import.meta.env.REACT_APP_API_URL}/blogs/${id}`).then((res)=>{
             reset(
            {
              title:res.data.title,
-            blogimg:res.data.blogimg,
-            blog_content:res.data.blog_content           
+            blog_content:res.data.blog_content,
+            blogimg:res.data.blogimg
            }) 
            setPreview(res.data.blogimg)
         }).catch(err=>console.log(err))
@@ -62,7 +69,7 @@ useEffect(()=>{
                     </section>
                     <section className="mb-3">
               <label className="form-label">Upload Image</label>
-              <input type="file" className="form-control"  {...register("blogimg",{required:true,onChange:(e)=>setPreview(e)})} />
+              <input type="file" className="form-control"  {...register("blogimg",{required:!edit,onChange: uploadImg})} />
               {errors.blogimg && <p>Select Image</p>}
 
               {preview && 
