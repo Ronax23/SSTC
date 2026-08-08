@@ -94,6 +94,37 @@ interface BarGraphProps {
     labels: string[];
     datasets: DatasetItem[]; // Note the 's'
 }
+interface FormInputs {
+  invoiceDate: string;
+  invoiceType: 'inventory' | 'custom';
+  entryNumber?: string;
+  entryDate?: string;
+  supplierName?: string;
+  productName: string;
+  qty: number;
+  price: number;
+  buy_price?: number;
+  mrp?: number;
+  expiry?: string;
+  paymentMode: string;
+  customerName?: string;
+  customerMobileNo?: string;
+  invoiceNumber?:string
+  customerGstin?: string;
+  challanNumber?: string;
+}
+
+interface ItemRow {
+  id: string;
+  productName: string;
+  qty: number;
+  price?: number;
+  taxPercent?: number;
+  buy_price?: number;
+  mrp?: number;
+  expiry?: string;
+}
+
 export type {
     HeaderReusableDynamic,
     comp_logo,
@@ -108,4 +139,5 @@ export type {
     Machine,
     counterMap,
     dynamics,Blog,login,DatasetItem,BarGraphProps
+    ,FormInputs,ItemRow
 }

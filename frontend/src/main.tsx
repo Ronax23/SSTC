@@ -50,7 +50,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="addSupplier" element={<AddUser userType={"supplier"} />} />
           <Route path="addSupplier/:id" element={<AddUser userType={"supplier"} />} />
 
-          <Route path='AddInvoice' element={<Invoice />} />
+          <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
           <Route path="Investments" element={<InvestDash/>}></Route>
           <Route path="viewBlogs" element={<BlogList />}>
             <Route path=":id" element={<DynamicBlog />} />
