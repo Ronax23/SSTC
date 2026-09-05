@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Password from './Password';
+import BackButton from '../../assets/Reusable/BackButton';
 
 
 
@@ -103,7 +104,8 @@ useEffect(() => {
     <Toaster />
 
     <section className="container">
-        <section className="row vh-100 pt-5">
+        <BackButton/>
+        <section className="row  pt-5">
             <section className="mt-3 col-lg-6 col-md-6 col-12">
                 <h2>Reset Password</h2>
                 {step===1 && <motion.div

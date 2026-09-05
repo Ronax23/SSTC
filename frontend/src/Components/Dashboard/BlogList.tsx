@@ -16,11 +16,11 @@ function BlogList() {
     setLoading(true);
     axios.get(`${import.meta.env.VITE_API}blogs?page=${page}`,{withCredentials:true}).then((res)=>{
         setBlogs(res.data.blogs || []);
-        setLoading(false);
     }).catch((err)=>{
         console.log(err);
+    }).finally(() => {
         setLoading(false);
-    })
+      });
   }
   const searchBlogs=(title:string)=>{
     setLoading(true);

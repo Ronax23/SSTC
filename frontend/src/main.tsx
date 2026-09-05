@@ -35,8 +35,9 @@ createRoot(document.getElementById('root')!).render(
     <AnimatedCursor />
     <Suspense fallback={<LoaderError loading={true} />}>
       <Routes>
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<AddUser userType={"customer"} main={true} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPass />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<DashboardHome />} />
           <Route path='userList'  element={<UserList/>}/>
@@ -66,10 +67,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path="services" element={<Services />} />
           <Route path="blogs" element={<ViewBlog />} />
           <Route path="viewblog/:id" element={<DynamicBlog />} />
-          <Route path="login/register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="reset-password" element={<ResetPass />} />
-          
+          <Route path="login/register" element={<AddUser userType={"customer"} main={true} />} />
+          <Route path="signup" element={<AddUser userType={"customer"} main={true} />} />
+          <Route path="login" element={<Login />} />  
+                  
         </Route>
         <Route path="*" element={<LoaderError hasError={true} />} />
       </Routes>

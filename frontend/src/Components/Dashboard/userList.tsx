@@ -16,12 +16,11 @@ function userList() {
         axios.delete(`http://localhost:8000/userlist/${id}`).then((res)=>{
             userData();
             toast.success(res.data.message);
-            setShowModal(false);
-            setUser({});
         }).catch((err)=>{
+            toast.error(err.message || "An error occurred while deleting the user."); 
+        }).finally(()=>{
             setShowModal(false);
             setUser({});
-            toast.error(err.message || "An error occurred while deleting the user."); 
         })
     }
 

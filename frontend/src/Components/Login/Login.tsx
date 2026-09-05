@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import type {login} from '../../assets/Loading/Types';
 import Password from './Password';
+import BackButton from '../../assets/Reusable/BackButton';
 
 
 
@@ -13,6 +14,7 @@ function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm<login>({
         mode: "onBlur"
       });
+
      const loginhandle = (data:login) => {
         console.log(import.meta.env.VITE_API)
           axios.post(`${import.meta.env.VITE_API}login`,data).then((res)=>{
@@ -37,7 +39,8 @@ function Login() {
 
     <section className="container">
         <section className="row">
-            <section className="mt-3 col-lg-6 col-md-6 col-12">
+    <BackButton/>       
+    <section className="mt-3 col-lg-6 col-md-6 col-12">
                 <form onSubmit={handleSubmit(loginhandle)}>
                     <h2>Login</h2>
                     <section className="form-group">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { sidebar } from '../../assets/Dynamic Routes/Dashboard_routes';
 import { Link, Outlet} from 'react-router-dom';
 import AuthRole from './AuthRole';
@@ -6,14 +6,42 @@ import AuthRole from './AuthRole';
 function Dashboard() {
   const [collapse, setCollapse] = useState(true);
   const { role } = AuthRole();
-  const sidebarWidth = collapse ? "70px" : "260px";
+  const [sidebarWidth,setSidebarWidth] = useState("260px");
+
+
+   const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 450) {
+        setSidebarWidth(collapse ?'90px':'100%');
+      } else if (width < 992) {
+        setSidebarWidth(collapse ?'70px':'260px');
+      } else {
+        setSidebarWidth(collapse ? '70px' : '260px');
+      }
+      
+    };
+  useLayoutEffect(() => {
+  handleResize(); 
+ window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [collapse]);
+
 
  return (
     <div className="container-fluid g-0">
-      <div className="d-flex vh-100">
+      <div className="d-flex vh-100 position-relative">
         <div className="p-3 text-white sidebar" 
-          style={{ "--sidebar": sidebarWidth} as React.CSSProperties}>
-          <i  onClick={() => setCollapse(!collapse)} style={{backdropFilter:'blur(10px)'}} className={`bi ${collapse ? 'bi-list' : 'bi-x-lg'} sidebar-button rounded my-5 p-2`}></i>
+            onMouseEnter={() => setCollapse(false)}
+            onMouseLeave={() => setCollapse(true)}
+            style={{ 
+            width: sidebarWidth,
+            position: sidebarWidth === '100%' ? 'absolute' : 'relative',
+            zIndex: 1050,
+            height: '100vh',
+             "--sidebar": sidebarWidth } as React.CSSProperties}>
+          <i  onClick={() => setCollapse(!collapse)}
+            
+          style={{backdropFilter:'blur(10px)'}} className={`bi ${collapse ? 'bi-list' : 'bi-x-lg'} sidebar-button rounded my-5 p-2`}></i>
                
           <ul className="list-unstyled d-flex flex-column align-items-start my-3">
             {sidebar.map((item, index) =>{

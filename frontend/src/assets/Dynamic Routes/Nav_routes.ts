@@ -5,7 +5,15 @@ export const Nav_Route:NavType[]=[
         Name: "Home"
     },
     {
-        links: "about",
+        links: "services",
+        Name: "Services"
+    },  
+    {
+        links: "blogs",
+        Name: "Blogs"
+    },
+    {
+        links: "",
         Name: "About Us",
         Dropdown:[
             {
@@ -18,13 +26,19 @@ export const Nav_Route:NavType[]=[
             }
         ]
     },
-    {
-        links: "blogs",
-        Name: "Blogs"
-    },
-    {
-        links: "services",
-        Name: "Services"
+     {
+        links: "",
+        Name: "More",
+        Dropdown:[
+            {
+                links: "Login",
+                Name: "Login"
+            },
+            {
+                links: "SignUp",
+                Name: "SignUp"
+            }
+        ]
     },
     {
         links: "contact",

@@ -6,18 +6,61 @@ interface Blog{
     title:string;
     blog_content:string;
     blogimg:FileList | string;
+    tags?:string[];
 }
 function CreateBlogs() {
     const {id}=useParams();
     const edit=Boolean(id)
-      const { register, handleSubmit, formState: { errors },reset } = useForm<Blog>({
+      const { register, handleSubmit, formState: { errors },reset,watch } = useForm<Blog>({
         mode: "onBlur"
     })
+    const [title,content]=watch(['title','blog_content'])
+    const [tags, setTags] = useState<string[]>([]);
+
+    const tagSuggestion=async()=>{
+        const ai = (window as any).ai || (window as any).LanguageModel;
+        if(!ai){
+            return ['redis']
+        };
+        if(ai.available==='readily'||ai.available==='available'){
+        const session = await ai.create({
+        samplingMode: 'slightly-creative',
+        expectedOutputs: [{ type: "text", languages: ["en"] }],
+        expectedInputLanguages: [{ type: "text", languages: ["en"] }],
+        temperature: 0.35,
+        topK: 3,                            
+      systemPrompt: "You are a helpful assistant that extracts tags from blog posts. Return only a comma-separated list of 8-10 keywords."
+    });
+    const promptText = `
+      Title: ${title}
+      Content: ${content.substring(0, 1000)}
+      Extract 8 to 10 relevant topic tags for this blog post.`;
+    const response = await session.prompt(promptText);
+
+    const tags = response.split(',').map((tag: string) => tag.trim()).filter(Boolean);
+
+    session.destroy();
+    return tags;
+        };
+        return ['redix'];
+    }
+
+    useEffect(() => {
+      const  timer=setTimeout(() => {
+            tagSuggestion().then((tags) => {
+                setTags(tags);
+            }).catch((error) => {
+                console.error('Error fetching tags:', error);
+            });
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, [title, content]);
 
 const postdata=(data:Blog)=>{
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("blog_content", data.blog_content);
+    formData.append("tags", data.tags?.join(', ') || '');
     if (data.blogimg instanceof FileList && data.blogimg.length > 0) {
       formData.append("blogimg", data.blogimg[0]);
     } else if (typeof data.blogimg === 'string') {
@@ -86,6 +129,11 @@ useEffect(()=>{
                         ></textarea>
                         {errors.blog_content && <p>Enter Blog Content</p>}
                     </section>
+                    <div className="mb-3">
+                        {tags.map((tag, index) => (
+                            <span key={index} className="badge bg-primary me-2">{tag}</span>
+                        ))}
+                    </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </section>

@@ -4,15 +4,21 @@ import { useForm } from 'react-hook-form'
 import toast, {Toaster } from 'react-hot-toast';
 import { useParams, useNavigate } from 'react-router-dom';
 interface Users{
-    userType: 'employee' | 'admin'|'supplier'|'customer';
+    userType: 'employee' | 'admin'|'supplier'|'customer',
+    main?: boolean;
 }
-function AddUser({userType}:Users) {
+function AddUser({userType, main=false}:Users) {
     const { register, handleSubmit, formState: { errors }, watch, setValue,reset } = useForm({
         mode: "onBlur"
     })
     const navigate=useNavigate();
-
-    const {id}=useParams()
+const closerModal = () => {
+  if (main) {
+    navigate(-1);
+  } else {
+    navigate('/dashboard/userList');
+  }
+};    const {id}=useParams()
     const edit=Boolean(id)
     const isSameAddress = watch("isSameAddress");
     const gst = watch('userType') === 'gst';
@@ -121,7 +127,7 @@ function AddUser({userType}:Users) {
                     <section className="modal-content">
                         <section className="modal-header">
                             <h5 className="modal-title">{`${edit? "Edit" : "Add"} ${userType}`}</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={()=>navigate('/dashboard/userList')} aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={closerModal} aria-label="Close"></button>
                         </section>
                         <form onSubmit={handleSubmit(submitData)}>
                         <section className="modal-body">
@@ -194,13 +200,13 @@ function AddUser({userType}:Users) {
                                         </section>
                                     </section>
                                 </section>
-                                {userType !== 'employee'  && gstComponent()}
+                                {userType !== 'employee' && !main  && gstComponent()}
 
                                 {userType === 'employee' && employeeComponent()}
                            
                         </section>
                         <section className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>navigate('/dashboard/userList')}>Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closerModal}>Close</button>
                             <button type="submit" className="btn btn-primary text-Capitalize">{edit ? "Update" : "Add"} {userType}</button>
                         </section>
                          </form>

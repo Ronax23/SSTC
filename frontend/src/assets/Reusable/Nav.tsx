@@ -5,7 +5,7 @@ import type { NavType } from '../Loading/Types.ts';
 
 function Nav() {
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const [drop,setdrop]=useState<boolean>(false);
+  const [drop,setdrop]=useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,14 +33,14 @@ function Nav() {
        {Nav_Route.map((item:NavType, index:number) => (
          item.Dropdown ? (
             <li className="nav-item dropdown p-2" key={index}
-              onMouseEnter={()=>setdrop(true)}
-          onMouseLeave={()=>setdrop(false)}>
-          <Link className={`nav-link dropdown-toggle  ${drop?"show":""} `} to={item.links} role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              onMouseEnter={()=>setdrop(index)}
+          onMouseLeave={()=>setdrop(null)}>
+          <Link className={`nav-link dropdown-toggle  ${drop==index?"show":""} `} to={item.links} role="button"  aria-expanded="false"
         
           >
             {item.Name}
           </Link>
-          <ul className={`dropdown-menu ${drop?"show":""}`}>
+          <ul className={`dropdown-menu ${drop===index?"show":""}`}>
             {item.Dropdown.map((subItem: any) => (
               <li key={subItem.id}>
                 <Link className="dropdown-item" to={subItem.links}>{subItem.Name}</Link>

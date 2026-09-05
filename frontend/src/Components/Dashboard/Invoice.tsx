@@ -173,7 +173,7 @@ function Invoice({Usetype}: {Usetype: 'stock' | 'invoice' | 'custom'}) {
   const grandTotal = subtotal + totalTax;
 
   return (
-    <div className="container-fluid py-4 position-relative">
+    <div className="container-fluid py-4">
           <Toaster />
       {pendingDuplicate && (
         <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50" style={{ zIndex: 1050 }}>
@@ -196,7 +196,7 @@ function Invoice({Usetype}: {Usetype: 'stock' | 'invoice' | 'custom'}) {
       )}
 
       <form onSubmit={handleSubmit(onSubmitForm)}>
-        <div className="row mb-4 p-3 bg-light rounded shadow-sm align-items-center">
+        <div className="row mb-4  bg-light rounded shadow-sm align-items-center">
           <div className="col-12 mb-2 d-flex justify-content-between">
             <h5 className="fw-bold text-primary mb-0">
               {isStock ? '📦 Stock Inward Entry' : `🧾 Invoice Sales (${watchInvoiceType} mode)`}

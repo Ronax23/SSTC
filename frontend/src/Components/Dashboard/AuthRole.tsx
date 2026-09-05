@@ -7,10 +7,10 @@ const [role, setUser] = useState<String>("all");
   const roles=()=>{
     axois.get('/api/user/role').then((res) => {
         setUser(res.data.role);
-        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+      }).finally(() => {
         setLoading(false);
       });
   }
