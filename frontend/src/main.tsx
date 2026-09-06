@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
 const AnimatedCursor=lazy(()=> import('./assets/Reusable/AnimatedCursor.tsx'));
 const LandingPage=lazy(()=> import ('./Components/LandingPage.tsx'));
@@ -12,10 +13,9 @@ const MainPage= lazy(()=>import ('./Components/MainPage.tsx'));
 const OurTeam= lazy(()=>import ('./Components/OurTeam.tsx'));
 const Terms= lazy(()=>import ('./Components/Terms.tsx'));
 const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import InvestDash from './Components/Dashboard/InvestDash.tsx';
-import BlogList from './Components/Dashboard/BlogList.tsx';
-import Attendance from './Components/Dashboard/Attendance.tsx';
+const InvestDash= lazy(()=>import ('./Components/Dashboard/InvestDash.tsx'));
+const BlogList= lazy(()=>import ('./Components/Dashboard/BlogList.tsx'));
+const Attendance= lazy(()=>import('./Components/Dashboard/Attendance.tsx'));
 const ResetPass=lazy(()=> import('./Components/Login/ResetPass.tsx'));
 const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
 const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
@@ -23,7 +23,6 @@ const Dashboard =lazy(()=> import ('./Components/Dashboard/Dashboard.tsx'));
 const AddUser=lazy(()=>import  ('./Components/Dashboard/AddUser.tsx'));
 const Invoice= lazy(()=>import ('./Components/Dashboard/Invoice.tsx'));
 const CreateBlogs =lazy(()=>import ('./Components/Dashboard/CreateBlogs.tsx'))
-const Register=lazy(()=> import('./Components/Login/Register.tsx'));
 const Login=lazy(()=> import('./Components/Login/Login.tsx'));
 const Services= lazy(()=>import ('./Components/Services.tsx'));
 const UserList=lazy(()=> import('./Components/Dashboard/userList.tsx'));
