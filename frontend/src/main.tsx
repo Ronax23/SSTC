@@ -15,6 +15,7 @@ const Workshop= lazy(()=>import ('./Components/Workshop.tsx'));
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import InvestDash from './Components/Dashboard/InvestDash.tsx';
 import BlogList from './Components/Dashboard/BlogList.tsx';
+import Attendance from './Components/Dashboard/Attendance.tsx';
 const ResetPass=lazy(()=> import('./Components/Login/ResetPass.tsx'));
 const LoaderError=lazy(()=> import ('./assets/Reusable/LoaderError.tsx'));
 const DashboardHome =lazy(()=>import  ( './Components/Dashboard/dashboardHome.tsx'));
@@ -50,6 +51,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="addAdmin/:id" element={<AddUser userType={"admin"} />} />
           <Route path="addSupplier" element={<AddUser userType={"supplier"} />} />
           <Route path="addSupplier/:id" element={<AddUser userType={"supplier"} />} />
+          <Route path='Attendance' element={<Attendance />} />
 
           <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
           <Route path="Investments" element={<InvestDash/>}></Route>

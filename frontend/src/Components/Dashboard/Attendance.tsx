@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useLayoutEffect, useState} from 'react'
 interface Attendance {
     date:string;
     checkin_time:string;
@@ -7,13 +7,20 @@ interface Attendance {
 }
 function Attendance() {
   const [status, setStatus] = useState<String>('Not Checked In');
-
+  const [time, setTime] = useState<String>(new Date().toLocaleTimeString());
+   useLayoutEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
     <div className="container">
         <div className="row">
             <div className="col-12">
-                <div className="col-lg-4">
+             <div className="row mb-5">
+                   <div className="col-lg-4">
                     <h2>Total Days</h2>
                 </div>
                 <div className="col-lg-4">
@@ -22,11 +29,12 @@ function Attendance() {
                 <div className="col-lg-4">
                     <h2>Present Days</h2>
                 </div>
+             </div>
             </div>
             <div className="col-12">
                 <h2>Attendance</h2>
                 <h5>{new Date().toLocaleDateString()}</h5>
-                <h6>Time: {new Date().toLocaleTimeString()}</h6>
+                <h6>Time: {time}</h6>
                 <p> <span className={`badge 
                     ${status === 'Checked In' ? 'bg-success' :
                 status === 'On Break' ? 'bg-warning text-dark' :
