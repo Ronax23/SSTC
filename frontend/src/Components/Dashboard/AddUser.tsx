@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast, {Toaster } from 'react-hot-toast';
 import { useParams, useNavigate } from 'react-router-dom';
+import LoaderError from '../../assets/Reusable/LoaderError';
 interface Users{
     userType: 'employee' | 'admin'|'supplier'|'customer',
     main?: boolean;
@@ -18,7 +19,9 @@ const closerModal = () => {
   } else {
     navigate('/dashboard/userList');
   }
-};    const {id}=useParams()
+};   
+    const [loading, setloading] = useState(false);
+    const {id}=useParams()
     const edit=Boolean(id)
     const isSameAddress = watch("isSameAddress");
     const gst = watch('userType') === 'gst';
@@ -95,7 +98,16 @@ const closerModal = () => {
     }
 
     const fetchdat=()=>{
-        axios.get(`${import.meta.env.VITE_API_URL}/getUser/${id}`).then(res => {reset(res.data)}).catch(err => console.log(err))
+        setloading(true)
+        axios.get(`${import.meta.env.VITE_API_URL}/getUser/${id}`).then(res => {
+           if (res.data && typeof res.data === 'object' && !Array.isArray(res.data)) {
+            reset(res.data);
+          } else {
+            toast.error('Invalid user data received');
+            closerModal();
+            console.error('Unexpected response:', res.data);
+          }
+        }).catch(() => toast.error("Failed to fetch user data")).finally(() => setloading(false))
     }
 
     const submitData = (data: any) => {
@@ -118,7 +130,9 @@ const closerModal = () => {
             setValue('firmState', watch("state"));
         }
     }, [isSameAddress, watch("address"), watch("state"), setValue]);
-
+ if(loading){
+        return <div><LoaderError loading={true}/></div>
+    }
     return (
         <>
         <Toaster position="top-right" />

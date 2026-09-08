@@ -8,29 +8,20 @@ interface Blog{
 }
 function BlogList() {
     const [isPressed, setIsPressed] = useState(false);
-  const [blogs,setBlogs]=useState<Blog[]>([]);
+    const [blogs,setBlogs]=useState<Blog[]>([]);
     const [page,setPage]=useState<number>(1);
     const [blogname,setBlogname]=useState<string>('');
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState('');
   const getBlogs=()=>{
     setLoading(true);
-    axios.get(`${import.meta.env.VITE_API}blogs?page=${page}`,{withCredentials:true}).then((res)=>{
+    axios.get(`${import.meta.env.VITE_API}blogs${search?`/search?query=${search}`:''}?page=${page}`,{withCredentials:true}).then((res)=>{
         setBlogs(res.data.blogs || []);
     }).catch((err)=>{
         console.log(err);
     }).finally(() => {
         setLoading(false);
       });
-  }
-  const searchBlogs=(title:string)=>{
-    setLoading(true);
-    axios.get(`${import.meta.env.VITE_API}blogs/search?query=${title}`,{withCredentials:true}).then((res)=>{
-        setBlogs(res.data.blogs || []);
-        setLoading(false);
-    }).catch((err)=>{
-        console.log(err);
-        setLoading(false);
-    })
   }
   useEffect(()=>{
     getBlogs();
@@ -53,7 +44,7 @@ useEffect(() => {
             <div className="col-12"><h1>Blog List</h1></div>
             <div className="col-lg-4 col-md-6 position-relative">
                     <input type="text" className="form-control" placeholder="Search..." onChange={(e)=>setBlogname(e.target.value)} />
-                    <i className="bi bi-search position-absolute top-0 end-0 border-0 p-2 me-2"  onClick={()=>{searchBlogs(blogname)}}
+                    <i className="bi bi-search position-absolute top-0 end-0 border-0 p-2 me-2"  onClick={()=>{setSearch(blogname)}}
                     
                     style={{ 
     cursor: 'pointer',

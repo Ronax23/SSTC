@@ -2,15 +2,19 @@ import {useState, useEffect } from 'react'
 import LoaderError from '../../assets/Reusable/LoaderError';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 function userList() {
 
+    const [isPressed, setIsPressed] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [duser,setUser]=useState<any>({});
     const [data,setData]=useState<any>([]);
     const [page,setPage]=useState(1);
     const [total,setTotal]=useState(0);
     const [loading,setLoading]=useState(true);
+    const [search,setSearch]=useState<string>('');
+    const [searchUser, setSearchUser] = useState<string>('');
 
     const delUser=async(id:string)=>{
         axios.delete(`http://localhost:8000/userlist/${id}`).then((res)=>{
@@ -26,19 +30,28 @@ function userList() {
 
 
 
-    const userData= async()=>{
-        setLoading(true);
-        await fetch(`http://localhost:8000/userlist?page=${page}`).then((res)=>{
-            return res.json();
-        }).then((data)=>{
-            setTotal(data.total);
-            setData(data.data);
-            setLoading(false);
-        }).catch((err)=>{
-            console.log(err);
-        })
-
+   const userData = async () => {
+    setLoading(true);
+    
+    const searchParam = search ? `/search?query=${encodeURIComponent(search)}&` : '?';
+    
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/userlist${searchParam}page=${page}`
+      );
+      
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      const result = await res.json();
+      setTotal(result.total);
+      setData(result.data || []);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      toast.error('Failed to load users. Is backend running?');
+    } finally {
+      setLoading(false);
     }
+  };
 
     useEffect(()=>{
         userData()
@@ -52,6 +65,29 @@ function userList() {
     <>
     <Toaster/>
     <div className="tablesdat">
+      <div className="row justify-content-end">
+          <div className="col-12"><h1>User List</h1></div>
+            <div className="col-lg-4 col-md-6 position-relative mb-3">
+                    <input type="text" className="form-control" placeholder="Search..." onChange={(e)=>setSearch(e.target.value)} />
+                    <i className="bi bi-search position-absolute top-0 end-0 border-0 p-2 me-2"  onClick={()=>{userData(); setSearchUser(search)}}
+                    
+                    style={{ 
+    cursor: 'pointer',
+    borderRadius: '50%', // Ensures the background blur is circular
+    transition: 'background-color 0.15s ease, backdrop-filter 0.15s ease, transform 0.1s ease',    
+    backgroundColor: isPressed ? 'rgba(255, 255, 255, 0.2)' : 'transparent', 
+    backdropFilter: isPressed ? 'blur(8px)' : 'none',
+    transform: isPressed ? 'scale(0.92)' : 'scale(1)',     // Slight push-down feel
+  }}
+onMouseDown={() => setIsPressed(true)}
+  onMouseUp={() => setIsPressed(false)}
+  onMouseLeave={() => setIsPressed(false)}
+  onTouchStart={() => setIsPressed(true)}
+  onTouchEnd={() => setIsPressed(false)}
+                    
+                    />
+                </div>
+      </div>
             <table className="table">
         <thead>
             <tr>
@@ -73,8 +109,20 @@ function userList() {
                 <td>{user.gender}</td>
                 <td>{user.bloodGroup}</td>
                 <td>{user.age}</td>
-                <td><button onClick={() =>{setUser(user._id); setShowModal(true);}}>Delete</button></td>
-            </tr>
+                <td><div className="dropdown">
+  <button
+    className="btn btn-sm btn-light"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >⋮</button>
+  <ul className="dropdown-menu">
+    <li><button className="dropdown-item"> View</button></li>
+<li>  <Link className="dropdown-item" to={`/dashboard/editUser/${user._id}`}> Edit</Link></li>
+<li><button className="dropdown-item text-danger" onClick={() => {
+      setUser(user._id);
+      setShowModal(true);
+    }}> Delete</button></li>
+  </ul></div></td> </tr>
         ))}
     </tbody>
 </table>
@@ -82,9 +130,9 @@ function userList() {
     <div className="pagination">
       
   <ul className="pagination">
-    <li className="page-item" onClick={() => setPage(page>1?page - 1:1)}> <span className='page-link' aria-hidden="true">&laquo;</span></li>
+    <li className={`page-item ${page === 1 ? 'disabled' : ''}`} onClick={() => setPage(page>1?page - 1:1)}> <span className='page-link' aria-hidden="true">&laquo;</span></li>
     <li className="page-item"><span className="page-link active">{page}</span></li>
-    <li className="page-item" onClick={() => setPage(Math.min(page + 1, total))}><span className='page-link' aria-hidden="true">&raquo;</span></li>
+    <li className={`page-item ${page >= total ? 'disabled' : ''}`} onClick={() => setPage(Math.min(page + 1, total))}><span className='page-link' aria-hidden="true">&raquo;</span></li>
   </ul>
 
     </div>
