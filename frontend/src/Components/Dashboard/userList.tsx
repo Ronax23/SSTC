@@ -14,7 +14,7 @@ function userList() {
     const [total,setTotal]=useState(0);
     const [loading,setLoading]=useState(true);
     const [search,setSearch]=useState<string>('');
-    const [searchUser, setSearchUser] = useState<string>('');
+    // const [searchUser, setSearchUser] = useState<string>('');
 
     const delUser=async(id:string)=>{
         axios.delete(`http://localhost:8000/userlist/${id}`).then((res)=>{
@@ -137,7 +137,7 @@ onMouseDown={() => setIsPressed(true)}
 
     </div>
 
-{showModal && <div className="modal" style={{display:"block"}} onClick={(e) => setShowModal(false)}>
+{showModal && <div className="modal" style={{display:"block"}} onClick={() => setShowModal(false)}>
   <div className="modal-dialog">
     <div className="modal-content" onClick={(e)=>e.stopPropagation()}>
       <div className="modal-header">
