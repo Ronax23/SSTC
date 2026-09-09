@@ -14,7 +14,7 @@ function userList() {
     const [total,setTotal]=useState(0);
     const [loading,setLoading]=useState(true);
     const [search,setSearch]=useState<string>('');
-    // const [searchUser, setSearchUser] = useState<string>('');
+    const [searchUser, setSearchUser] = useState<string>('');
 
     const delUser=async(id:string)=>{
         axios.delete(`http://localhost:8000/userlist/${id}`).then((res)=>{
@@ -33,7 +33,7 @@ function userList() {
    const userData = async () => {
     setLoading(true);
     
-    const searchParam = search ? `/search?query=${encodeURIComponent(search)}&` : '?';
+    const searchParam = search ? `/search?query=${encodeURIComponent(searchUser)}&` : '?';
     
     try {
       const res = await fetch(
