@@ -1,7 +1,8 @@
 import userModel from '../../models/User.mjs';
 import loginModel from '../../models/login.mjs';
 import bcrypt from 'bcrypt';
-
+import sendMail from '../../utils/sendMail.mjs';
+import mongoose from 'mongoose';
 const userAdd =    async(req,res)=>{
     const {id}=req.params;
     const edit=Boolean(id);
@@ -10,7 +11,7 @@ const userAdd =    async(req,res)=>{
         address, state, ...datas
       } = req.body; 
     const session=mongoose.startSession();
-    session.startTransaction();
+   await session.startTransaction();
    try
    {
     if(edit){

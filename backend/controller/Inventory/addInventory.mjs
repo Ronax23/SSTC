@@ -13,7 +13,7 @@ const addStock = async (req, res) => {
     );
 }
      if (!names) {
-        await Inventory.insert({
+        await Inventory.create({
             name: name,
             quantity: quantity,
             price: purchasePrice,
