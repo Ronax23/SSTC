@@ -33,7 +33,7 @@ function userList() {
    const userData = async () => {
     setLoading(true);
     
-    const searchParam = search ? `/search?query=${encodeURIComponent(search)}&` : '?';
+    const searchParam = search ? `/search?query=${encodeURIComponent(searchUser)}&` : '?';
     
     try {
       const res = await fetch(
@@ -137,7 +137,7 @@ onMouseDown={() => setIsPressed(true)}
 
     </div>
 
-{showModal && <div className="modal" style={{display:"block"}} onClick={(e) => setShowModal(false)}>
+{showModal && <div className="modal" style={{display:"block"}} onClick={() => setShowModal(false)}>
   <div className="modal-dialog">
     <div className="modal-content" onClick={(e)=>e.stopPropagation()}>
       <div className="modal-header">
