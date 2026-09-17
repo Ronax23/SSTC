@@ -1,4 +1,5 @@
 import redisClient from "../config/redisConnect.mjs";
+import sendMail from "../services/nodemailer.mjs";
 
 const rateLimiter = async (req, res, next) => {
     const ip = req.ip;
@@ -38,6 +39,11 @@ const rateLimiter = async (req, res, next) => {
 
         if (email && emailCount && parseInt(emailCount) >= EMAIL_LIMIT) {
             const timer = await redisClient.ttl(emailKey);
+             sendMail({
+                to:email,
+                type: "ACCOUNT_LOCKED",
+                attachments: []
+            },res); 
             return res.status(200).json({ message: `Account Locked. Try after ${Math.ceil(timer / 60)} mins`, status: 429 });
         }
 

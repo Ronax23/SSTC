@@ -1,8 +1,8 @@
-export const getAccountLockedTemplate = (name, unlockTime, supportEmail = "support@yourapp.com") => `
+export const getAccountLockedTemplate = (unlockTime, supportEmail) => `
   <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; color: #334155;">
     <h2 style="color: #dc2626; text-align: center; margin-top: 0; font-size: 20px;">Account Temporarily Locked</h2>
     
-    <p style="font-size: 15px; margin-top: 0;">Hi <strong>${name}</strong>,</p>
+    <p style="font-size: 15px; margin-top: 0;">Hi,</p>
     
     <p style="font-size: 15px; line-height: 1.5;">
       Your account has been temporarily locked due to multiple incorrect password attempts. This is a security measure to protect your data.
