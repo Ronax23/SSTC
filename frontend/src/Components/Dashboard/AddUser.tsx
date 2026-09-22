@@ -25,7 +25,7 @@ const closerModal = () => {
     const edit=Boolean(id)
     const isSameAddress = watch("isSameAddress");
     const gst = watch('userType') === 'gst';
-
+    const roles=["customer","manager","cashier","sales-man","helper","accounts","engineer","back-office","security","cleaner","worker"]
 
     const gstComponent=()=>{
         return (
@@ -76,14 +76,11 @@ const closerModal = () => {
                                 <div className="">
                                     <label htmlFor="">Employee Type</label>
                                     <select className="form-select mt-2" {...register('empType', { required: true })}>
-                                        <option value="manager">Manager</option>
-                                        <option value="cashier">Cashier</option>
-                                        <option value="sales-men">Sales Man</option>
-                                        <option value="helper">Helper</option>
-                                        <option value="accounts">Accountant</option>
-                                        <option value="engineer">Engineer</option>
-                                        <option value="worker">Worker</option>
-                                        <option value="operator">Operator</option>
+                                        {roles.map(role => (
+                                            <option key={role} value={role}>
+                                                {role.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}
+                                            </option>
+                                        ))}
                                     </select>
                                     {errors.empType && <p className="text-danger">Employee Type is required</p>}
                                 </div>

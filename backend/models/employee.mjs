@@ -1,10 +1,23 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import {commonSchema} from '../models/User.mjs'
 
  const employeeSchema=Schema({
     ...commonSchema,
-    role:{type:String,enum:["admin","customer","manager","clerk","workers"],default:"user"},
+    role:{type:String,
+      enum:[
+         "customer",
+         "manager",
+         "cashier",
+         "sales-man",
+         "helper",
+         "accounts",
+         "engineer",
+         "backoffice",
+         "security",
+         "cleaner",
+         "worker"]
+      ,default:"customer"},
     salary:{type:Number, min:500,required:true}
  },{timestamps: true})
-
- export default employeeSchema
+const employeeModel=mongoose.model('employee',employeeSchema)
+ export default employeeModel
