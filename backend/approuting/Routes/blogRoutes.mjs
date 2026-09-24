@@ -9,10 +9,12 @@ const blogroutes = Router();
 
 
 blogroutes.get("/",viewBlog);
-
 blogroutes.get("/:id",viewBlog);
 blogroutes.post('/tagsgen',generateTags)
-
+blogroutes.put("/edit/:id",auth,upload.fields([{
+    name:"blogimg",
+    maxCount:1
+}]),viewBlog);
 blogroutes.post("/createblog",auth,upload.fields([{
     name:"blogimg",
     maxCount:1
