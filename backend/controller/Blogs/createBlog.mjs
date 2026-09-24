@@ -2,7 +2,7 @@ import blogs from "../../models/blogs.mjs";
 import uploadImage from "../../utilities/cloudinary.mjs";
 
 const createBlog = async(req,res) => {
-    const {title,content}=req.body;
+    const {title,content,tags}=req.body;
     const blogImg= req.files?.blogimg[0]?.path;
     try{
     if(!title || !content){
@@ -14,14 +14,16 @@ const createBlog = async(req,res) => {
        res.status(200).json({message:"No Image Found"})
     }
     const fileURL=await uploadImage(blogImg);
-    if(!fileURL){res.status(200).json({message:"Image Is required"})}
-    const newBlog = await blogs.insertOne({
+    if(!fileURL){return res.status(200).json({message:"Image Is required"})}
+   let parsedTags = tags.split(",").map((tag) => tag.trim()).filter(Boolean);
+    const newBlog = await blogs({
         title,
         content,
+        tags:parsedTags,
         img:fileURL.url,
     })
     await newBlog.save();
-    res.status(200).json({message:"Blog created successfully",status:200});
+    res.status(200).json({message:"Blog created successfully",status:201});
     }
     catch(err){
         res.status(200).json(

@@ -1,9 +1,9 @@
- import loginModel from "../../models/login.mjs";
+import loginModel from "../../models/login.mjs";
 import sendEmail from "../../services/nodemailer.mjs";
 import redisClient from "../../config/redisConnect.mjs";  
 import sendMail from "../../services/nodemailer.mjs";
 
- const passReset=    async(req,res)=>{
+ const passReset=async(req,res)=>{
     const {names}=req.body;  
     const OTPTime=10*60;
     if(!names){
@@ -17,7 +17,7 @@ import sendMail from "../../services/nodemailer.mjs";
     if(user){
         const otp=Math.floor(100000 + Math.random() * 900000);
         await sendEmail(user.email,otp,user.username);
-        await redisClient.setEx(user.email, OTPTime, otp);
+        await redisClient.setEx(`otp:${email}`, OTPTime, otp);
         sendMail({
             to: user.email,
             type: "OTP",

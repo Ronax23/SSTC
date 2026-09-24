@@ -3,6 +3,7 @@ import { upload } from '../../middlewares/multer.mjs';
 import viewBlog from "../../controller/Blogs/viewBlog.mjs"
 import createBlog from '../../controller/Blogs/createBlog.mjs';
 import auth from '../../middlewares/auth.mjs';
+import generateTags from '../../controller/Blogs/tagsGenAI.mjs'
 
 const blogroutes = Router();
 
@@ -10,6 +11,7 @@ const blogroutes = Router();
 blogroutes.get("/",viewBlog);
 
 blogroutes.get("/:id",viewBlog);
+blogroutes.post('/tagsgen',generateTags)
 
 blogroutes.post("/createblog",auth,upload.fields([{
     name:"blogimg",

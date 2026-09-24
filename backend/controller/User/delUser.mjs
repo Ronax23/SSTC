@@ -19,7 +19,6 @@ const delUser=    async(req,res)=>{
 }
 catch(err){
     res.status(200).json({message:"Server error",error:err.message, errorcode:err.code});       
-   
 }
 }
 export default delUser;

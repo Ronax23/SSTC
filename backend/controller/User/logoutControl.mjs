@@ -1,7 +1,7 @@
  const logout=async(req,res)=>{
     if(!req.cookies.token)
     {
-        res.status(200).json({message:"No File Found",status:500})
+        res.status(200).json({message:"No Token",status:500})
     }
     try
     {
