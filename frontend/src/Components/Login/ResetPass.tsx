@@ -44,10 +44,11 @@ useEffect(() => {
         const verifyCap = getValues("capcha");
         if (!isValid) return;
         const data={email:getValues("email")};
+        console.log(data)
        if(verifyCap===regen)
        {
-         axios.post(`${import.meta.env.VITE_API}forgetpass`,data).then((res)=>{
-            if(res.data.userExists){
+         axios.post(`${import.meta.env.VITE_API}users/forgot-password`,data).then((res)=>{
+            if(res.data.userFound==true){
                 toast.success(res.data.message);
                 setStep(2);
              }
@@ -66,10 +67,15 @@ useEffect(() => {
         const isValid = trigger("otp");
         if (!isValid) return;
         const data={email:getValues("email"),otp:getValues("otp")};
-        axios.post(`${import.meta.env.VITE_API}verify-otp`,data).then((res)=>{
-            if(res.data.otpValid){
+        axios.post(`${import.meta.env.VITE_API}users/verify-otp`,data).then((res)=>{
+            if(res.data.verified){
                 toast.success(res.data.message);
                 setStep(3);
+             }
+             else if(res.data.expired)
+             {
+                toast.error(res.data.message)
+                navigateDashboard(-1)
              }
              else{
                 toast.error(res.data.message);
@@ -83,12 +89,17 @@ useEffect(() => {
         const isValid = trigger("password");
         if (!isValid) return;
         const data={email:getValues("email"),password:getValues("password"),otp:getValues("otp")};
-          axios.patch("http://localhost:8000/reset-password",data).then((res)=>{
-            if(res.data.login){
+          axios.patch(`${import.meta.env.VITE_API}users/reset-password`,data).then((res)=>{
+            if(res.data.verified){
                 toast.success(res.data.message);
                 setTimeout(()=>{
                     navigateDashboard("/login");
                 },2000)
+             }
+             else if(res.data.verified==false)
+             {
+                toast.error(res.data.message);
+                navigateDashboard("/reset-password")
              }
              else{
                 toast.error(res.data.message);

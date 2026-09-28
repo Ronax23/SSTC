@@ -1,5 +1,6 @@
 import blogs from "../../models/blogs.mjs";
 import uploadImage from "../../utilities/cloudinary.mjs";
+import deleteCloud from "../../utilities/deleteCloudnary.mjs";
 
 const createBlog = async(req,res) => {
     const id=req.params.id;
@@ -10,13 +11,20 @@ const createBlog = async(req,res) => {
     if(id)
     {
         const updateData = {title,content,tags: parsedTags};
-if (blogImg) {
-const fileURL = await uploadImage(blogImg);
-updateData.img = fileURL.url;
-}
-        const blogres= await blogs.findByIdAndUpdate(id,{updateData},{new: true});
-        if(!blogres) return res.status(200).json({mesage:'Error Has Occured', status:400});
-       return res.status(200).json({success: true,status:200});
+        const blogfetch= await blogs.findById(id)
+        try{
+         if(!blogfetch) return res.status(200).json({message:'No Blog Found',status:300})
+         if (blogImg) {
+                const fileURL = await uploadImage(blogImg);
+                if(blogfetch.img) await deleteCloud(blogfetch.img)
+                updateData.img = fileURL.url;
+            }
+                const blogres= await blogs.findByIdAndUpdate(id,{updateData},{new: true});
+                if(!blogres) return res.status(200).json({mesage:'Error Has Occured', status:400});
+            return res.status(200).json({success: true,status:200});
+                    } catch(err){
+            return res.status(200).json({message:err,status:400})
+        }       
     }
     try{
     if(!title || !content){

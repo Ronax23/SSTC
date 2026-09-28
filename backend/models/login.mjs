@@ -1,6 +1,6 @@
 import mongoose,{Schema} from "mongoose";
 const ALL_VALID_ROLES = [
-  "superAdmin", "admin", "supplier", "manager", "cashier", 
+  "superadmin", "admin", "supplier", "manager", "cashier", 
   "sales-man", "helper", "accounts", "engineer", "backoffice", 
   "security", "cleaner", "worker", "customer"
 ];

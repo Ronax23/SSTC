@@ -56,12 +56,8 @@ const sendMail = async ({to,type,data,attachments},res) => {
       attachments: attachments || [],
     }
     await transporter.sendMail(mailOptions);
-    res.status(200).json({
-      success: true, 
-      message: `${type} email sent successfully` });
   } catch (error) {
     console.error("Error sending email:", error);
-    res.status(500).json({ message: "Error sending email" });
   }
 };
 export default sendMail;

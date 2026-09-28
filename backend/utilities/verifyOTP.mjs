@@ -12,11 +12,11 @@ const verifyOTP = async (req, res) => {
     const storedOTP = await redisClient.get(`otp:${email}`);
 
     if (!storedOTP || storedOTP !== otp.trim()) {
-      return res.status(200).json({ message: "Invalid or expired OTP", status:400 });
+      return res.status(200).json({ message: "Invalid or expired OTP", status:400,expired:true });
     }
     await redisClient.setEx(`reset_verified:${email}`, 600, "true");
     await redisClient.del(`otp:${email}`);
-    return res.status(200).json({ message: "OTP verified successfully. Proceed to reset password." });
+    return res.status(200).json({ message: "OTP verified successfully. Proceed to reset password.",verified:true });
   } catch (err) {
     return res.status(500).json({ message: "Error verifying OTP", error: err.message });
   }

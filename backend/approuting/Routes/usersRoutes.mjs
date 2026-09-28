@@ -7,17 +7,18 @@ import changePass from '../../controller/User/changepass.mjs'
 import passReset from '../../controller/User/passReset.mjs'
 import {newPass} from '../../controller/User/newPass.mjs'
 import verifyOTP from '../../utilities/verifyOTP.mjs'
+import { upload } from '../../middlewares/multer.mjs';
 const userRoute=Router();
 
-userRoute.post("/add",userAdd);
+userRoute.post("/add",upload.fields([{name:'profileIMG',maxCount:1}]),userAdd);
 userRoute.put("/update/:id",userAdd);
 userRoute.delete("/delete/:id",delUser);
 userRoute.get("/list",userList);
 userRoute.delete("/logout",logoutControl)
 userRoute.put("/passwordChange",changePass)
-userRoute.post("/user/forgot-password", passReset);
-userRoute.post("/user/verify-otp", verifyOTP);
-userRoute.put("/user/reset-password", newPass);
+userRoute.post("/forgot-password", passReset);
+userRoute.post("/verify-otp", verifyOTP);
+userRoute.patch("/reset-password", newPass);
 userRoute.get("/me",(req,res)=>{
    try
    {

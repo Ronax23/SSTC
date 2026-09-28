@@ -1,7 +1,7 @@
 import  {v2 as clouds} from 'cloudinary';
 import fs from 'fs';
-
-
+import {configDotenv} from 'dotenv'
+configDotenv();
 clouds.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -24,10 +24,16 @@ const uploadImage = async (imagePath) => {
       }
       const result = await clouds.uploader.upload(imagePath, options);
       console.log(result);
-      return result;
+      return result.secure_url;
     } catch (error) {
-        fs.unlink(imagePath);
       console.error(error);
+    }
+    finally{
+      if (imagePath && fs.existsSync(imagePath)) {
+        fs.unlink(imagePath, (err) => {
+          if (err) console.error("Failed to delete local temp file:", err);
+        });
+      }
     }
 };
 
