@@ -5,9 +5,13 @@ import deleteCloud from "../../utilities/deleteCloudnary.mjs";
 const createBlog = async(req,res) => {
     const id=req.params.id;
     const {title,content,tags}=req.body;
-    const blogImg= req.files?.blogimg[0]?.path;
-    let parsedTags = tags?.split(",").map((tag) => tag.trim()).filter(Boolean);
-
+    const blogImg= req.files?.img[0]?.path;
+    let parsedTags = [];
+    if (typeof tags === 'string') {
+        parsedTags = tags.split(",").map((tag) => tag.trim()).filter(Boolean);
+    } else if (Array.isArray(tags)) {
+        parsedTags = tags;
+    }
     if(id)
     {
         const updateData = {title,content,tags: parsedTags};
@@ -16,10 +20,10 @@ const createBlog = async(req,res) => {
          if(!blogfetch) return res.status(200).json({message:'No Blog Found',status:300})
          if (blogImg) {
                 const fileURL = await uploadImage(blogImg);
-                if(blogfetch.img) await deleteCloud(blogfetch.img)
+                if(blogfetch.img) await deleteCloud(blogfetch.img);
                 updateData.img = fileURL.url;
             }
-                const blogres= await blogs.findByIdAndUpdate(id,{updateData},{new: true});
+                const blogres= await blogs.findByIdAndUpdate(id,updateData,{new: true});
                 if(!blogres) return res.status(200).json({mesage:'Error Has Occured', status:400});
             return res.status(200).json({success: true,status:200});
                     } catch(err){
@@ -27,13 +31,13 @@ const createBlog = async(req,res) => {
         }       
     }
     try{
-    if(!title || !content){
+    if(!title || !content || !tags){
         return res.status(200).json({message:"Title and content are required",status:400});
     }
    
     if(!blogImg)
     {
-       res.status(200).json({message:"No Image Found"})
+      return res.status(200).json({message:"No Image Found"})
     }
     const fileURL=await uploadImage(blogImg);
     if(!fileURL){return res.status(200).json({message:"Image Is required"})}
@@ -41,7 +45,7 @@ const createBlog = async(req,res) => {
         title,
         content,
         tags:parsedTags,
-        img:fileURL.url,
+        img:fileURL,
     })
     await newBlog.save();
     return res.status(200).json({message:"Blog created successfully",status:201});

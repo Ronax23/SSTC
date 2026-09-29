@@ -7,12 +7,11 @@ import { Link } from 'react-router-dom';
 function Blogs() {
     const [blogs,setBlogs]=useState<Blog[]>([]);
     const [page,setPage]=useState<number>(1);
-    let total:number=0;
+    const [total, setTotal] = useState<number>(0);
     const getBlogs=()=>{
-        axios.get(`${import.meta.env.VITE_API}/blogs?page=${page}`).then((res)=>{
+        axios.get(`${import.meta.env.VITE_API}blogs?page=${page}`).then((res)=>{
             setBlogs(res.data.blog);
-            setPage(res.data.page);
-            total = res.data.total;
+            setTotal(res.data.total);
         }).catch((e: Error)=>{
             console.log(e);
         })
@@ -20,7 +19,7 @@ function Blogs() {
 
     useEffect(()=>{
         getBlogs();
-    },[])
+    },[page])
   return (
     <>
     <HeaderReusable title="Blogs" image="/Headers/blog.jpg" />
@@ -30,11 +29,12 @@ function Blogs() {
                     <section key={blog.id} className="col-lg-4 col-md-6 col-12">
                         <div className="card my-3">
                             <div className="card-img-top">
-                                <img src={blog.image} alt={blog.title} className='' />
+                                <img src={blog.img} alt={blog.title} className='' />
                             </div>
                             <div className="card-body">
                                 <h5 className="card-title">{blog.title}</h5>
-                                <Link to={`/viewblog/${blog.id}`} className="card-text">{blog.content.substring(0, 50)}Read More...</Link>
+                                <Link to={`/viewblog/${blog.id}`} className="card-text text-decoration-none text-dark">{blog.content.substring(0, 100)}...   <span className="d-block text-primary text-end p-2">Read More</span>
+</Link>
                             </div>
                         </div>
                     </section>
@@ -43,9 +43,9 @@ function Blogs() {
                 <div className="pagination">
       
   <ul className="pagination">
-    <li className="page-item" onClick={() => setPage(page>1?page - 1:1)}> <span className='page-link' aria-hidden="true">&laquo;</span></li>
+    <li className={`page-item ${page === 1 ? 'disabled' : ''}`} onClick={() => setPage(page>1?page - 1:1)}> <span className='page-link' aria-hidden="true">&laquo;</span></li>
     <li className="page-item"><span className="page-link active">{page}</span></li>
-    <li className="page-item" onClick={() => setPage(Math.min(page + 1, total))}><span className='page-link' aria-hidden="true">&raquo;</span></li>
+    <li className={`page-item ${page >= total ? 'disabled' : ''}`} onClick={() => setPage(Math.min(page + 1, total))}><span className='page-link' aria-hidden="true">&raquo;</span></li>
   </ul>
 
     </div>

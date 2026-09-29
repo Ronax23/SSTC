@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
+import AuthRole from './Components/Dashboard/AuthRole.tsx';
+import { MANAGEMENT, ADMINS, EVERYONE, FRONT_OFFICE, SHOP_FLOOR,ACCOUNTS } from './assets/Dynamic Routes/Dashboard_routes.ts';
+
 const AnimatedCursor=lazy(()=> import('./assets/Reusable/AnimatedCursor.tsx'));
 const LandingPage=lazy(()=> import ('./Components/LandingPage.tsx'));
 const ContactUs= lazy(()=> import ('./Components/ContactUs.tsx'));
@@ -38,21 +41,42 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/register" element={<AddUser userType={"customer"} main={true} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPass />} />
+        
+        
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<DashboardHome />} />
+        <Route element={<AuthRole allowedRoles={MANAGEMENT} />}>
+           <Route path='createBlog' element={<CreateBlogs />} />
           <Route path='userList'  element={<UserList/>}/>
-          <Route path='createBlog' element={<CreateBlogs />} />
+           <Route path="addEmployee" element={<AddUser userType={"employee"} />} />
+          <Route path="addEmployee/:id" element={<AddUser userType={"employee"} />} />
+
+        </Route>
+         <Route element={<AuthRole allowedRoles={EVERYONE} />}>
+                  <Route index element={<DashboardHome />} />
+
+        </Route>
+        <Route element={<AuthRole allowedRoles={FRONT_OFFICE} />}>
+                  <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
+
+        </Route>
+        <Route element={<AuthRole allowedRoles={ACCOUNTS} />}>
+        
+        </Route>
+        <Route element={<AuthRole allowedRoles={ADMINS} />}>
+        
+        </Route>
+        <Route element={<AuthRole allowedRoles={SHOP_FLOOR} />}>
+        
+        </Route>
           <Route path="addUser" element={<AddUser userType={"customer"} />} />
           <Route path="editUser/:id" element={<AddUser userType={"customer"} />} />
-          <Route path="addEmployee" element={<AddUser userType={"employee"} />} />
-          <Route path="addEmployee/:id" element={<AddUser userType={"employee"} />} />
+         
           <Route path="addAdmin" element={<AddUser userType={"admin"} />} />
           <Route path="addAdmin/:id" element={<AddUser userType={"admin"} />} />
           <Route path="addSupplier" element={<AddUser userType={"supplier"} />} />
           <Route path="addSupplier/:id" element={<AddUser userType={"supplier"} />} />
           <Route path='Attendance' element={<Attendance />} />
 
-          <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
           <Route path="Investments" element={<InvestDash/>}></Route>
           <Route path="viewBlogs" element={<BlogList />}>
             <Route path=":id" element={<DynamicBlog />} />

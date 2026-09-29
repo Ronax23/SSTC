@@ -20,8 +20,8 @@ const loginAuth=    async(req,res)=>{
     const passwordMatch=await bcrypt.compare(password,user.password[0]);
     if (user.email===email && passwordMatch){
         const token=jwt.sign({role:user.role,firm_id:user._id.toString()},process.env.JWT_SECRET,{expiresIn:'1h'});
-        res.cookie("token", token, { httpOnly: true, secure: true,maxAge: 60 * 60 * 1000,path: '/' });
-        res.cookie("role", user.role, { httpOnly: false, secure: true,maxAge: 60 * 60 * 1000,path: '/',sameSite: 'lax' });
+        res.cookie("token", token, { httpOnly: true, secure: false,maxAge: 60 * 60 * 1000,path: '/' ,sameSite: 'lax' });
+        res.cookie("role", user.role, { httpOnly: false, secure: false,maxAge: 60 * 60 * 1000,path: '/',sameSite: 'lax' });
         res.status(200).json({message:"Login successful",login:true, stats:200, token:token});
         clearRateLimit(req.ip,user.email)
         console.log("Login successful");

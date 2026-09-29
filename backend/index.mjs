@@ -16,7 +16,6 @@ app.use(cors(
 ));
 app.use(cookieParser());
 
-// Render health check — must respond before heavy route handlers
 app.get('/health', (_req, res) => res.status(200).send('ok'));
 
 app.use(appRoute);

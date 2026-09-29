@@ -1,13 +1,28 @@
 import { useLayoutEffect, useState } from 'react';
 import { sidebar } from '../../assets/Dynamic Routes/Dashboard_routes';
-import { Link, Outlet} from 'react-router-dom';
-import AuthRole from './AuthRole';
+import { Link, Outlet, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import toast, {Toaster } from 'react-hot-toast';
 
 function Dashboard() {
   const [collapse, setCollapse] = useState(true);
-  const { role } = AuthRole();
+  const role = document.cookie.split('; ').find(row => row.startsWith('role='))?.split('=')[1] || 'guest';
   const [sidebarWidth,setSidebarWidth] = useState("260px");
-
+  const navigate=useNavigate();
+  const handleLogout = async () => {
+    try {
+      const res = await axios.delete(`${import.meta.env.VITE_API}users/logout`,{ withCredentials: true });
+      if (res.status === 200) {
+        toast.success("Logged out successfully");
+        setTimeout(()=>{
+        navigate('/login');
+        },2000);
+      }
+    } catch (err: any) {
+      console.error("Logout failed:", err);
+      toast.error(err.response?.data?.message || "Failed to logout");
+    }
+  };
 
    const handleResize = () => {
       const width = window.innerWidth;
@@ -29,6 +44,7 @@ function Dashboard() {
 
  return (
     <div className="container-fluid g-0">
+      <Toaster />
       <div className="d-flex vh-100 position-relative">
         <div className="p-3 text-white sidebar" 
             onMouseEnter={() => setCollapse(false)}
@@ -91,6 +107,14 @@ function Dashboard() {
               )
             }
             </li>)})}
+            <button
+              onClick={handleLogout}
+              className="btn btn-toggle text-light align-items-center rounded collapsed"
+              style={{ border: 'none' }}
+            >
+              <span className="fs-5 text-center" style={{ width: '24px' }}>🚪</span>
+              {!collapse && <span className="text-white">Logout</span>}
+            </button>
           </ul>
         </div>
       

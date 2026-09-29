@@ -1,7 +1,10 @@
 import axios from 'axios';
 import {useState,useEffect} from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
+import LoaderError from '../../assets/Reusable/LoaderError';
+
 interface Blog{
     title:string;
     blog_content:string;
@@ -20,13 +23,17 @@ function CreateBlogs() {
     const [allAITags, setAllAITags] = useState<string[]>([]); // Master set of fetched AI tags
     const [tagInput, setTagInput] = useState<string>(""); // Field typing state
     const [preview, setPreview] = useState<string>("");
+    const [loading, setLoading] = useState(false);
 
     const tagSuggestion=async()=>{
-        const ai = (window as any).ai || (window as any).LanguageModel;
+      const win = window as any;
+        const ai = win.ai?.LanguageModel || win.LanguageModel;
         if(!ai){
-            return ['redis']
+          return  fetchFromBackend();
         };
-        if(ai.available==='readily'||ai.available==='available'){
+        const availability = typeof ai.availability === 'function'? await ai.availability(): null;
+
+if (availability === 'available' || availability === 'readily') {
        try{
          const session = await ai.create({
         samplingMode: 'slightly-creative',
@@ -49,17 +56,27 @@ function CreateBlogs() {
        }
        catch(err){
         console.error('Error fetching tags:', err);
-        return ['error'];
        }
         };
-        return ['redix'];
+        return fetchFromBackend();
     }
+
+
+    const fetchFromBackend = async () => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_API}blogs/tagsgen`, { title, content });
+        return response.data.tags || [];
+    } catch (err) {
+        console.error("Backend tag generation failed:", err);
+        return [];
+    }
+};
+
 
     useEffect(() => {
         if (!title && !content) return;
       const  timer=setTimeout(() => {
             tagSuggestion().then((AItags) => {
-                // Exclude tags that are already selected in active tags state
                const filteredNewAI = AItags.filter((t:any) => !tags.includes(t));
         setAITags(filteredNewAI);
         setAllAITags(AItags);
@@ -74,7 +91,6 @@ const addTag = (rawTag: string) => {
     const cleanedTag = rawTag.trim().replace(/^#/, '').replace(/,/g, '');
     if (cleanedTag && !tags.includes(cleanedTag)) {
       setTags((prev) => [...prev, cleanedTag]);
-      // If it was in the AI suggestions list, remove it from suggestions
       setAITags((prev) => prev.filter((t) => t !== cleanedTag));
     }
   };
@@ -85,7 +101,6 @@ const addTag = (rawTag: string) => {
       addTag(tagInput);
       setTagInput("");
     } else if (e.key === "Backspace" && !tagInput && tags.length > 0) {
-      // Remove last tag when hitting backspace in empty field
       removeTag(tags[tags.length - 1]);
     }
   };
@@ -97,42 +112,43 @@ const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     setTagInput("");
   };
 
-  // Remove Tag Logic: If AI tag, return to suggestions pool; if manual, discard
   const removeTag = (tagToRemove: string) => {
     setTags((prev) => prev.filter((t) => t !== tagToRemove));
-
-    // Check if the tag originally came from AI suggestions
     if (allAITags.includes(tagToRemove) && !AItags.includes(tagToRemove)) {
       setAITags((prev) => [...prev, tagToRemove]);
     }
   };
 
-  // Click on AI Suggested Tag
   const handleAISuggestionClick = (aiTag: string) => {
     addTag(aiTag);
   };
 const postdata=(data:Blog)=>{
+  setLoading(true)
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("blog_content", data.blog_content);
-    formData.append("tags", data.tags?.join(', ') || '');
+    formData.append("content", data.blog_content);
+    formData.append("tags", tags.join(', '));    
     if (data.blogimg instanceof FileList && data.blogimg.length > 0) {
-      formData.append("blogimg", data.blogimg[0]);
+    formData.append("img", data.blogimg[0]);
     } else if (typeof data.blogimg === 'string') {
-      formData.append("blogimg", data.blogimg);
+      formData.append("img", data.blogimg);
     }
-axios[edit?'put':'post'](`{import.meta.env.VITE_API_URL}/blogs/${edit?`edit/${id}` : 'add'}`,formData,
-    {withCredentials:true, headers: { "Content-Type": "multipart/form-data" }},).then((res)=>{
-    if(res.data.status===200)
+axios[edit?'put':'post'](`${import.meta.env.VITE_API}blogs/${edit?`edit/${id}` : 'createblog'}`,formData,
+    {withCredentials:true},).then((res)=>{
+    if(res.data.status===201)
     {
-
+      toast.success(res.data.message)
+      reset()
+      setTags([])
+      setPreview("")
     }
     else{
-
+      toast.error(res.data.message)
     }
-}).catch(err=>console.log(err))
+}).catch(err=> toast.error(err?.response?.data?.message || err.message || "Something went wrong")).finally(()=>setLoading(false));
 }
     const fetchdat=()=>{
+      setLoading(true)
         axios.get(`${import.meta.env.VITE_API_URL}/blogs/${id}`).then((res)=>{
             reset(
            {
@@ -141,7 +157,7 @@ axios[edit?'put':'post'](`{import.meta.env.VITE_API_URL}/blogs/${edit?`edit/${id
             blogimg:res.data.blogimg
            }) 
            setPreview(res.data.blogimg)
-        }).catch(err=>console.log(err))
+        }).catch(err=>console.log(err)).finally(()=>setLoading(false))
     }
 useEffect(()=>{
     if(id&&edit)fetchdat();
@@ -152,7 +168,9 @@ useEffect(()=>{
             setPreview(URL.createObjectURL(e.target.files[0]));
         }
     }
-
+if(loading){
+        return <div><LoaderError loading={true}/></div>
+    }
  return (
     <>
         <section className="container">

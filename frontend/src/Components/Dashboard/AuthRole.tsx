@@ -1,25 +1,20 @@
-import { useState,useEffect } from 'react'
-import axois from 'axios';
-function AuthRole() {
-const [role, setUser] = useState<String>("all");
-  const [loading, setLoading] = useState<Boolean>(true);
+import { toast } from 'react-hot-toast';
+import { Navigate,Outlet} from 'react-router-dom';
+interface ProtectedRouteProps {
+  allowedRoles?: string[];
+}
+function AuthRole({ allowedRoles }: ProtectedRouteProps) {
+  const role = document.cookie.split('; ').find(row => row.startsWith('role='))?.split('=')[1];
 
-  const roles=()=>{
-    axois.get('/api/user/role').then((res) => {
-        setUser(res.data.role);
-      })
-      .catch((err) => {
-        console.log(err);
-      }).finally(() => {
-        setLoading(false);
-      });
+  if (!role || role === 'guest') {
+    toast.error('Please log in to access this page.');
+    return <Navigate to="/login" replace />; // Happens instantly, toast persists!
   }
-
-  useEffect(() => {
-       roles();
-  }, []);
-
-  return { role, loading };
+  if (allowedRoles && !allowedRoles.includes(role)) {
+    toast.error('You do not have permission to view this page.');
+return <Navigate to="/login" replace />; // Happens instantly, toast persists!
+  }
+  return <Outlet />;
 }
 
 export default AuthRole

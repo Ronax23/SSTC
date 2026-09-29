@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const authMiddleware=(req,res,next)=>{
+    console.log("Incoming Cookies:", req.cookies); // <--- Add this log
     const token=req.cookies.token;
     if(!token){
        return res.status(401).json({message:"Unauthorized",auth:false, status:401});

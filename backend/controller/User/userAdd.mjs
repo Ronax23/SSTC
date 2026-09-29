@@ -56,12 +56,7 @@ const userAdd =    async(req,res)=>{
     {     
 
 let fileURL = "";
-if (profileImg) {
-    console.log("Starting Cloudinary upload...");
-    fileURL = await uploadImage(profileImg);
-    console.log("Cloudinary upload finished:", fileURL);
-}       
-console.log(fileURL)
+if (profileImg)fileURL = await uploadImage(profileImg);       
          let newUser;
         const saltRounds = 10;
         const rawpass=password?password:mob;
@@ -83,8 +78,6 @@ console.log(fileURL)
   await newLogin.save({session});
        await session.commitTransaction();   
     res.status(200).json({message:"User added successfully",status:201});
-        console.log('9')
-
     sendMail({
         to: email,
         type: "WELCOME",

@@ -16,7 +16,7 @@ function Login() {
 
      const loginhandle = (data:login) => {
         console.log(import.meta.env.VITE_API)
-          axios.post(`${import.meta.env.VITE_API}login`,data).then((res)=>{
+          axios.post(`${import.meta.env.VITE_API}login`,data,{withCredentials:true}).then((res)=>{
             if(res.data.login){
                 toast.success(res.data.message);
                 setTimeout(()=>{

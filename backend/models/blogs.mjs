@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema({
+
     title: {
         type: String,
         required: true,
@@ -16,6 +17,17 @@ const blogSchema = new mongoose.Schema({
     },
     tags:{
         type: [String]
+    },
+    admin: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Admin", // Match this to your Admin model name
+        required: false
+    },
+    // Reference to the Employee model (if created by an employee)
+    employee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Employee", // Match this to your Employee model name
+        required: false
     }
 }, { 
     timestamps: true,

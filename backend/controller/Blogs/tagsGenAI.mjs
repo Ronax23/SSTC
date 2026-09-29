@@ -8,7 +8,7 @@ const generateTags = async (req,res) => {
     if(!title||!content){return res.status(200).json({message:'No Content Found',status:200})}
   try {
     const response = await groq.chat.completions.create({
-      model: "llama-3.1-8b-instant", // Fast, free open model
+      model: "openai/gpt-oss-120b", 
       response_format: { type: "json_object" }, // Enforces JSON output
       messages: [
         {
@@ -25,8 +25,7 @@ Example: {"tags": ["node.js", "express", "mongodb"]}`,
       temperature: 0.2, // Low temperature for deterministic output
     });
     const parsedData =JSON.parse(response.choices[0].message.content || "{}").tags || []
-    res.status(200).json({message:'Successful',tags:parsedData,status:201})
-    return parsedData.tags || [];
+    return res.status(200).json({message:'Successful',tags:parsedData,status:200})
   } catch (error) { res.status(200).json({message:error,status:500})  }
 };
 

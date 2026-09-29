@@ -1,4 +1,4 @@
-const ADMINS=['superAdmin',"admin"]
+const ADMINS=['superadmin',"admin"]
 const MANAGEMENT = [...ADMINS, "manager"];
 const ACCOUNTS=[...MANAGEMENT,'accounts']
 const SHOP_FLOOR = [...MANAGEMENT, "engineer", "worker", "helper"];
@@ -57,12 +57,5 @@ const EVERYONE = [...SHOP_FLOOR,'cashier','accounts', "sales-man", "backoffice",
       {name:"Investments",icon:"📈",role:ADMINS,to:"Investments"} ,
       {name:"Settings",icon:"⚙️",role:ADMINS,to:"Settings"}
     ]}
-  ,{
-    title:"Logout",
-    icon:"🚪",
-    links:[
-      {name:"Logout",icon:"🚪",role:EVERYONE,to:"Logout"}
-    ]
-  }
-
   ]
+  export { MANAGEMENT, ADMINS, EVERYONE, FRONT_OFFICE, SHOP_FLOOR,ACCOUNTS }
