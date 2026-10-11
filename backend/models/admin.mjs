@@ -7,7 +7,9 @@ const admin=new mongoose.Schema({
 firmName:{type:String,required:true,uppercase:true},
 firmAddress:{type:String,required:true},
 role:{type:String,enum:['superadmin','admin','seller'],default:'seller',required:true,lowercase: true},
-GST:{type:String,maxLength:15,required:false,uppercase:true}
+GST:{type:String,maxLength:15,required:false,uppercase:true},
+PAN:{type:String,maxLength:10,required:true,uppercase:true},
+firmState:{type:String,required:false}
 })
 
 const adminmodel=mongoose.model('admin',admin)

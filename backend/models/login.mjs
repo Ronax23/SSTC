@@ -10,7 +10,7 @@ const loginAuth=Schema({
     profileType: { 
       type: String, 
       required: true, 
-      enum: ['Admin', 'Employee', 'Customer', 'Supplier'] // Must match your exact mongoose.model names!
+      enum: ['admin', 'employee', 'customer', 'supplier'] // Must match your exact mongoose.model names!
     },
     role:{type:String,enum:ALL_VALID_ROLES,lowercase:true,default:"user"},
     userref:{type:mongoose.Schema.Types.ObjectId,ref:'profileType'}

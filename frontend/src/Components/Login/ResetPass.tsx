@@ -75,7 +75,7 @@ useEffect(() => {
              else if(res.data.expired)
              {
                 toast.error(res.data.message)
-                navigateDashboard(-1)
+                setStep(1);
              }
              else{
                 toast.error(res.data.message);

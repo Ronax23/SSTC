@@ -41,6 +41,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/register" element={<AddUser userType={"customer"} main={true} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPass />} />
+        <Route path='register-admin' element={<AddUser userType={"admin"} main={true} />} />
         
         
         <Route path="/dashboard" element={<Dashboard />}>
@@ -56,7 +57,7 @@ createRoot(document.getElementById('root')!).render(
 
         </Route>
         <Route element={<AuthRole allowedRoles={FRONT_OFFICE} />}>
-                  <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
+          <Route path='AddInvoice' element={<Invoice Usetype="invoice" />} />
 
         </Route>
         <Route element={<AuthRole allowedRoles={ACCOUNTS} />}>

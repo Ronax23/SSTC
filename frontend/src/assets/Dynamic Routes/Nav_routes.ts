@@ -37,6 +37,14 @@ export const Nav_Route:NavType[]=[
             {
                 links: "SignUp",
                 Name: "SignUp"
+            },
+            {
+                links:'register-admin',
+                Name:'Register Your Firm'
+            },
+            {
+                links:'reset-password',
+                Name:'Forgot Password'
             }
         ]
     },

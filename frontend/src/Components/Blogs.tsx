@@ -1,19 +1,25 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import axios from 'axios';
 import HeaderReusable from '../assets/Reusable/HeaderReusable';
 import type{Blog } from '../assets/Loading/Types';
 import { Link } from 'react-router-dom';
+import LoaderError from '../assets/Reusable/LoaderError';
 
 function Blogs() {
     const [blogs,setBlogs]=useState<Blog[]>([]);
     const [page,setPage]=useState<number>(1);
     const [total, setTotal] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false);
+    const snapshotTimeRef = useRef<number>(Date.now());
     const getBlogs=()=>{
-        axios.get(`${import.meta.env.VITE_API}blogs?page=${page}`).then((res)=>{
+        setLoading(true);
+        axios.get(`${import.meta.env.VITE_API}blogs?page=${page}&before=${snapshotTimeRef.current}`).then((res)=>{
             setBlogs(res.data.blog);
             setTotal(res.data.total);
         }).catch((e: Error)=>{
             console.log(e);
+        }).finally(()=>{
+            setLoading(false);
         })
     }
 
@@ -24,7 +30,8 @@ function Blogs() {
     <>
     <HeaderReusable title="Blogs" image="/Headers/blog.jpg" />
     <section className="container">
-        <section className="row">
+        {loading?<LoaderError loading={true}/>:
+        (<section className="row">
             {blogs.map((blog)=>(
                     <section key={blog.id} className="col-lg-4 col-md-6 col-12">
                         <div className="card my-3">
@@ -39,7 +46,7 @@ function Blogs() {
                         </div>
                     </section>
                 ))}
-                </section>
+                </section>)}
                 <div className="pagination">
       
   <ul className="pagination">

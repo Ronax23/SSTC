@@ -12,7 +12,10 @@ const commonSchema={
 
 const users=Schema({
      ...commonSchema,
-    uname:{type:String,required:true,unique:true},
+     GST:{type:String,maxLength:15,required:false,uppercase:true},
+     firmName:{type:String},
+     firmAddress:{type:String},
+     firmState:{type:String},
 },{timestamps: true})
 
 users.methods.getAge = function() {

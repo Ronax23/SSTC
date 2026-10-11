@@ -11,12 +11,14 @@ const userAdd =    async(req,res)=>{
     const {id}=req.params;
     const edit=Boolean(id);
     const {firstName, lastName, email, mob, uname, dob, password, gender, role,
-      profileType,address, state,firmName,firmAddress,GST,salary,overtime} = req.body; 
-    const allFields={email, uname, dob, password, gender, role,address, state,firmName,firmAddress,GST,salary,overtime}
+      profileType,address, state,firmName,firmAddress,GST,salary,firmState,overtime,PAN} = req.body; 
+    const allFields={email, uname, dob, password, gender, role,address, state,firmName,firmAddress,GST,salary,firmState,overtime}
     const profileImgR= req.files?.profileIMG?.[0]?.path;
     const profileImg = profileImgR ? path.resolve(profileImgR) : null;
-    console.log(profileImg)
+    console.log(profileImg)      
     const fixedParams={firstName,lastName,mob,address,state}
+        console.log({...fixedParams,dob,gender,role,profileType,password})
+                const rawpass=password?password:mob;
     const TargetModel = { customer: userModel, employee: employeeModel, admin: adminmodel }[profileType] || userModel;
    if (edit) {
     try
@@ -34,7 +36,7 @@ const userAdd =    async(req,res)=>{
     }
   }
   
-      if(!firstName || !lastName || !email || !mob || !dob || !password||!gender||!role){
+      if(!firstName || !lastName || !email || !mob || !dob || !rawpass||!gender||!role){
             return res.status(200).json({message:"All fields are required",status:400});  
     }
         const session=await mongoose.startSession();
@@ -54,29 +56,34 @@ const userAdd =    async(req,res)=>{
     }
     else 
     {     
-
 let fileURL = "";
 if (profileImg)fileURL = await uploadImage(profileImg);       
          let newUser;
         const saltRounds = 10;
-        const rawpass=password?password:mob;
         const hashedPassword = bcrypt.hashSync(rawpass, saltRounds,process.env.JWT_SECRET);
         await session.startTransaction();
-        if(profileType==='Admin')
+        console.log(1)
+        if(profileType==='admin')
         {
-            newUser=new adminmodel({...fixedParams,dob,gender,role,GST,profilePic:fileURL,firmName,firmAddress})
+                    console.log(2)
+            newUser=new adminmodel({...fixedParams,dob,gender,role,GST,profilePic:fileURL,firmName,firmAddress,PAN,firmState});
         }
-        else if(profileType==='Employee'){
+        else if(profileType==='employee'){
             newUser= new employeeModel({...fixedParams,dob,gender,role,profilePic:fileURL,adminref:req.body._id,salary,overtime});
-
+        console.log(3)
         }
         else{
-            newUser=new userModel({...fixedParams,uname,dob,gender,role,profilePic:fileURL});
+                    console.log(4)
+            newUser=new userModel({...fixedParams,dob,gender,role,profilePic:fileURL,firmName,firmAddress,GST,firmState});
+                                console.log(newUser)
         }
      await newUser.save({session});
+console.log(newUser)
     const newLogin=new loginModel({email,password:hashedPassword,role,userref:newUser._id, profileType});
+    console.log(newLogin)
   await newLogin.save({session});
        await session.commitTransaction();   
+       console.log(5)
     res.status(200).json({message:"User added successfully",status:201});
     sendMail({
         to: email,

@@ -6,6 +6,7 @@ const viewBlog = async (req, res) => {
   const { title } = req.query;                   
   const page  = +req.query.page  || 1;
   const limit = +req.query.limit ||3;
+  const snapshotDate = new Date(req.query.before ? Number(req.query.before) : Date.now());
 
   try {
     if (id) {
@@ -20,7 +21,7 @@ const viewBlog = async (req, res) => {
       return res.status(200).json({ message: "Blog found", status: 200, blog });
     }
     const [list, totalCount] = await Promise.all([          
-      blogs.find().sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit),
+      blogs.find({ createdAt: { $lt: snapshotDate } }).sort({ createdAt: -1 }).limit(limit).skip((page - 1) * limit),
       blogs.countDocuments(),
     ]);
 
