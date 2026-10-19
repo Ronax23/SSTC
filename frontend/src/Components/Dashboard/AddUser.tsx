@@ -73,6 +73,7 @@ const closerModal = () => {
    }
         const finaldat={...data,role,profileType}
         console.log(finaldat)
+        setloading(true)
         axios[edit? "put":"post"](`${import.meta.env.VITE_API}users/${edit ? `update/${id}` : 'add'}`, finaldat)
             .then(res => {
 
@@ -85,15 +86,12 @@ else{
            })
             .catch(err => {
                 toast.error(`Failed to add user ${err.message || ''}`);
-            })
+            }).finally(() => setloading(false))
     }
     useEffect(() => {
        if (edit && id) fetchdat();
     }, [id,edit])
    
- if(loading){
-        return <div><LoaderError loading={true}/></div>
-    }
     return (
         <>
         <Toaster position="top-right" />
@@ -104,7 +102,8 @@ else{
                             <h5 className="modal-title">{`${edit? "Edit" : "Add"} ${userType}`}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={closerModal} aria-label="Close"></button>
                         </section>
-                        <form onSubmit={handleSubmit(submitData)}>
+                        {loading && <LoaderError loading={true} />}
+                        <form style={{display: loading ? 'none' : 'block'}} onSubmit={handleSubmit(submitData)}>
                         <section className="modal-body">                            
                                 <section className="row">
                                     <section className="col-lg-4 col-md-6 col-12">
@@ -176,7 +175,7 @@ else{
                         </section>
                         <section className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closerModal}>Close</button>
-                            <button type="submit" className="btn btn-primary text-Capitalize">{edit ? "Update" : "Add"} {userType}</button>
+                            <button type="submit" className="btn btn-primary text-Capitalize" disabled={loading}>{edit ? "Update" : "Add"} {userType}</button>
                         </section>
                          </form>
                     </section>

@@ -8,6 +8,9 @@ import passReset from '../../controller/User/passReset.mjs'
 import {newPass} from '../../controller/User/newPass.mjs'
 import verifyOTP from '../../utilities/verifyOTP.mjs'
 import { upload } from '../../middlewares/multer.mjs';
+import {rbac} from '../../middlewares/rbac.mjs';
+import auth from '../../middlewares/auth.mjs';
+import adminStatus from '../../controller/User/adminStatus.mjs';
 const userRoute=Router();
 
 userRoute.post("/add",upload.fields([{name:'profileIMG',maxCount:1}]),userAdd);
@@ -19,6 +22,7 @@ userRoute.put("/passwordChange",changePass)
 userRoute.post("/forgot-password", passReset);
 userRoute.post("/verify-otp", verifyOTP);
 userRoute.patch("/reset-password", newPass);
+userRoute.patch("/adminStatus/:id",[auth,rbac],adminStatus)
 userRoute.get("/me",(req,res)=>{
    try
    {

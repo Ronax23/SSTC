@@ -39,9 +39,9 @@ if(!gst){
                                         <section className="mb-3">
                                             <label htmlFor="gst" className="form-label">Enter GSTIN</label>
                                             <input type="text" disabled={!gst || edit} className="form-control" id="gst" placeholder='Enter GSTIN' {...register("GST", {
-                                                minLength: 12,maxLength: 13, required: gst})} />
+                                                minLength: 15,maxLength: 16, required: gst})} />
                                             {gst && errors.GST?.type === "required" && <p className="text-danger">GSTIN is required</p>}
-                                            {gst && (errors.GST?.type === "minLength" || errors.GST?.type === "maxLength") && <p className="text-danger">GSTIN must be 12-13 characters</p>}
+                                            {gst && (errors.GST?.type === "minLength" || errors.GST?.type === "maxLength") && <p className="text-danger">GSTIN must be 15-16 characters</p>}
                                         </section>
                                     </section>
                                     <section className="col-lg-4 col-md-4 col-12">

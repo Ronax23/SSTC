@@ -15,9 +15,7 @@ const userAdd =    async(req,res)=>{
     const allFields={email, uname, dob, password, gender, role,address, state,firmName,firmAddress,GST,salary,firmState,overtime}
     const profileImgR= req.files?.profileIMG?.[0]?.path;
     const profileImg = profileImgR ? path.resolve(profileImgR) : null;
-    console.log(profileImg)      
     const fixedParams={firstName,lastName,mob,address,state}
-        console.log({...fixedParams,dob,gender,role,profileType,password})
                 const rawpass=password?password:mob;
     const TargetModel = { customer: userModel, employee: employeeModel, admin: adminmodel }[profileType] || userModel;
    if (edit) {
@@ -48,7 +46,6 @@ const userAdd =    async(req,res)=>{
       loginModel.findOne({email}),
     ]);
      if(userExists||employeeExists||adminExist){
-        console.log(userExists);
         return res.status(200).json({message:"User Already Exists",status:409});
     }
     else if(emailExist) {
@@ -62,28 +59,23 @@ if (profileImg)fileURL = await uploadImage(profileImg);
         const saltRounds = 10;
         const hashedPassword = bcrypt.hashSync(rawpass, saltRounds,process.env.JWT_SECRET);
         await session.startTransaction();
-        console.log(1)
         if(profileType==='admin')
         {
-                    console.log(2)
             newUser=new adminmodel({...fixedParams,dob,gender,role,GST,profilePic:fileURL,firmName,firmAddress,PAN,firmState});
         }
         else if(profileType==='employee'){
             newUser= new employeeModel({...fixedParams,dob,gender,role,profilePic:fileURL,adminref:req.body._id,salary,overtime});
-        console.log(3)
         }
         else{
-                    console.log(4)
             newUser=new userModel({...fixedParams,dob,gender,role,profilePic:fileURL,firmName,firmAddress,GST,firmState});
-                                console.log(newUser)
         }
+        console.log("newUser",newUser);
+             console.log("newUser._id",{email,password:hashedPassword,role,userref:newUser._id, profileType});
+
      await newUser.save({session});
-console.log(newUser)
     const newLogin=new loginModel({email,password:hashedPassword,role,userref:newUser._id, profileType});
-    console.log(newLogin)
   await newLogin.save({session});
        await session.commitTransaction();   
-       console.log(5)
     res.status(200).json({message:"User added successfully",status:201});
     sendMail({
         to: email,
@@ -101,6 +93,7 @@ console.log(newUser)
             console.error("Error aborting transaction:", abortErr);
         }
     }
+    console.log("Error adding user:", err);
     res.status(200).json({message:"Internal Server Error",err:err,status:500});
    }
    finally {
