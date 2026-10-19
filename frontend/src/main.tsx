@@ -95,8 +95,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="viewblog/:id" element={<DynamicBlog />} />
           <Route path="login/register" element={<AddUser userType={"customer"} main={true} />} />
           <Route path="signup" element={<AddUser userType={"customer"} main={true} />} />
-          <Route path="login" element={<Login />} />  
-                  
+          <Route path="login" element={<Login />} />                    
         </Route>
         <Route path="*" element={<LoaderError hasError={true} />} />
       </Routes>

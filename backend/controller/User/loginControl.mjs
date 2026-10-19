@@ -21,7 +21,7 @@ const loginAuth=    async(req,res)=>{
     const passwordMatch=await bcrypt.compare(password,user.password[0]);
     if(user.role==="admin"){
         const admin=await adminmodel.findOne(user.userref);
-        if(admin.status!=="active")        return res.status(200).json({message:"Admin account is not active",login:false, status:300});
+        if(admin.status!=="active")  return res.status(200).json({message:"Admin account is not active",login:false, status:300});
     }
     if (user.email===email && passwordMatch){
         const token=jwt.sign({role:user.role,firm_id:user._id.toString()},process.env.JWT_SECRET,{expiresIn:'1h'});
