@@ -39,7 +39,7 @@ const Permissions={
 
 export const rbac = (req, res, next) => {
   const userRole = req.user?.role?.toLowerCase();
-
+  console.log(`RBAC Check: User Role = ${userRole}, Route = ${req.method} ${req.baseUrl}${ req.path.replace(/[0-9a-fA-F]{24}/g, ':id')}`);
   if (!userRole) {
     return res.status(401).json({
       success: false,
@@ -47,7 +47,7 @@ export const rbac = (req, res, next) => {
     });
   }
 
-  const routeKey = `${req.method} ${req.baseUrl}${req.path}`.toLowerCase();
+  const routeKey = `${req.method} ${req.baseUrl}${ req.path.replace(/[0-9a-fA-F]{24}/g, ':id')}`.toLowerCase();
   const allowedRoles = Permissions[routeKey.toLowerCase()];
 
   if (!allowedRoles) {

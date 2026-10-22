@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState,useEffect} from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import LoaderError from '../../assets/Reusable/LoaderError';
 
@@ -149,14 +149,17 @@ axios[edit?'put':'post'](`${import.meta.env.VITE_API}blogs/${edit?`edit/${id}` :
 }
     const fetchdat=()=>{
       setLoading(true)
-        axios.get(`${import.meta.env.VITE_API_URL}/blogs/${id}`).then((res)=>{
+        axios.get(`${import.meta.env.VITE_API}blogs/${id}`, { withCredentials: true }).then((res)=>{
+          console.log(res.data.blog)
             reset(
            {
-             title:res.data.title,
-            blog_content:res.data.blog_content,
-            blogimg:res.data.blogimg
+             title:res.data.blog.title,
+            blog_content:res.data.blog.content,
+            blogimg:res.data.blog.blogimg
            }) 
-           setPreview(res.data.blogimg)
+setTags(res.data.blog.tags || []);
+      setAllAITags(res.data.tags || []);   
+              setPreview(res.data.blogimg)
         }).catch(err=>console.log(err)).finally(()=>setLoading(false))
     }
 useEffect(()=>{
@@ -173,6 +176,7 @@ if(loading){
     }
  return (
     <>
+    <Toaster />
         <section className="container">
             <section className="row">
                 <section className="col-12"><h1>{edit?"Edit":"Create"} Blogs</h1></section>

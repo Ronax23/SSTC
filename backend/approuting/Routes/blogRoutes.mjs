@@ -14,7 +14,7 @@ blogroutes.get("/",viewBlog);
 blogroutes.get("/:id",viewBlog);
 blogroutes.delete("/:id",[auth,rbac],deleteBlog);
 blogroutes.post('/tagsgen',[auth,rbac],generateTags)
-blogroutes.put("/edit/:id",[auth,rbac,upload.fields([{name:"img", maxCount:1}])],viewBlog);
+blogroutes.put("/edit/:id",[auth,rbac,upload.fields([{name:"img", maxCount:1}])],createBlog);
 blogroutes.post("/createblog",[auth,rbac,upload.fields([{name:"img",maxCount:1}])],createBlog);
 
 

@@ -23,9 +23,9 @@ const createBlog = async(req,res) => {
                 if(blogfetch.img) await deleteCloud(blogfetch.img);
                 updateData.img = fileURL.url;
             }
-                const blogres= await blogs.findByIdAndUpdate(id,updateData,{new: true});
+                const blogres= await blogs.findByIdAndUpdate(id,updateData,{returnDocument: 'after'});
                 if(!blogres) return res.status(200).json({mesage:'Error Has Occured', status:400});
-            return res.status(200).json({success: true,status:200});
+            return res.status(200).json({message: 'Blog updated successfully', status:200});
                     } catch(err){
             return res.status(200).json({message:err,status:400})
         }       

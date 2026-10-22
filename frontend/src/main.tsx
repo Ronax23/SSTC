@@ -79,8 +79,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path='Attendance' element={<Attendance />} />
 
           <Route path="Investments" element={<InvestDash/>}></Route>
+          <Route path='editBlog/:id' element={<CreateBlogs />} />
           <Route path="viewBlogs" element={<BlogList />}>
-            <Route path=":id" element={<DynamicBlog />} />
+            <Route path=":id?" element={<DynamicBlog dashboard={true} />} />
           </Route>
         </Route>
         <Route path="/" element={<MainPage />}>

@@ -77,8 +77,9 @@ interface Blog{
     id:string,
     title:string,
     content:string,
-    img:string
-    time:string
+    img:string,
+    tags:string[],
+    readTime:string
 }
 interface login{
   email:string,
