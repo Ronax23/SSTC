@@ -8,6 +8,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
 import AuthRole from './Components/Dashboard/AuthRole.tsx';
 import { MANAGEMENT, ADMINS, EVERYONE, FRONT_OFFICE, SHOP_FLOOR,ACCOUNTS } from './assets/Dynamic Routes/Dashboard_routes.ts';
+import InvestForm from './Components/Dashboard/investForm.tsx';
 
 const AnimatedCursor=lazy(()=> import('./assets/Reusable/AnimatedCursor.tsx'));
 const LandingPage=lazy(()=> import ('./Components/LandingPage.tsx'));
@@ -79,6 +80,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='Attendance' element={<Attendance />} />
 
           <Route path="Investments" element={<InvestDash/>}></Route>
+          <Route path='AddInvestment' element={<InvestForm/>}></Route>
           <Route path='editBlog/:id' element={<CreateBlogs />} />
           <Route path="viewBlogs" element={<BlogList />}>
             <Route path=":id?" element={<DynamicBlog dashboard={true} />} />

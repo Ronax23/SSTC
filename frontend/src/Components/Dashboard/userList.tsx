@@ -3,6 +3,131 @@ import LoaderError from '../../assets/Reusable/LoaderError';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import ListTab from '../../assets/Reusable/ListTab';
+
+
+ const ex = [
+  {
+    firstName: "Aarav",
+    lastName: "Sharma",
+    email: "aarav.sharma@example.com",
+    mob: "+919810123456",
+    gender: "Male",
+    role: "Customer",
+    profileType: "Business",
+    state: "Delhi",
+    firmName: "Sharma Traders & Co.",
+    GST: "07AAAAA0000A1Z5"
+  },
+  {
+    firstName: "Priya",
+    lastName: "Verma",
+    email: "priya.verma@example.com",
+    mob: "+919876543210",
+    gender: "Female",
+    role: "Customer",
+    profileType: "Individual",
+    state: "Haryana",
+    firmName: null,
+    GST: null
+  },
+  {
+    firstName: "Rohan",
+    lastName: "Mehta",
+    email: "rohan.mehta@example.com",
+    mob: "+919820011223",
+    gender: "Male",
+    role: "Customer",
+    profileType: "Business",
+    state: "Maharashtra",
+    firmName: "Apex Technologies",
+    GST: "27BBBBB1111B1Z2"
+  },
+  {
+    firstName: "Ananya",
+    lastName: "Iyer",
+    email: "ananya.iyer@example.com",
+    mob: "+919444012345",
+    gender: "Female",
+    role: "Customer",
+    profileType: "Individual",
+    state: "Tamil Nadu",
+    firmName: null,
+    GST: null
+  },
+  {
+    firstName: "Vikram",
+    lastName: "Singh",
+    email: "vikram.singh@example.com",
+    mob: "+919830098765",
+    gender: "Male",
+    role: "Admin",
+    profileType: "Business",
+    state: "West Bengal",
+    firmName: "Singh Logistics",
+    GST: "19CCCCC2222C1Z9"
+  },
+  {
+    firstName: "Neha",
+    lastName: "Patel",
+    email: "neha.patel@example.com",
+    mob: "+919909054321",
+    gender: "Female",
+    role: "Customer",
+    profileType: "Individual",
+    state: "Gujarat",
+    firmName: null,
+    GST: null
+  },
+  {
+    firstName: "Siddharth",
+    lastName: "Rao",
+    email: "siddharth.rao@example.com",
+    mob: "+919845011223",
+    gender: "Male",
+    role: "Customer",
+    profileType: "Business",
+    state: "Karnataka",
+    firmName: "Rao Precision",
+    GST: "29DDDDD3333D1Z6"
+  },
+  {
+    firstName: "Kavya",
+    lastName: "Reddy",
+    email: "kavya.reddy@example.com",
+    mob: "+919700123456",
+    gender: "Female",
+    role: "Customer",
+    profileType: "Individual",
+    state: "Telangana",
+    firmName: null,
+    GST: null
+  },
+  {
+    firstName: "Amit",
+    lastName: "Kumar",
+    email: "amit.kumar@example.com",
+    mob: "+919818099887",
+    gender: "Male",
+    role: "Customer",
+    profileType: "Business",
+    state: "Uttar Pradesh",
+    firmName: "Kumar Hardware",
+    GST: "09EEEEE4444E1Z3"
+  },
+  {
+    firstName: "Pooja",
+    lastName: "Joshi",
+    email: "pooja.joshi@example.com",
+    mob: "+919822033445",
+    gender: "Female",
+    role: "Customer",
+    profileType: "Individual",
+    state: "Maharashtra",
+    firmName: null,
+    GST: null
+  }
+];
 
 function userList() {
 
@@ -64,6 +189,7 @@ function userList() {
   return (
     <>
     <Toaster/>
+    <ListTab title="User List" data={ex} columns={Object.keys(ex[0])} />
     <div className="tablesdat">
       <div className="row justify-content-end">
           <div className="col-12"><h1>User List</h1></div>
