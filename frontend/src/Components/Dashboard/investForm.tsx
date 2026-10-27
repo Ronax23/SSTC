@@ -426,7 +426,7 @@ return(<div className="row">
                 {selectedAsset=='MUTUAL_FUND' && mutualFundsFields()}
                 {selectedAsset=='STOCK' && stocksFields()}
                 {selectedAsset=='BOND' && bondsField()}
-                {selectedAsset=='COINS' && coinField()}                {selectedAsset=='COINS' && bankFields()}
+                {selectedAsset=='COINS' && coinField()}
                 {selectedAsset=='CRYPTO' && cryptoFields()}
             <div className="row g-3 mt-1">
               {/* Account Name */}
