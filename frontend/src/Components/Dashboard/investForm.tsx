@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import 'swiper/css';
 //@ignore
 import 'swiper/css/navigation';
+import { p } from 'framer-motion/client';
 
 interface AssetType {
   id: string;
@@ -32,7 +33,7 @@ interface FormValues {
   accountName: string;
   bankName: string;
   currentValue: string;
-  amountInvested: string;
+  investedAmount: string;
   startDate: string;
   notes: string;
 }
@@ -58,6 +59,23 @@ const selectedAsset = watch('assetType', ASSET_TYPES[0].id); // Default to the f
     console.log('Submitted Asset Data:', data);
     alert('Asset added successfully!');
   };
+
+
+const   bankFields=()=>{
+<div className="row">
+<label className="form-label fw-semibold small" htmlFor="bank">Enter Bank Name</label>
+<input className='form-control text-uppercase rounded-3' placeholder="e.g. Banco do Nordeste" type="text" {...register('bankName',{required:true})}/>
+{errors.bankName && <p className='text-danger'>Bank Name Required</p>}
+<label htmlFor="Invested Amount">Enter Invested Amount</label>
+<input type="number" {...register('investedAmount',{required:true,minLength:0})} />
+{errors.investedAmount?.type==='required' && <p className='text-danger'>Enter Amount</p>}
+{errors.investedAmount?.type==='minLength' && <p className='text-danger'>Amount Should Be More Than 0</p>}
+<label htmlFor="interest-rate" className='form-control text-uppercase rounded-3'>Enter Interest Rate</label>
+<input type='number' placeholder='5%' {...register('interestRate',{required:true, minLength:0})} />
+{errors.interestRate?.type==='minLength' && <p className='text-danger'>Interest Rate Should Be More Than 0</p>}
+{errors.interestRate?.type==='required' && <p className='text-danger'>Interest Rate Required</p>}
+</div>
+  }
 
   const handleAssetSelect = (assetId: string) => {
     setValue('assetType', assetId);
@@ -136,7 +154,7 @@ const selectedAsset = watch('assetType', ASSET_TYPES[0].id); // Default to the f
               <h5 className="mb-0 fw-bold">Asset details</h5>
             </div>
             <p className="text-muted small ms-4 ps-2">Add the latest information for your {activeAssetLabel}.</p>
-
+                {selectedAsset=='fixed_deposit' && bankFields()}
             <div className="row g-3 mt-1">
               {/* Account Name */}
               <div className="col-md-6">

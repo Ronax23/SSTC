@@ -7,11 +7,12 @@ export const FixedDeposit = Investment.discriminator('FD', new mongoose.Schema({
     interestRate: { type: Number, required: true },
     investmentDuration:{type:Number,required:true,min:1,max:200*365},
     maturityDate: { type: Date, required: true },
-    payputFrequency: { type: String,enum: ['Monthly', 'Quarterly', 'Half-Yearly', 'Annually', 'At Maturity'], default: true }
+    payoutFrequency: { type: String,enum: ['Monthly', 'Quarterly', 'Half-Yearly', 'Annually', 'At Maturity'], default: 'At Maturity' }
 }));
 
 export const RecurringDeposit = Investment.discriminator('RD', new mongoose.Schema({
     bankName: { type: String, required: true },
+    investmentDuration: { type: Number, required: true, min: 1 }, // Added duration in months/days
     monthlyInstallment: { type: Number, required: true },
     interestRate: { type: Number, required: true },
     maturityDate: { type: Date, required: true }
