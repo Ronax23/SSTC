@@ -307,7 +307,7 @@ function userList() {
   return (
     <>
     <Toaster/>
-    <ListTab title="User List" data={ex} columns={Object.keys(ex[0])} setSearch={setSearch} />
+    <ListTab title="User List" data={data} columns={Object.keys(ex[0])} setSearch={setSearch} />
     
     <div className="pagination">
       

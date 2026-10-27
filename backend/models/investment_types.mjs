@@ -2,7 +2,7 @@ import { Investment } from '../models/investment.mjs';
 import mongoose from 'mongoose';
 
 // 🏦 Fixed Deposit (FD) & Recurring Deposit (RD)
-export const FixedDeposit = Investment.discriminator('FD', new mongoose.Schema({
+export const FixedDeposit = Investment.discriminator('FixedDeposit', new mongoose.Schema({
     bankName: { type: String, required: true },
     interestRate: { type: Number, required: true },
     investmentDuration:{type:Number,required:true,min:1,max:200*365},
@@ -10,7 +10,7 @@ export const FixedDeposit = Investment.discriminator('FD', new mongoose.Schema({
     payoutFrequency: { type: String,enum: ['Monthly', 'Quarterly', 'Half-Yearly', 'Annually', 'At Maturity'], default: 'At Maturity' }
 }));
 
-export const RecurringDeposit = Investment.discriminator('RD', new mongoose.Schema({
+export const RecurringDeposit = Investment.discriminator('RecurringDeposit', new mongoose.Schema({
     bankName: { type: String, required: true },
     investmentDuration: { type: Number, required: true, min: 1 }, // Added duration in months/days
     monthlyInstallment: { type: Number, required: true },
@@ -22,15 +22,13 @@ export const RecurringDeposit = Investment.discriminator('RD', new mongoose.Sche
 export const Stock = Investment.discriminator('STOCK', new mongoose.Schema({
     companyName: { type: String, required: true, uppercase: true }, // e.g., "RELIANCE" or "AAPL"
     quantity: { type: Number, required: true, min: 0 },
-    avgBuyPrice: { type: Number, required: true },
-    category:{type:String,enum:['Hybrid','Equity','ELSS','Debt'],require:true}
+    purchasePrice: { type: Number, required: true },
 }));
 
 export const MutualFund = Investment.discriminator('MUTUAL_FUND', new mongoose.Schema({
     fundName: { type: String, required: true },
     unitsHeld: { type: Number,min:0 },
-    investedAmount:{type:Number,required:true,min:0},
-    avgNav: { type: Number, required: true } 
+    category:{type:String,enum:['Hybrid','Equity','ELSS','Debt'],require:true}
 }));
 
 // 🪙 Crypto & Digital Assets
